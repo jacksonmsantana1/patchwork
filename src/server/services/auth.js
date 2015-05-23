@@ -52,8 +52,8 @@ function createSendToken(user, res) {
 
 function hasRole(roleRequired) {
 
-	if (!roleRequired) {
-        return res.status(401).send({ok: false, msn: "This role: " +roleRequired+ " not exist"});
+	if(!roleRequired) {
+        return res.status(401).send({ok: false, msn: "This role: " + roleRequired + " not exist"});
     }
 
     return compose()

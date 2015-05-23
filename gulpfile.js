@@ -60,7 +60,7 @@ gulp.task('plato', function(done) {
  * @return {Stream}
  */
 gulp.task('styles', ['clean-styles'], function() {
-    log('Compiling Less --> CSS');
+    log('Compiling LESS --> CSS');
 
     return gulp
         .src(config.less)

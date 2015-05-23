@@ -11,6 +11,7 @@
             'blocks.exception',
             'blocks.logger',
             'blocks.router',
+            'blocks.svg',
             /* 3rd-party modules */
             'ui.router',
             'ngplus'

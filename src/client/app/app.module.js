@@ -5,9 +5,9 @@
     angular.module('app', [
         /* Shared modules */
         'app.core',
-        'app.layout'
+        'app.layout',
+        'app.directives'
         /* Feature areas */
-
     ]);
 
 })();
