@@ -13,9 +13,17 @@
         return Block;
         //////////////////////
 
+        /**
+         * Create the block
+         * @param  {[type]} pInit Coordenates of the initial point, where start the draw
+         * @param  {[type]} x     Size of the blocks
+         * @param  {[type]} type  Block's name
+         * @return {Array}       Block, an array of elements divided into groups with the
+         * same image
+         */
         function createBlock(pInit, x, type) {
             var arrayGroup = [];
-            if (!type) {
+            if (false) {
                 arrayGroup.push({
                         id: i,
                         img: '',
@@ -35,7 +43,7 @@
                         elements: []
                     });
                     for (var j = 0; j < infoBlock[i].coordenates.length; j++) {
-                        var id = ''+ i + '' + j;
+                        var id = '' + i + '' + j;
                         arrayGroup[i].elements.push(Element.createElement(id, pInit, x, infoBlock[i].coordenates[j], infoBlock[i].img));
                     }
                 }
@@ -44,8 +52,12 @@
             return arrayGroup;
         };
 
+        /**
+         * Get from the database the block's information
+         * @param  {String} type  The block's name
+         * @return {Array}      Array of array of informations to draw the block
+         */
         function getBlockFromType(type) {
-            //Pega do banco as informacoes do bloco
             //Retorna um array duplo, dividindo os elementos com as mesmas imagens
             //TODO
             return [

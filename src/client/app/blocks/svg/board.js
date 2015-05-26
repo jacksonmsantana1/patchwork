@@ -16,21 +16,6 @@
         //////////////////
 
         /**
-         * Return the total size of the drawing
-         * @param  {[type]} b     Size of the border
-         * @param  {[type]} x     Size of the blocks
-         * @param  {[type]} i     Number of the blocks on the y-axis
-         * @param  {[type]} j     Number of the blocks on the x-axis
-         * @return {[type]}   Array [Number, Number]
-         */
-        function totalSize(b, x, i, j) {
-            var size = [];
-            size[0] = (j * x) + (2 * b);
-            size[1] = (i * x) + (2 * b);
-            return size;
-        }
-
-        /**
          * Create the object Board which contains the blocks informations
          * @param  {[type]} pInit Coordenates of the initial point, where start the draw
          * @param  {[type]} b     Size of the border
@@ -83,36 +68,8 @@
          * @return {[type]}       Container Block
          */
         function getBlock(i, j, board) {
-            return board.blocks[i][j];
+            //TODO
         }
-
-        /**
-         * Returns the board width
-         * @param  {[type]} x Size of the blocks
-         * @param  {[type]} j Number of blocks on the x-axis
-         * @return {[type]}   Number
-         */
-        function boardWidth(x, j) {
-            if (!_.isNaN(x) && !_.isNaN(j)) {
-                return 2 * x;
-            }else {
-                Log.error('Invalid blocks-width parameter!', moment(), 'Board Creation');
-            }
-        };
-
-        /**
-         * Returns the board height
-         * @param  {[type]} x Size of the blocks
-         * @param  {[type]} i Number of blocks on the y-axis
-         * @return {[type]}   Number
-         */
-        function boardHeight(x, i) {
-            if (!_.isNaN(x) && !_.isNaN(i)) {
-                return 2 * x;
-            } else {
-                Log.error('Invalid blocks-height parameter!', moment(), 'Board Creation');
-            }
-        };
 
         /**
          * Draw the block container
@@ -145,5 +102,48 @@
                     ' ' + point[0] +
                     ' ' + (point[1] + x);
         };
+
+        /**
+         * Returns the board width
+         * @param  {[type]} x Size of the blocks
+         * @param  {[type]} j Number of blocks on the x-axis
+         * @return {[type]}   Number
+         */
+        function boardWidth(x, j) {
+            if (!_.isNaN(x) && !_.isNaN(j)) {
+                return 2 * x;
+            }else {
+                Log.error('Invalid blocks-width parameter!', moment(), 'Board Creation');
+            }
+        };
+
+        /**
+         * Returns the board height
+         * @param  {[type]} x Size of the blocks
+         * @param  {[type]} i Number of blocks on the y-axis
+         * @return {[type]}   Number
+         */
+        function boardHeight(x, i) {
+            if (!_.isNaN(x) && !_.isNaN(i)) {
+                return 2 * x;
+            } else {
+                Log.error('Invalid blocks-height parameter!', moment(), 'Board Creation');
+            }
+        };
+
+        /**
+         * Return the total size of the drawing
+         * @param  {[type]} b     Size of the border
+         * @param  {[type]} x     Size of the blocks
+         * @param  {[type]} i     Number of the blocks on the y-axis
+         * @param  {[type]} j     Number of the blocks on the x-axis
+         * @return {[type]}   Array [Number, Number]
+         */
+        function totalSize(b, x, i, j) {
+            var size = [];
+            size[0] = (j * x) + (2 * b);
+            size[1] = (i * x) + (2 * b);
+            return size;
+        }
     }
 })();

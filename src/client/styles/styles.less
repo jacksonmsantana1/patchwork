@@ -1,3 +1,6 @@
+@svgHeight: '($(window).height() * 2)  + 30';
+
+
 /*****************************************
 Repair Browsers bugs
 *****************************************/
@@ -64,18 +67,27 @@ CSS
 *****************************************/
 #container{
         /* Largura máxima */
-        max-width:;
-        background:#fff;
-        overflow:auto;
+        max-width:1200px;
+        max-height: 700px;
+        background-color: red;
+        padding-top: 5%;
+        padding-bottom: 5%;
+        margin: 0 auto;
     }
     #content{
-        /* Largura */
         width:100%;
-        /* Alinha à esquerda */
         float:left;
+        background-color: green;
+        clear:b;
     }
     .content_inner{
         padding:10px;
+    }
+
+    .svg-wrap {
+        height:0;
+        padding-top: 100%;  /* 350px/550px */
+        position: relative;
     }
 
     svg {
@@ -84,14 +96,6 @@ CSS
         position: absolute;
         top:0;
         left:0;
-    }
-
-    .svg-wrap {
-        background-color:"#ccc";
-        height:0;
-        width: 100%;
-        padding-top: 100%; /* 350px/550px */
-        position: relative;
     }
 
     #content img, #sidebar img{
