@@ -4,7 +4,7 @@
     angular
         .module('app.directives', [
             'app.core',
-            'blocks.svg'
+            'blocks.svg',
         ]);
 
 })();

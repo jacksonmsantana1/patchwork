@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('app.directives')
-        .directive('blockElem', function ($compile, Board) {
+        .directive('blockElem', function ($compile, $window, Board, Block) {
             return {
                 restrict: 'E',
                 replace: true,
@@ -31,7 +31,7 @@
                     img1.attr({mask: g1});
 
                     var img2 = svg
-                        .image('http://www.tecidospatchwork.com.br/wp-content/uploads/2011/04/colecao-importada-FLOWER-DOLLS-FLD7128-CRE.jpg',
+                        .image('',
                                  0, 0, scope.width, scope.height);
                     var g2 = svg.group(polygon2);
                     img2.attr({mask: g2});
@@ -39,7 +39,11 @@
                     var img3 = svg.image('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQTcohScFo1-9y09nkaxwuFX0Y8dQD_dIoJDutOAiMXDMb_Z0xm', 0, 0, scope.width, scope.height);
                     var g3 = svg.group(polygon3);
                     img3.attr({mask: g3});*/
-                    var board = Board.create([0, 0], 20, 500, 2, 2);
+                    Board.create([0, 0], 20, 400, 3, 1)
+                    var svgs = $window.document.getElementsByTagName('svg');
+                    _.each(svgs, function (svg) {
+                        el[0].appendChild(svg);
+                    });
                     $compile(el)(scope);
                 }
             }

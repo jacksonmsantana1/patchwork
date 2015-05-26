@@ -40,8 +40,7 @@ footer, header, hgroup, menu, nav, section {
     display: block;
 }
 body {
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
     line-height: 1;
 }
 ol, ul {
@@ -60,6 +59,45 @@ table {
     border-spacing: 0;
 }
 
+/*****************************************
+CSS
+*****************************************/
+#container{
+        /* Largura máxima */
+        max-width:;
+        background:#fff;
+        overflow:auto;
+    }
+    #content{
+        /* Largura */
+        width:100%;
+        /* Alinha à esquerda */
+        float:left;
+    }
+    .content_inner{
+        padding:10px;
+    }
+
+    svg {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top:0;
+        left:0;
+    }
+
+    .svg-wrap {
+        background-color:"#ccc";
+        height:0;
+        width: 100%;
+        padding-top: 100%; /* 350px/550px */
+        position: relative;
+    }
+
+    #content img, #sidebar img{
+        max-width:100%;
+        height:auto;
+    }
 
 /*****************************************
 #region wrapper for angular ng-include and ng-view animations
@@ -185,11 +223,5 @@ table {
 @media screen and (min-width: 660px) {
   body {
     background-color: white;
-
   }
-  svg {
-        overflow: visible;
-        position: absolute;
-        top:0;            
-    }
 };
