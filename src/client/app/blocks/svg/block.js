@@ -15,49 +15,51 @@
 
         /**
          * Create the block
-         * @param  {[type]} pInit Coordenates of the initial point, where start the draw
-         * @param  {[type]} x     Size of the blocks
-         * @param  {[type]} type  Block's name
-         * @return {Array}       Block, an array of elements divided into groups with the
+         * @param  {Number} id            Id
+         * @param  {Array} pInit          Coordenates of the initial point, where start the draw
+         * @param  {Number} x             Size of the blocks
+         * @param  {String} type          Block's name
+         * @param  {Boolean} orientation  Flag to sinalize if the block will be in vertical|horizontal
+         * @return {Array}                Block, an array of elements divided into groups with the
          * same image
          */
-        function createBlock(pInit, x, type) {
+        function createBlock(id, pInit, x, type, orientation) {
             var arrayGroup = [];
-            if (false) {
+            if (type) {
                 arrayGroup.push({
-                        id: i,
                         img: '',
                         imgHeight: 0,
                         imgWidth: 0,
                         elements: []
                     });
-                arrayGroup[0].elements.push(Element.createElement(id, pInit, x));
+                arrayGroup[0].elements.push(Element.createElement(id, pInit, x, orientation));
             } else {
-                var infoBlock = getBlockFromType(type);
+                var infoBlock = getBlockFromType(type, orientation);
                 for (var i = 0; i < infoBlock.length; i++) {
                     arrayGroup.push({
-                        id: i,
                         img: '',
                         imgHeight: 0,
                         imgWidth: 0,
                         elements: []
                     });
                     for (var j = 0; j < infoBlock[i].coordenates.length; j++) {
-                        var id = '' + i + '' + j;
+                        var elementId = id + i + '' + j;
                         arrayGroup[i].elements.push(Element.createElement(id, pInit, x, infoBlock[i].coordenates[j], infoBlock[i].img));
                     }
                 }
             }
 
+            arrayGroup.id = id;
             return arrayGroup;
         };
 
         /**
          * Get from the database the block's information
          * @param  {String} type  The block's name
+         * @param  {Boolean} orientation  Flag to sinalize if the block will be in vertical|horizontal
          * @return {Array}      Array of array of informations to draw the block
          */
-        function getBlockFromType(type) {
+        function getBlockFromType(type, orientation) {
             //Retorna um array duplo, dividindo os elementos com as mesmas imagens
             //TODO
             return [
