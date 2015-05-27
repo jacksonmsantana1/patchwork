@@ -1,11 +1,11 @@
 (function () {
     'use strict';
 
-    angular.module('blocks.svg', [])
+    angular.module('blocks.svg')
         .factory('Retangule', Retangule);
 
     Retangule.$inject = []
-    function Retangule() {
+    function Retangule () {
         var Retangule = {
             //TODO
         }

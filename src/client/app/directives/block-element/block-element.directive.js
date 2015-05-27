@@ -14,11 +14,11 @@
                 },
                 templateUrl: '/src/client/app/directives/block-element/block-element.html',
                 link: function (scope, el, attrs, ctrl) {
-                    /*Board.create([200, 0], 0, 80, 7, 7)
+                    Board.create([200, 0], 0, 80, 7, 7)
                     var svgs = $window.document.getElementsByTagName('svg');
                     _.each(svgs, function (svg) {
                         el[0].appendChild(svg);
-                    });*/
+                    });
                     $compile(el)(scope);
                 }
             }
