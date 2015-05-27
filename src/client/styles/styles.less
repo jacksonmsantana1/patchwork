@@ -68,7 +68,7 @@ CSS
 #container{
         /* Largura máxima */
         max-width:1200px;
-        max-height: 700px;
+        max-height: 900px;
         background-color: red;
         padding-top: 5%;
         padding-bottom: 5%;
@@ -78,7 +78,6 @@ CSS
         width:100%;
         float:left;
         background-color: green;
-        clear:b;
     }
     .content_inner{
         padding:10px;
@@ -86,8 +85,8 @@ CSS
 
     .svg-wrap {
         height:0;
-        padding-top: 100%;  /* 350px/550px */
-        position: relative;
+        padding-top: 50%;  /* 350px/550px */
+        position: relative;        
     }
 
     svg {
@@ -98,7 +97,13 @@ CSS
         left:0;
     }
 
-    #content img, #sidebar img{
+    .group::after {
+        content: '';
+        display: table;
+        clear: both;
+    };
+
+    #content img {
         max-width:100%;
         height:auto;
     }

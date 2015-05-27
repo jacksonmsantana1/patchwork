@@ -7,7 +7,7 @@
     Retangule.$inject = []
     function Retangule () {
         var Retangule = {
-            //TODO
+            createRetangule: createRetangule
         }
         return Retangule;
         //////////////////////
@@ -15,7 +15,7 @@
         function createRetangule(id, pInit, x, a, b, img) {
             var svg = Snap(x, x).attr('id', id);
             var image;
-            var polygon = svg.rect(pInit[0], pInit[1], x, x).attr({
+            var polygon = svg.rect(pInit[0], pInit[1], a, b).attr({
                         fill: '#F6F6F6',
                         stroke: 'black',
                         strokeWidth: 1

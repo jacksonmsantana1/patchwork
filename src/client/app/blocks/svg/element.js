@@ -8,7 +8,8 @@
 
     function Element() {
         var Element = {
-            createElement: createElement
+            createElement: createElement,
+            drawShape: drawShape
         }
 
         return Element;
@@ -21,32 +22,18 @@
          * @param  {Number} x                Block's size
          * @param  {String} coordenateString Concatenated string with the coordenates of the element
          * @param  {String} img              Path to the image which composes the element
-         * @param  {Boolean} orientation     Flag to sinalize if the block will be in vertical|horizontal
          * @return {Object}                  Return an object with the  img path, snap element(group)
          */
-        function createElement(id, pInit, x, coordenateString, img, orientation) {
+        function createElement(id, pInit, x, coordenateString, img) {
             var svg = Snap(x, x).attr('id', id);
             var polygon, g, image;
 
             if (coordenateString) {
                 g = drawShape(svg, pInit, x, coordenateString);
-            } else {
-                if (orientation) {
-                    polygon = svg.rect(pInit[0], pInit[1], x, x).attr({
-                        fill: '#F6F6F6',
-                        stroke: 'black',
-                        strokeWidth: 1
-                    });
-                    g = svg.group(polygon);
-                }else {
-                    var coordenates = '(Px) (Py) (Px + (0.7071 * x)) (Py - (0.7041 * x)) (Px + (1.4142 * x)) (Py) (Px + (0.7071 * x)) (Py + (0.7071 * x))';
-                    g = drawShape(svg, pInit, x, coordenates);
+                if (img) {
+                    image = svg.image(img, pInit[0], pInit[1], x, x);
+                    image.attr({mask: g});
                 }
-            }
-
-            if (img) {
-                image = svg.image(img, pInit[0], pInit[1], x, x);
-                image.attr({mask: g});
             }
 
             return {

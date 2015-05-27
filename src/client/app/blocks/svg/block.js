@@ -7,8 +7,10 @@
     Block.$inject = ['Element'];
 
     function Block(Element) {
+        var vm = this;
         var Block = {
-            createBlock: createBlock
+            createBlock: createBlock,
+            createEmptyBlock:createEmptyBlock
         };
         return Block;
         //////////////////////
@@ -25,26 +27,24 @@
          */
         function createBlock(id, pInit, x, type, orientation) {
             var arrayGroup = [];
-            if (type) {
-                arrayGroup.push({
+            var group = {
                         img: '',
                         imgHeight: 0,
                         imgWidth: 0,
                         elements: []
-                    });
-                arrayGroup[0].elements.push(Element.createElement(id, pInit, x, orientation));
+                    }
+            if (!type) {
+                arrayGroup.push(group);
+                arrayGroup[0].elements.push(
+                    createEmptyBlock(id, pInit, x, orientation));
             } else {
                 var infoBlock = getBlockFromType(type, orientation);
                 for (var i = 0; i < infoBlock.length; i++) {
-                    arrayGroup.push({
-                        img: '',
-                        imgHeight: 0,
-                        imgWidth: 0,
-                        elements: []
-                    });
+                    arrayGroup.push(group);
                     for (var j = 0; j < infoBlock[i].coordenates.length; j++) {
                         var elementId = id + i + '' + j;
-                        arrayGroup[i].elements.push(Element.createElement(id, pInit, x, infoBlock[i].coordenates[j], infoBlock[i].img));
+                        arrayGroup[i].elements.push(Element.createElement(id, pInit, x,
+                            infoBlock[i].coordenates[j], infoBlock[i].img));
                     }
                 }
             }
@@ -52,6 +52,27 @@
             arrayGroup.id = id;
             return arrayGroup;
         };
+
+        function createEmptyBlock(id, pInit, x, orientation) {
+            var svg = Snap(x, x).attr('id', id);
+            var g, polygon;
+            if (orientation) {
+                polygon = svg.rect(pInit[0], pInit[1], x, x).attr({
+                    fill: '#F6F6F6',
+                    stroke: 'black',
+                    strokeWidth: 1
+                });
+                g = svg.group(polygon);
+            }else {
+                var coordenates = '(Px) (Py) (Px+(0.7071*x)) (Py-(0.7041*x)) (Px+(1.4142*x)) (Py) (Px+(0.7071*x)) (Py+(0.7071*x))';
+                g = Element.drawShape(svg, pInit, x, coordenates);
+            }
+
+            return {
+                'img': '',
+                'group': g
+            };
+        }
 
         /**
          * Get from the database the block's information

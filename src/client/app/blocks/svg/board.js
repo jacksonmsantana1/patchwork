@@ -18,30 +18,36 @@
         /**
          Create the object Board which contains the blocks informations
          * @param  {Array}  pInit Coordenates of the initial point, where start the draw
-         * @param  {Number} b     Size of the border
+         * @param  {Number} border     Size of the border
          * @param  {Number} x     Size of the blocks
-         * @param  {Number} i     Number of the blocks on the y-axis
-         * @param  {Number} j     Number of the blocks on the x-axis
          * @param  {String} layout Name of the Board s layout
          * @return {Object}       Object Board
          */
-        function create(pInit, b, x, i, j, layout) {
-            var boardInfo = getBoardLayout(layout);
+        function create(pInit, border, x, layout) {
+            var boardInfo = getBoardLayout(layout, pInit,border, x);
             var board = {};
             board.lines = [];
-            for (var i = 1; i < boardInfo.lines.length; i++) {
+            for (var i = 0; i < boardInfo.lines.length; i++) {
                 board.lines[i] = [];
-                for (var j = 1; j < boardInfo.lines.length; j++) {
+                for (var j = 0; j < boardInfo.lines.length; j++) {
                     var id = '' + i + '' + j
                     switch (boardInfo.lines[i][j].shape) {
                         case'retangule':
-                            board.lines[i].push(id, Retangule.createRetangule(id, boardInfo.lines[i][j].pInit, x, a, b));
+                            board.lines[i].push(id,
+                                Retangule.createRetangule(id,
+                                    boardInfo.lines[i][j].pInit, x,
+                                        boardInfo.lines[i][j].a,
+                                            boardInfo.lines[i][j].b));
                             break;
                         case 'block':
-                            board.lines[i].push(Block.createBlock(id, boardInfo.lines[i][j].pInit, x, '', boardInfo.orientation));
+                            board.lines[i].push(
+                                Block.createBlock(id,
+                                    boardInfo.lines[i][j].pInit, x, '', boardInfo.orientation));
                             break;
                         case 'triangule':
-                            board.lines[i].push(Element.createElement(id, boardInfo.lines[i][j].pInit, x, points, '', true));
+                            board.lines[i].push(
+                                Element.createElement(id,
+                                    boardInfo.lines[i][j].pInit, x, points, '', true));
 
                     }
                 }
@@ -49,50 +55,120 @@
             return board;
         };
 
-        function getBoardLayout(layout) {
+        function getBoardLayout(layout, pInit, border, x) {
             //TODO
-            return {
+            return evaluateExpression({
                 orientation: true, //or losango
                 lines: [
-                    [], //Empty array because its start on 1
                     [
-                        {shape: 'retangule', pInit: ['0', '0'], a: 'b', b: 'b'},
-                            {shape: 'retangule', pInit: ['b', '0'], a: 'x', b: 'b'},
-                                {shape: 'retangule', pInit: ['b + x', '0'], a: 'x', b: 'b'},
-                                    {shape: 'retangule', pInit: ['b + (2 * x)', '0'], a: 'x', b: 'b'},
-                                        {shape: 'retangule', pInit: ['b + (3 * x)', '0'], a: 'b', b: 'b'}
+                        {shape: 'retangule', pInit: ['Px', 'Py'], a: 'b', b: 'b'},
+                            {shape: 'retangule', pInit: ['Px + b', 'Py'], a: 'x', b: 'b'},
+                                {shape: 'retangule', pInit: ['Px + b + x', 'Py'], a: 'x', b: 'b'},
+                                    {shape: 'retangule', pInit: ['Px + b + (2 * x)', 'Py'],
+                                         a: 'x', b: 'b'},
+                                        {shape: 'retangule', pInit: ['Px + b + (3 * x)', 'Py'],
+                                             a: 'b', b: 'b'}
                     ],
                     [
-                        {shape: 'retangule', pInit: ['0', 'b'], a: 'b', b: 'x'},
-                            {shape: 'block', pInit: ['b', 'b']},
-                                {shape: 'block', pInit: ['b + x', 'b']},
-                                    {shape: 'block', pInit: ['b + (2 * x)', 'b']},
-                                        {shape: 'retangule', pInit: ['b + (3 * x)', 'b'], a: 'b', b: 'x'}
+                        {shape: 'retangule', pInit: ['Px', 'Py + b'], a: 'b', b: 'x'},
+                            {shape: 'block', pInit: ['Px + b', 'Py + b']},
+                                {shape: 'block', pInit: ['Px + b + x', 'Py + b']},
+                                    {shape: 'block', pInit: ['Px + b + (2 * x)', 'Py + b']},
+                                        {shape: 'retangule', pInit: ['Px + b + (3 * x)', 'Py + b'],
+                                            a: 'b', b: 'x'}
                     ],
                     [
-                        {shape: 'retangule', pInit: ['0', 'b + x'], a: 'b', b: 'x'},
-                            {shape: 'block', pInit: ['b', 'b + x']},
-                                {shape: 'block', pInit: ['b + x', 'b + x']},
-                                    {shape: 'block', pInit: ['b + (2 * x)', 'b + x']},
-                                        {shape: 'retangule', pInit: ['0', 'b'], a: 'b', b: 'x'},
-                                            {shape: 'retangule', pInit: ['b + (3 * x)', 'b + x'], a: 'b', b: 'x'}
+                        {shape: 'retangule', pInit: ['Px', 'Py + b + x'], a: 'b', b: 'x'},
+                            {shape: 'block', pInit: ['Px + b', 'Py + b + x']},
+                                {shape: 'block', pInit: ['Px + b + x', 'Py + b + x']},
+                                    {shape: 'block', pInit: ['Px + b + (2 * x)', 'Py + b + x']},
+                                            {shape: 'retangule',
+                                                pInit: ['Px + b + (3 * x)', 'Py + b + x'],
+                                                     a: 'b', b: 'x'}
                     ],
                     [
-                        {shape: 'retangule', pInit: ['0', 'b + (2 * x)'], a: 'b', b: 'x'},
-                            {shape: 'block', pInit: ['b', 'b + (2 * x)']},
-                                {shape: 'block', pInit: ['b + x', 'b + (2 * x)']},
-                                    {shape: 'block', pInit: ['b + (2 * x)', 'b + (2 * x)']},
-                                        {shape: 'retangule', pInit: ['0', 'b'], a: 'b', b: 'x'},
-                                            {shape: 'retangule', pInit: ['b + (3 * x)', 'b + (2 * x)'], a: 'b', b: 'x'}
+                        {shape: 'retangule', pInit: ['Px', 'Py + b + (2 * x)'], a: 'b', b: 'x'},
+                            {shape: 'block', pInit: ['Px + b', 'Py + b + (2 * x)']},
+                                {shape: 'block', pInit: ['Px + b + x', 'Py + b + (2 * x)']},
+                                    {shape: 'block', pInit: ['Px + b + (2 * x)', 'Py + b + (2 * x)']},
+                                            {shape: 'retangule',
+                                                pInit: ['Px + b + (3 * x)', 'Py + b + (2 * x)'],
+                                                     a: 'b', b: 'x'}
                     ],
                     [
-                        {shape: 'retangule', pInit: ['0', 'b + (3 * x)'], a: 'b', b: 'b'},
-                            {shape: 'retangule', pInit: ['b', 'b + (3 * x)'], a: 'x', b: 'b'},
-                                {shape: 'retangule', pInit: ['b + x', 'b + (3 * x)'], a: 'x', b: 'b'},
-                                    {shape: 'retangule', pInit: ['b + (2 * x)', 'b + (3 * x)'], a: 'x', b: 'b'},
-                                        {shape: 'retangule', pInit: ['b + (3 * x)', 'b + (3 * x)'], a: 'b', b: 'b'}
+                        {shape: 'retangule', pInit: ['Px', 'Py + b + (3 * x)'],
+                             a: 'b', b: 'b'},
+                            {shape: 'retangule', pInit: ['Px + b', 'Py + b + (3 * x)'],
+                                 a: 'x', b: 'b'},
+                                {shape: 'retangule', pInit: ['Px + b + x', 'Py + b + (3 * x)'],
+                                     a: 'x', b: 'b'},
+                                    {shape: 'retangule',
+                                        pInit: ['Px + b + (2 * x)', 'Py + b + (3 * x)'],
+                                             a: 'x', b: 'b'},
+                                        {shape: 'retangule',
+                                            pInit: ['Px + b + (3 * x)', 'Py + b + (3 * x)'],
+                                                a: 'b', b: 'b'}
                     ]]
+            }, pInit , border, x);
+        }
+
+        function evaluateExpression (layout, pInit, border, x) {
+            var obj = layout;
+            for (var i = 0; i < obj.lines.length; i++) {
+                for (var j = 0; j < obj.lines.length; j++) {
+                    switch (obj.lines[i][j].shape) {
+                        case 'retangule':
+                            obj.lines[i][j] = evaluateRtgl(obj.lines[i][j], pInit, border, x);
+                            break;
+                        case 'block':
+                            obj.lines[i][j] = evaluateBlock(obj.lines[i][j], pInit, border, x);
+                            break;
+                        case 'triangule':
+                            obj.lines[i][j] = evaluateTrgl(obj.lines[i][j], pInit, border, x);
+                            break;
+                    }
+                }
             }
+            return obj;
+        }
+
+        function evaluateRtgl(retangule, pInit, border, x) {
+            return {
+                shape: 'retangule',
+                pInit: [exprValue(retangule.pInit[0], pInit, border, x),
+                             exprValue(retangule.pInit[1], pInit, border, x)],
+                a: exprValue(retangule.a, pInit, border, x),
+                b: exprValue(retangule.b, pInit, border, x)
+            }
+        }
+
+        function evaluateBlock(block, pInit, border, x) {
+            return {
+                shape: 'block',
+                pInit: [exprValue(block.pInit[0], pInit, border, x),
+                             exprValue(block.pInit[1], pInit, border, x)],
+            }
+        }
+
+        function evaluateTrgl(triangule, pInit, border, x) {
+            var points = '';
+            _.each(triangule.points, function (point) {
+                points += exprValue(point, border, x);
+            });
+            return {
+                shape: 'triangule',
+                pInit: [exprValue(triangule.pInit[0], pInit, border, x),
+                             exprValue(triangule.pInit[1], pInit, border, x)],
+                points: points_
+            }
+        }
+
+        function exprValue (expression, pInit, border, x) {
+            if (expression === '0') {
+                return 0;
+            }
+            var func = new Function ('Px', 'Py', 'x', 'b', 'return ' + expression);
+            return func(pInit[0], pInit[1], x, border);
         }
 
         /**
