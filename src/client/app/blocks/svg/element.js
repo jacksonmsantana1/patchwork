@@ -4,9 +4,13 @@
     angular.module('blocks.svg')
         .factory('Element', Element);
 
-    Element.$inject = [];
+    Element.$inject = ['Drawer'];
 
-    function Element() {
+    function Element(Drawer) {
+        var vm = this;
+        var svg = Drawer.svg;
+        var x = Drawer.size;
+
         var Element = {
             createElement: createElement,
             drawShape: drawShape,
@@ -18,58 +22,56 @@
 
         /**
          * Create the geometry element which composes the block
-         * @param  {String} id          DOM Iddentification of the element
-         * @param  {Array} pInit             Coordenates of the initial point, where start the draw
-         * @param  {Number} x                Block's size
+         * @param  {String} id               DOM Iddentification of the element
+         * @param  {Array} pInit             Coordenates of the initial points to draw
          * @param  {String} coordenateString Concatenated string with the coordenates of the element
          * @param  {String} img              Path to the image which composes the element
          * @return {Object}                  Return an object with the  img path, snap element(group)
          */
-        function createElement(id, pInit, x, coordenateString, img) {
-            var svg = Snap(x, x).attr('id', id);
-            var polygon, image;
+        function createElement(id, pInit, coordenateString, img) {
+            var polygon, image, element;
 
             if (coordenateString) {
-                polygon = drawShape(svg, pInit, x, coordenateString);
+                polygon = drawShape(id, pInit, coordenateString);
                 if (img) {
-                    image = svg.image(img, pInit[0], pInit[1], x, x).pattern(pInit[0], pInit[1], x, x);
+                    image = svg.image(img, pInit[0], pInit[1], x, x)
+                        .pattern(pInit[0], pInit[1], x, x);
                     polygon.attr({
                         fill: image
-                    });
-                    polygon.click(function () {
-                        alert('Click working');
+                    }).click(function () {
+                        changeImage(element, 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSmJjsawcDgHkkecCbWXxcaeSZCf_HU6HSivzBWtZDQ6UsBRrzu');
                     });
                 }
             }
 
-
-            return {
+            element = {
                 'id': id,
                 'img': image,
                 'polygon': polygon,
-                'pInit': pInit,
-                'x': x,
                 'coordenates': coordenateString,
-                'svg': svg
+                'pInit': pInit
             };
+
+            return element;
         }
 
         /**
          * Draws the element on the DOM
-         * @param  {HTMLElement} svg         Svg
-         * @param  {Array} pInit             Coordenates of the initial point, where start the draw
-         * @param  {Number} x                Block's size
+         * @param  {Number} id               ID
+         * @param  {Array} pInit             Coordenates of the initial points to draw
          * @param  {String} coordenateString String with the coordenates of the element
          * @return {HTMLElement}             Return the snap element(polygon)
          */
-        function drawShape(svg, pInit, x, coordenateString) {
-            var coordArray = evaluateCoordenates(pInit, x, coordenateString);
+        function drawShape(id, pInit, coordenateString) {
+            var coordArray = evaluateCoordenates(pInit, coordenateString);
             var coordenates = '';
             _.each (coordArray, function (coord, index) {
                 coordenates += ' ' + coord;
             });
             var polygon =  svg.polygon(coordenates).attr({
+                id: id,
                 stroke: 'black',
+                fill: 'white',
                 strokeWidth: 1
             })
             return polygon;
@@ -77,12 +79,11 @@
 
         /**
          * Tranform the array of funtions into an array of coordenates
-         * @param  {Array} pInit             Coordenates of the initial point, where start the draw
-         * @param  {Number} x                Block's size
+         * @param  {Array} pInit             Coordenates of the initial points to draw
          * @param  {String} coordenateString String with the coordenates of the element
          * @return {Array}                   Coordenates
          */
-        function evaluateCoordenates(pInit, x, coordenateString) {
+        function evaluateCoordenates(pInit, coordenateString) {
             var coordExp = evaluateExpressions(coordenateString);
             var coordenates = [];
             _.each (coordExp, function (coord, index) {
@@ -112,12 +113,13 @@
          */
         function changeImage (element, img) {
             element.img.remove();
-            var image = element.svg.image(img, element.pInit[0], element.pInit[1], element.x, element.x)
-                            .pattern(element.pInit[0], element.pInit[1], element.x, element.x);
+            var image = svg.image(img, element.pInit[0], element.pInit[1], x, x)
+                            .pattern(element.pInit[0], element.pInit[1], x, x);
             element.img = image;
             element.polygon.attr({
+                id: element.id,
                 fill: image
-            })
+            });
         }
     };
 

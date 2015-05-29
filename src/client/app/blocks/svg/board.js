@@ -4,28 +4,32 @@
     angular.module('blocks.svg')
         .factory('Board', Board);
 
-    Board.$inject = ['Block', 'Retangule', 'Element'];
+    Board.$inject = ['Drawer', 'Block', 'Retangule', 'Element'];
 
-    function Board(Block, Retangule, Element) {
+    function Board(Drawer, Block, Retangule, Element) {
+        var vm = this;
+        var svg = Drawer.svg;
+        var x = Drawer.size;
+        var pInit = Drawer.pInit;
+        var border = Drawer.border;
+
         var Board = {
             create: create,
             createBlocks: createBlocks,
             getElement: getElement,
-            totalSize: totalSize
+            totalSize: totalSize,
+            getBoardLayout: getBoardLayout
         }
         return Board;
         //////////////////
 
         /**
          Create the object Board which contains the blocks informations
-         * @param  {Array}  pInit Coordenates of the initial point, where start the draw
-         * @param  {Number} border     Size of the border
-         * @param  {Number} x     Size of the blocks
          * @param  {String} layout Name of the Board s layout
          * @return {Object}       Object Board
          */
-        function create(pInit, border, x, layout) {
-            var boardInfo = getBoardLayout(layout, pInit, border, x);
+        function create(layout) {
+            var boardInfo = getBoardLayout(layout);
             var board = {};
             board.lines = [];
             for (var i = 0; i < boardInfo.lines.length; i++) {
@@ -36,19 +40,19 @@
                         case'retangule':
                             board.lines[i].push(
                                 Retangule.createRetangule(id,
-                                    boardInfo.lines[i][j].pInit, x,
+                                    boardInfo.lines[i][j].pInit,
                                         boardInfo.lines[i][j].a,
                                             boardInfo.lines[i][j].b));
                             break;
                         case 'block':
                             board.lines[i].push(
                                 Block.createBlock(id,
-                                    boardInfo.lines[i][j].pInit, x, 'bla', boardInfo.orientation));
+                                    boardInfo.lines[i][j].pInit, '', boardInfo.orientation));
                             break;
                         case 'triangule':
                             board.lines[i].push(
                                 Element.createElement(id,
-                                    boardInfo.lines[i][j].pInit, x, points, '', true));
+                                    boardInfo.lines[i][j].pInit, points, '', true));
 
                     }
                 }
@@ -56,7 +60,12 @@
             return board;
         };
 
-        function getBoardLayout(layout, pInit, border, x) {
+        /**
+         * Get the board layout s info from the server
+         * @param  {Object} layout Informations about the board layout
+         * @return {[type]}        Board layout s info
+         */
+        function getBoardLayout(layout) {
             //TODO
             return evaluateExpression({
                 orientation: true, //or losango
@@ -113,7 +122,12 @@
             }, pInit , border, x);
         }
 
-        function evaluateExpression (layout, pInit, border, x) {
+        /**
+         * Transform the layout s info into numbers acording to the given parameter(pInit, x, border)
+         * @param  {Object} layout Layout
+         * @return {Object}        Layout s info
+         */
+        function evaluateExpression (layout) {
             var obj = layout;
             for (var i = 0; i < obj.lines.length; i++) {
                 for (var j = 0; j < obj.lines.length; j++) {
@@ -133,7 +147,9 @@
             return obj;
         }
 
-        function evaluateRtgl(retangule, pInit, border, x) {
+        //////////////////////Evaluated functions acording to the objects
+
+        function evaluateRtgl(retangule) {
             return {
                 shape: 'retangule',
                 pInit: [exprValue(retangule.pInit[0], pInit, border, x),
@@ -143,7 +159,7 @@
             }
         }
 
-        function evaluateBlock(block, pInit, border, x) {
+        function evaluateBlock(block) {
             return {
                 shape: 'block',
                 pInit: [exprValue(block.pInit[0], pInit, border, x),
@@ -151,7 +167,7 @@
             }
         }
 
-        function evaluateTrgl(triangule, pInit, border, x) {
+        function evaluateTrgl(triangule) {
             var points = '';
             _.each(triangule.points, function (point) {
                 points += exprValue(point, border, x);
@@ -164,13 +180,24 @@
             }
         }
 
-        function exprValue (expression, pInit, border, x) {
+        ///////////////////////////////////////////////////////////
+
+        /**
+         * Return a function, formed acording to the layout s info, to be evaluated
+         * @param  {String} expression      Expression
+         * @return {Function}               function to be evaluated
+         */
+        function exprValue (expression) {
             if (expression === '0') {
                 return 0;
             }
             var func = new Function ('Px', 'Py', 'x', 'b', 'return ' + expression);
             return func(pInit[0], pInit[1], x, border);
         }
+
+        ///////////////////////////////OPCIONAIS///////////////////////////////////
+
+
 
         /**
          * Create an Array containing the Board's blocks info  (initial point, type of block)

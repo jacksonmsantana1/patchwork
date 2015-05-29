@@ -15,7 +15,9 @@
         $scope.coordenates = '(Px) (Py) (Px+x) (Py) (Px) (Py+(x*0.333333333))';
         $scope.coordenates2 = '(Px+x) (Py) (Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333))';
         $scope.size = 200;
-        $scope.pointInitial = [10, 10];
+        $scope.pX = '10';
+        $scope.pY = '10';
+        $scope.layout = 'dfsd';
     };
 
 })();
