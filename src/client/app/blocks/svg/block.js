@@ -27,23 +27,27 @@
          */
         function createBlock(id, pInit, x, type, orientation) {
             var arrayGroup = [];
-            var group = {
+            if (!type) {
+                arrayGroup.push({
                         img: '',
                         imgHeight: 0,
                         imgWidth: 0,
                         elements: []
-                    }
-            if (!type) {
-                arrayGroup.push(group);
+                    });
                 arrayGroup[0].elements.push(
                     createEmptyBlock(id, pInit, x, orientation));
             } else {
                 var infoBlock = getBlockFromType(type, orientation);
                 for (var i = 0; i < infoBlock.length; i++) {
-                    arrayGroup.push(group);
+                    arrayGroup.push({
+                        img: '',
+                        imgHeight: 0,
+                        imgWidth: 0,
+                        elements: []
+                    });
                     for (var j = 0; j < infoBlock[i].coordenates.length; j++) {
-                        var elementId = id + i + '' + j;
-                        arrayGroup[i].elements.push(Element.createElement(id, pInit, x,
+                        var elementId = id + 'b' + i + '' + j;
+                        arrayGroup[i].elements.push(Element.createElement(elementId, pInit, x,
                             infoBlock[i].coordenates[j], infoBlock[i].img));
                     }
                 }
@@ -69,6 +73,7 @@
             }
 
             return {
+                'id': id,
                 'img': '',
                 'group': g
             };

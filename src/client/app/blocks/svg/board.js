@@ -10,6 +10,7 @@
         var Board = {
             create: create,
             createBlocks: createBlocks,
+            getElement: getElement,
             totalSize: totalSize
         }
         return Board;
@@ -24,16 +25,16 @@
          * @return {Object}       Object Board
          */
         function create(pInit, border, x, layout) {
-            var boardInfo = getBoardLayout(layout, pInit,border, x);
+            var boardInfo = getBoardLayout(layout, pInit, border, x);
             var board = {};
             board.lines = [];
             for (var i = 0; i < boardInfo.lines.length; i++) {
                 board.lines[i] = [];
                 for (var j = 0; j < boardInfo.lines.length; j++) {
-                    var id = '' + i + '' + j
+                    var id = 'e' + i + '' + j
                     switch (boardInfo.lines[i][j].shape) {
                         case'retangule':
-                            board.lines[i].push(id,
+                            board.lines[i].push(
                                 Retangule.createRetangule(id,
                                     boardInfo.lines[i][j].pInit, x,
                                         boardInfo.lines[i][j].a,
@@ -42,7 +43,7 @@
                         case 'block':
                             board.lines[i].push(
                                 Block.createBlock(id,
-                                    boardInfo.lines[i][j].pInit, x, '', boardInfo.orientation));
+                                    boardInfo.lines[i][j].pInit, x, 'bla', boardInfo.orientation));
                             break;
                         case 'triangule':
                             board.lines[i].push(
@@ -202,14 +203,18 @@
         };
 
         /**
-         * Return the conteiner block
-         * @param  {[type]} i     The x-axis coordenate of the returned conteiner block
-         * @param  {[type]} j     The x-axis coordenate of the returned conteiner block
+         * Return the element
+         * @param  {[type]} id     ID
          * @param  {[type]} board The board who contains the conteiners blocks
          * @return {[type]}       Container Block
          */
-        function getBlock(i, j, board) {
-            //TODO
+        function getElement(id, board) {
+            var id = id.replace(/\D+/g, '').split('');
+            if (id.length  === 2) {
+                return board.lines[parseInt(id[0])][parseInt(id[1])];
+            } else {
+                return board.lines[parseInt(id[0])][parseInt(id[1])][parseInt(id[2])].elements[parseInt(id[3])];
+            }
         }
 
         /**

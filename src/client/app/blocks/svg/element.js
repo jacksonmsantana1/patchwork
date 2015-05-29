@@ -9,7 +9,8 @@
     function Element() {
         var Element = {
             createElement: createElement,
-            drawShape: drawShape
+            drawShape: drawShape,
+            changeImage: changeImage
         }
 
         return Element;
@@ -26,19 +27,30 @@
          */
         function createElement(id, pInit, x, coordenateString, img) {
             var svg = Snap(x, x).attr('id', id);
-            var polygon, g, image;
+            var polygon, image;
 
             if (coordenateString) {
-                g = drawShape(svg, pInit, x, coordenateString);
+                polygon = drawShape(svg, pInit, x, coordenateString);
                 if (img) {
-                    image = svg.image(img, pInit[0], pInit[1], x, x);
-                    image.attr({mask: g});
+                    image = svg.image(img, pInit[0], pInit[1], x, x).pattern(pInit[0], pInit[1], x, x);
+                    polygon.attr({
+                        fill: image
+                    });
+                    polygon.click(function () {
+                        alert('Click working');
+                    });
                 }
             }
 
+
             return {
+                'id': id,
                 'img': image,
-                'group': g
+                'polygon': polygon,
+                'pInit': pInit,
+                'x': x,
+                'coordenates': coordenateString,
+                'svg': svg
             };
         }
 
@@ -57,11 +69,10 @@
                 coordenates += ' ' + coord;
             });
             var polygon =  svg.polygon(coordenates).attr({
-                fill: '#F6F6F6',
                 stroke: 'black',
                 strokeWidth: 1
-            });
-            return svg.group(polygon);
+            })
+            return polygon;
         }
 
         /**
@@ -91,6 +102,22 @@
                 return new Function ('Px', 'Py', 'x', 'return ' + coord);
             });
             return coordenatesExp;
+        }
+
+        /**
+         * Change the background image of the element
+         * @param  {Element} element    Element
+         * @param  {String} img         Image s path
+         * @return none
+         */
+        function changeImage (element, img) {
+            element.img.remove();
+            var image = element.svg.image(img, element.pInit[0], element.pInit[1], element.x, element.x)
+                            .pattern(element.pInit[0], element.pInit[1], element.x, element.x);
+            element.img = image;
+            element.polygon.attr({
+                fill: image
+            })
         }
     };
 
