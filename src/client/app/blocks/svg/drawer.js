@@ -7,7 +7,7 @@
     Drawer.$inject = [];
     function Drawer() {
         var svg = Snap(1200, 800);
-        var x = 100;
+        var x = 200;
         var pInit = [20, 20];
         var border = 20;
 

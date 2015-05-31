@@ -1,6 +1,3 @@
-@svgHeight: '($(window).height() * 2)  + 30';
-
-
 /*****************************************
 Repair Browsers bugs
 *****************************************/
@@ -63,50 +60,125 @@ table {
 }
 
 /*****************************************
-CSS
+MAIN
 *****************************************/
-#container{
-        /* Largura máxima */
-        max-width:1200px;
-        max-height: 900px;
-        background-color: red;
-        padding-top: 5%;
-        padding-bottom: 5%;
-        margin: 0 auto;
-    }
-    #content{
-        width:100%;
-        float:left;
-        background-color: green;
-    }
-    .content_inner{
-        padding:10px;
-    }
 
-    .svg-wrap {
-        height:0;
-        padding-top: 65.83333333%;  /* 350px/550px */
-        position: relative;
-    }
+html {
+    height: 100%;
+}
 
-    svg {
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top:0;
-        left:0;
-    }
+body {
+    background-color: red;
+    height:100%;
+    max-width:1200px;
+    max-height: 1000px;
+    margin: 0 auto;
+}
 
-    .group::after {
-        content: '';
-        display: table;
-        clear: both;
-    };
+main {
+    background-color: #0C005C;
+    height:90%;      
+}
 
-    #content img {
-        max-width:100%;
-        height:auto;
-    }
+#container {
+    padding: 1%;
+    overflow-x: hidden;
+}
+
+#content{
+        
+}
+
+.svg-wrap {
+    height:0;
+    padding-top: 66.6666667%; 
+    position: relative;
+    width: 100%;
+}
+
+svg {
+     height: 100%;
+     width: 100%;
+     position: absolute;
+     top:0;
+     left:25;
+}
+
+.group::after {
+    content: '';
+    display: table;
+    clear: both;
+};
+
+#content img {
+    max-width:100%;
+    height:auto;
+}
+
+/*****************************************
+Scroolbar
+*****************************************/
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+ 
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #ccc; 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #ccc; 
+}    
+
+/*****************************************
+NavBar
+*****************************************/
+nav {
+    width:100%;
+    background-color: blue;
+    height:10%;
+    padding: 1.5% 3% 1.5% 3%;
+}
+
+ul {
+    width: 70%;
+    padding: 1% 0.75% 1.5% 0.75%;
+    float: right;
+}
+
+li {
+    display: inline-block;
+    float:right;
+    margin-right:5%;
+}
+
+ul li a {
+    font-size: 1.0em;
+    font-family: 'Indie Flower',Arial, serif;
+    font-weight: 400;
+}
+
+.logo {
+    float:left;
+    width: 30%;
+}
+
+.logo  a {
+    font-size: 2.0em;
+    font-family: 'Indie Flower',Arial, serif;
+    font-weight: 400;
+}
+
+
 
 /*****************************************
 #region wrapper for angular ng-include and ng-view animations
@@ -225,12 +297,10 @@ CSS
         
 @media screen and (min-width: 480px) {
   body {
-    background-color: navy;
   } 
 }
 
 @media screen and (min-width: 660px) {
   body {
-    background-color: white;
   }
 };

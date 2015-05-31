@@ -12,6 +12,9 @@
     
     <title></title> 
     <base href="/">
+    
+    <!--Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
@@ -29,10 +32,10 @@
 </head>
 <body>
     <nav>
-        <div ng-include="'app/layout/nav/nav.html'"></div>
+        <div ng-include="'app/layout/nav/nav.html'" class="group"></div>
     </nav>
     <main id="container" class="group">
-        <div ui-view id="content" class="svg-wrap content_inner"></div>
+        <div ui-view id="content" class="svg-wrap"></div>
     </main>
     <footer>
         <div ng-include=""></div>

@@ -9,13 +9,19 @@
                 link: function ($scope, element, attrs, controller) {
                     $scope.board = Board.create('bla');
                     var content = $window.document.querySelector('svg');
+                    makeResponsible(content);
                     element.append(content);
-
-                    Board.cleanBlock(Board.getBlockById($scope.board, 'e11'));
                 }
             }
 
             ////////////////////////////////////////////////////////
+
+            function makeResponsible(svg) {
+                var viewbox = '0 0 ' + svg.getAttribute('width') + ' ' + svg.getAttribute('height');
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.setAttribute('viewBox', viewbox);
+            }
 
             function create(layout, element) {
                 var boardInfo = Board.getBoardLayout(layout);
