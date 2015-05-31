@@ -26,16 +26,12 @@
          * @return {Retangule}      Retangule Object
          */
         function createRetangule(id, pInit, a, b, img) {
-            var image;
+            var image, retangular;
             var polygon = svg.rect(pInit[0], pInit[1], a, b).attr({
                         id: id,
                         fill: '#F6F6F6',
                         stroke: 'black',
                         strokeWidth: 1
-                    }).click(function () {
-                        this.attr({
-                            fill: 'red'
-                        })
                     });
 
             if (img) {
@@ -44,7 +40,7 @@
                 polygon.attr({fill: image});
             }
 
-            return {
+            retangular = {
                 'id': id,
                 'img': image,
                 'polygon': polygon,
@@ -52,6 +48,8 @@
                 'b': b,
                 'pInit': pInit
             };
+
+            return retangular;
         }
 
          /**
@@ -61,14 +59,30 @@
          * @return none
          */
         function changeImage (element, img) {
-            element.img.remove();
+            if (element.img) {
+                element.img.remove();
+            }
             var image = svg.image(img, element.pInit[0], element.pInit[1], element.a, element.b)
-                        .pattern(element.pInit[0], element.pInit[1], a, b);
+                        .pattern(element.pInit[0], element.pInit[1], element.a, element.b);
             element.img = image;
             element.polygon.attr({
                 id: element.id,
                 fill: image
             });
+        }
+
+        /**
+         * Take away the image as background from the border
+         * @param  {Retangule} retangule Retangule clicked
+         * @return                       none
+         */
+        function cleanBorder(retangule) {
+            if (element.img) {
+                element.img.remove();
+                element.polygon.attr({
+                    fill:'#FFF'
+                });
+            }
         }
     }
 

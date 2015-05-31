@@ -7,9 +7,11 @@
                 restrict: 'E',
                 replace: true,
                 link: function ($scope, element, attrs, controller) {
-                    Board.create('bla');
+                    $scope.board = Board.create('bla');
                     var content = $window.document.querySelector('svg');
                     element.append(content);
+
+                    Board.cleanBlock(Board.getBlockById($scope.board, 'e11'));
                 }
             }
 

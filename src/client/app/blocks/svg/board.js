@@ -18,7 +18,9 @@
             createBlocks: createBlocks,
             getElement: getElement,
             totalSize: totalSize,
-            getBoardLayout: getBoardLayout
+            getBoardLayout: getBoardLayout,
+            cleanBlock: cleanBlock,
+            getBlockById:getBlockById
         }
         return Board;
         //////////////////
@@ -46,8 +48,9 @@
                             break;
                         case 'block':
                             board.lines[i].push(
+                                //Put some random string to test the blocks with images
                                 Block.createBlock(id,
-                                    boardInfo.lines[i][j].pInit, '', boardInfo.orientation));
+                                    boardInfo.lines[i][j].pInit, 'image.png', boardInfo.orientation));
                             break;
                         case 'triangule':
                             board.lines[i].push(
@@ -68,6 +71,7 @@
         function getBoardLayout(layout) {
             //TODO
             return evaluateExpression({
+                name: '',
                 orientation: true, //or losango
                 lines: [
                     [
@@ -195,7 +199,31 @@
             return func(pInit[0], pInit[1], x, border);
         }
 
-        ///////////////////////////////OPCIONAIS///////////////////////////////////
+        /**
+         * Return the element by it s id
+         * @param  {Board} board    Board
+         * @param  {String} id      ID
+         * @return {Element}        Element
+         */
+        function getBlockById(board, id) {
+            var line = id.substr(1, 1);
+            var column = id.substr(2, 2);
+            return board.lines[line][column];
+        }
+
+        /**
+         * Tranform the block in an empty block
+         * @param  {Block} block    Block clicked
+         * @return                  none
+         */
+        function cleanBlock(block) {
+            Block.changeBlockType(block, '');
+        }
+
+
+        /**************************************************************************
+        *                               OPCIONAIS                                  *
+        ****************************************************************************/
 
 
 

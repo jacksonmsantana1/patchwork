@@ -13,7 +13,8 @@
 
         var Block = {
             createBlock: createBlock,
-            createEmptyBlock:createEmptyBlock
+            createEmptyBlock:createEmptyBlock,
+            changeBlockType:changeBlockType
         };
         return Block;
         //////////////////////
@@ -28,7 +29,7 @@
          * same image
          */
         function createBlock(id, pInit, type, orientation) {
-            var arrayGroup = [];
+            var arrayGroup = [], block;
             if (!type) {
                 arrayGroup.push({
                         img: '',
@@ -42,9 +43,9 @@
                 var infoBlock = getBlockFromType(type, orientation);
                 for (var i = 0; i < infoBlock.length; i++) {
                     arrayGroup.push({
-                        img: '',
-                        imgHeight: 0,
-                        imgWidth: 0,
+                        img: infoBlock[i].img,
+                        imgHeight: x,
+                        imgWidth: x,
                         elements: []
                     });
                     for (var j = 0; j < infoBlock[i].coordenates.length; j++) {
@@ -55,8 +56,15 @@
                 }
             }
 
-            arrayGroup.id = id;
-            return arrayGroup;
+            //img & polygon = arrayGroup
+            block = {
+                'id': id,
+                'pInit': pInit,
+                'orientation': orientation,
+                'arrayGroup': arrayGroup
+            }
+
+            return block;
         };
 
         /**
@@ -74,17 +82,14 @@
                 coordenates = '(Px) (Py) (Px+(0.7071*x)) (Py-(0.7041*x)) (Px+(1.4142*x)) (Py) (Px+(0.7071*x)) (Py+(0.7071*x))';
             }
             polygon = Element.drawShape(id, pInit, coordenates);
-            polygon.click(function () {
-                        changeBlockType(block, 'typeTest');
-                    });
 
+            //arrayGroup = polygon & img
             block = {
                 'id': id,
                 'img': '',
                 'polygon': polygon,
                 'pInit': pInit,
                 'orientation': orientation,
-                'arrayGroup': []
             };
 
             return block;
@@ -94,12 +99,16 @@
          * Change the Block type
          * @param  {Block} block  Actual block
          * @param  {String} type  Block s type
-         * @return        none
+         * @return                none
          */
         function changeBlockType(block, type) {
             //Remove Block elements
             removeBlock(block)
-            block.arrayGroup = createBlock(block.id, block.pInit, type, block.orientation);
+            if (!type) {
+                block.arrayGroup = createEmptyBlock(block.id, block.pInit, block.orientation);
+            } else {
+                block.arrayGroup = createBlock(block.id, block.pInit, type, block.orientation);
+            }
         }
 
         /**
@@ -108,16 +117,16 @@
          * @return       none
          */
         function removeBlock(block) {
-            if (block.arrayGroup.length !== 0) {
-                _.each(block.arrayGroup, function (elements) {
-                    _.each(elements, function (element) {
+            if (block.arrayGroup) {
+                _.each(block.arrayGroup, function (block) {
+                    _.each(block.elements, function (element) {
                         element.img.remove();
+                        element.polygon.unclick();
                         element.polygon.remove();
-                        element = null;
                     });
-                    elements = null;
                 });
             } else {
+                block.polygon.unclick();
                 block.polygon.remove();
                 block.polygon = null;
             }

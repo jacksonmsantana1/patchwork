@@ -14,7 +14,8 @@
         var Element = {
             createElement: createElement,
             drawShape: drawShape,
-            changeImage: changeImage
+            changeImage: changeImage,
+            cleanElement: cleanElement
         }
 
         return Element;
@@ -38,8 +39,6 @@
                         .pattern(pInit[0], pInit[1], x, x);
                     polygon.attr({
                         fill: image
-                    }).click(function () {
-                        changeImage(element, 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSmJjsawcDgHkkecCbWXxcaeSZCf_HU6HSivzBWtZDQ6UsBRrzu');
                     });
                 }
             }
@@ -53,6 +52,20 @@
             };
 
             return element;
+        }
+
+        /**
+         * Take away the image as background from the element
+         * @param  {Element} element Element clicked
+         * @return         none
+         */
+        function cleanElement(element) {
+            if (element.img) {
+                element.img.remove();
+                element.polygon.attr({
+                    fill:'#FFF'
+                });
+            }
         }
 
         /**
