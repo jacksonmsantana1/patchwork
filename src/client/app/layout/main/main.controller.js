@@ -2,10 +2,10 @@
 
     'use strict';
 
-	angular.module('app.layout')
+    angular.module('app.layout')
         .controller('Main', Main);
 
-    Main.$inject = ['$scope']
+    Main.$inject = ['$scope'];
 
     function Main($scope) {
         $scope.img = [
@@ -18,6 +18,6 @@
         $scope.pX = '10';
         $scope.pY = '10';
         $scope.layout = 'dfsd';
-    };
+    }
 
 })();
