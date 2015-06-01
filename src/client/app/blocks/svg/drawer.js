@@ -19,7 +19,6 @@
         };
         ////////////////GETTERS/SETTERS////
 
-
         function setSvg(newX, newY) {
             svg = Snap(newX, newY);
         }

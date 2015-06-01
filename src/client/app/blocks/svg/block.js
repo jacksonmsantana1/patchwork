@@ -11,12 +11,11 @@
         var svg = Drawer.svg;
         var x = Drawer.size;
 
-        var Block = {
+        return {
             createBlock: createBlock,
             createEmptyBlock:createEmptyBlock,
             changeBlockType:changeBlockType
         };
-        return Block;
         //////////////////////
 
         /**
@@ -62,10 +61,10 @@
                 'pInit': pInit,
                 'orientation': orientation,
                 'arrayGroup': arrayGroup
-            }
+            };
 
             return block;
-        };
+        }
 
         /**
          * Creates a block without elements inside
@@ -79,7 +78,8 @@
             if (orientation) {
                 coordenates = '(Px) (Py) (Px+x) (Py) (Px+x) (Py+x) (Px) (Py+x)';
             }else {
-                coordenates = '(Px) (Py) (Px+(0.7071*x)) (Py-(0.7041*x)) (Px+(1.4142*x)) (Py) (Px+(0.7071*x)) (Py+(0.7071*x))';
+                coordenates =
+'(Px) (Py) (Px+(0.7071*x)) (Py-(0.7041*x)) (Px+(1.4142*x)) (Py) (Px+(0.7071*x)) (Py+(0.7071*x))';
             }
             polygon = Element.drawShape(id, pInit, coordenates);
 
@@ -103,7 +103,7 @@
          */
         function changeBlockType(block, type) {
             //Remove Block elements
-            removeBlock(block)
+            removeBlock(block);
             if (!type) {
                 block.arrayGroup = createEmptyBlock(block.id, block.pInit, block.orientation);
             } else {
@@ -145,20 +145,26 @@
                 {
                     coordenates: [
                         '(Px) (Py) (Px+x) (Py) (Px) (Py+(x*0.333333333))',
-                        '(Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333)) (Px) (Py+(x*0.666666667))',
+                        '(Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333))' +
+                            ' (Px) (Py+(x*0.666666667))',
                         '(Px) (Py+(x*0.666666667)) (Px+x) (Py+(x*0.666666667)) (Px) (Py+x)'
                     ],
-                    img: 'http://mlb-s1-p.mlstatic.com/corte-tecido-importado-patchwork-pink-rosas-quilting-fantasy-14178-MLB3238135558_102012-F.jpg'
+                    img: 'http://mlb-s1-p.mlstatic.com/' +
+                            'corte-tecido-importado-patchwork-pink-rosas-quilting' +
+                                '-fantasy-14178-MLB3238135558_102012-F.jpg'
                 }, {
                     coordenates: [
                         '(Px+x) (Py) (Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333))',
-                        '(Px+x) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.666666667)) (Px) (Py+(x*0.666666667))',
+                        '(Px+x) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.666666667)) (Px)' +
+                            ' (Py+(x*0.666666667))',
                         '(Px+x) (Py+(x*0.666666667)) (Px+x) (Py+x) (Px) (Py+x)'
                     ],
-                    img: 'http://mlb-s2-p.mlstatic.com/corte-tecido-importado-patchwork-vinho-trelica-flor-quilting-14259-MLB195704781_1434-F.jpg'
+                    img: 'http://mlb-s2-p.mlstatic.com/' +
+                            'corte-tecido-importado-patchwork-vinho-trelica-flor-quilting-' +
+                            '14259-MLB195704781_1434-F.jpg'
                 }
             ];
-        };
-    };
+        }
+    }
 
 })();

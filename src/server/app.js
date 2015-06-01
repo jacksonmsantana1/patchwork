@@ -15,24 +15,24 @@ console.log('** Starting Node Server. **');
 console.log('PORT=' + config.port);
 console.log('NODE_ENV=' + config.env);
 
-
 var MONGODB_URI = config.db.baseUrl + config.db.projectName,
 
     /**
-     * Function connectToMongoose
      * The actual connection function. When the connection succeeds, it calls the next callback,
      * that will make the sequence advance. When it fails, it trigers the errorCallback function,
      * that works recursively with guaranteeMongooseConnection function, to ensure a connection is
      * obtained before starting the express server
-     * @param next next param from the sequence
-     * @param errorCallback the function errorCallback
+     * @param  {Function} next
+     * @param  {Function}   errorCallback
+     * @return
      */
     connectToMongoose = function (next, errorCallback) {
         mongoose.connect(MONGODB_URI, {}, function (err) {
             if (err) {
                 errorCallback();
             } else {
-                console.log(moment().toISOString(), '-', 'Connected to mongoDB.URL: '+ MONGODB_URI);
+                console.log(moment().toISOString(), '-',
+                    'Connected to mongoDB.URL: ' + MONGODB_URI);
                 if (typeof next === 'function') {
                     next();
                 }
@@ -41,12 +41,12 @@ var MONGODB_URI = config.db.baseUrl + config.db.projectName,
     },
 
     errorCallback = function (next) {
-        console.log(moment().toISOString(), '-', 'Error connecting to MongoDB. Trying again in 1000 ms');
+        console.log(moment().toISOString(), '-',
+            'Error connecting to MongoDB. Trying again in 1000 ms');
         setTimeout(function () {
             guaranteeMongooseConnection(next);
         }, 1000);
     },
-
 
     guaranteeMongooseConnection = function (next) {
         connectToMongoose(next, function () {
@@ -59,7 +59,7 @@ sequence
         guaranteeMongooseConnection(next);
     })
     .then(function () {
-        console.log(config.port)
+        console.log(config.port);
         process.on('SIGINT', function() {
             mongoose.connection.close(function () {
                 console.log('Mongoose disconnected through app termination');
@@ -74,6 +74,5 @@ sequence
                     '\nprocess.cwd = ' + process.cwd());
         });
     });
-
 
 module.exports = app;

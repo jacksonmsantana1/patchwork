@@ -13,7 +13,7 @@
         var pInit = Drawer.pInit;
         var border = Drawer.border;
 
-        var Board = {
+        return {
             create: create,
             createBlocks: createBlocks,
             getElement: getElement,
@@ -21,8 +21,7 @@
             getBoardLayout: getBoardLayout,
             cleanBlock: cleanBlock,
             getBlockById:getBlockById
-        }
-        return Board;
+        };
         //////////////////
 
         /**
@@ -37,7 +36,7 @@
             for (var i = 0; i < boardInfo.lines.length; i++) {
                 board.lines[i] = [];
                 for (var j = 0; j < boardInfo.lines.length; j++) {
-                    var id = 'e' + i + '' + j
+                    var id = 'e' + i + '' + j;
                     switch (boardInfo.lines[i][j].shape) {
                         case'retangule':
                             board.lines[i].push(
@@ -50,18 +49,20 @@
                             board.lines[i].push(
                                 //Put some random string to test the blocks with images
                                 Block.createBlock(id,
-                                    boardInfo.lines[i][j].pInit, 'image.png', boardInfo.orientation));
+                                    boardInfo.lines[i][j].pInit,
+                                        'image.png', boardInfo.orientation));
                             break;
                         case 'triangule':
                             board.lines[i].push(
                                 Element.createElement(id,
-                                    boardInfo.lines[i][j].pInit, points, '', true));
+                                    boardInfo.lines[i][j].pInit,
+                                        boardInfo.lines[i][j].points, '', true));
 
                     }
                 }
             }
             return board;
-        };
+        }
 
         /**
          * Get the board layout s info from the server
@@ -104,7 +105,8 @@
                         {shape: 'retangule', pInit: ['Px', 'Py + b + (2 * x)'], a: 'b', b: 'x'},
                             {shape: 'block', pInit: ['Px + b', 'Py + b + (2 * x)']},
                                 {shape: 'block', pInit: ['Px + b + x', 'Py + b + (2 * x)']},
-                                    {shape: 'block', pInit: ['Px + b + (2 * x)', 'Py + b + (2 * x)']},
+                                    {shape: 'block', pInit: ['Px + b + (2 * x)',
+                                                                 'Py + b + (2 * x)']},
                                             {shape: 'retangule',
                                                 pInit: ['Px + b + (3 * x)', 'Py + b + (2 * x)'],
                                                      a: 'b', b: 'x'}
@@ -160,7 +162,7 @@
                              exprValue(retangule.pInit[1], pInit, border, x)],
                 a: exprValue(retangule.a, pInit, border, x),
                 b: exprValue(retangule.b, pInit, border, x)
-            }
+            };
         }
 
         function evaluateBlock(block) {
@@ -168,7 +170,7 @@
                 shape: 'block',
                 pInit: [exprValue(block.pInit[0], pInit, border, x),
                              exprValue(block.pInit[1], pInit, border, x)],
-            }
+            };
         }
 
         function evaluateTrgl(triangule) {
@@ -180,8 +182,8 @@
                 shape: 'triangule',
                 pInit: [exprValue(triangule.pInit[0], pInit, border, x),
                              exprValue(triangule.pInit[1], pInit, border, x)],
-                points: points_
-            }
+                points: points
+            };
         }
 
         ///////////////////////////////////////////////////////////
@@ -195,6 +197,7 @@
             if (expression === '0') {
                 return 0;
             }
+            /*jslint evil: true */
             var func = new Function ('Px', 'Py', 'x', 'b', 'return ' + expression);
             return func(pInit[0], pInit[1], x, border);
         }
@@ -220,12 +223,9 @@
             Block.changeBlockType(block, '');
         }
 
-
         /**************************************************************************
         *                               OPCIONAIS                                  *
         ****************************************************************************/
-
-
 
         /**
          * Create an Array containing the Board's blocks info  (initial point, type of block)
@@ -255,20 +255,22 @@
                 }
             }
             return blocks;
-        };
+        }
 
         /**
          * Return the element
-         * @param  {[type]} id     ID
+         * @param  {[type]} ID     ID
          * @param  {[type]} board The board who contains the conteiners blocks
          * @return {[type]}       Container Block
          */
-        function getElement(id, board) {
-            var id = id.replace(/\D+/g, '').split('');
+        function getElement(ID, board) {
+            var id = ID.replace(/\D+/g, '').split('');
             if (id.length  === 2) {
                 return board.lines[parseInt(id[0])][parseInt(id[1])];
             } else {
-                return board.lines[parseInt(id[0])][parseInt(id[1])][parseInt(id[2])].elements[parseInt(id[3])];
+                return board
+                        .lines[parseInt(id[0])][parseInt(id[1])][parseInt(id[2])]
+                            .elements[parseInt(id[3])];
             }
         }
 
@@ -285,7 +287,7 @@
             var coordenates = createCoordenates(x, point);
             var polygon =  svg.polygon(coordenates).attr({fill: '#F1F1F1'});
             return polygon;
-        };
+        }
 
         /**
          * Create the coordenates to draw the container block
@@ -302,7 +304,7 @@
                     ' ' + (point[1] + x) +
                     ' ' + point[0] +
                     ' ' + (point[1] + x);
-        };
+        }
 
         /**
          * Returns the board width
@@ -316,7 +318,7 @@
             }else {
                 Log.error('Invalid blocks-width parameter!', moment(), 'Board Creation');
             }
-        };
+        }
 
         /**
          * Returns the board height
@@ -330,7 +332,7 @@
             } else {
                 Log.error('Invalid blocks-height parameter!', moment(), 'Board Creation');
             }
-        };
+        }
 
         /**
          * Return the total size of the drawing

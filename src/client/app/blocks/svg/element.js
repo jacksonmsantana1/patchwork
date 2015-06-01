@@ -5,20 +5,19 @@
         .factory('Element', Element);
 
     Element.$inject = ['Drawer'];
-
+    /*jshint -W004 */
     function Element(Drawer) {
         var vm = this;
         var svg = Drawer.svg;
         var x = Drawer.size;
 
-        var Element = {
+        return {
             createElement: createElement,
             drawShape: drawShape,
             changeImage: changeImage,
             cleanElement: cleanElement
-        }
+        };
 
-        return Element;
         //////////////////////////
 
         /**
@@ -86,7 +85,7 @@
                 stroke: 'black',
                 fill: 'white',
                 strokeWidth: 1
-            })
+            });
             return polygon;
         }
 
@@ -113,6 +112,7 @@
         function evaluateExpressions(coordenateString) {
             var arrayCoordExp = coordenateString.split(' ');
             var coordenatesExp = _.map(arrayCoordExp, function (coord) {
+                /*jslint evil: true */
                 return new Function ('Px', 'Py', 'x', 'return ' + coord);
             });
             return coordenatesExp;
@@ -134,6 +134,6 @@
                 fill: image
             });
         }
-    };
+    }
 
 })();

@@ -8,8 +8,7 @@
     "freeze": true,
     "immed": true,
     "indent": 4,
-    "latedef": "nofunc",
-    "newcap": true,
+    "newcap": false,
     "noarg": true,
     "noempty": true,
     "nonbsp": true,
@@ -55,6 +54,10 @@
     "node": true,
 
     "globals": {
-        "angular": false
+        "angular": false,
+        "_": true,
+        "Snap": true,
+        "moment": true,
+        "Log": true
     }
 }

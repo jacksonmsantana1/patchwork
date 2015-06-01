@@ -4,16 +4,15 @@
     angular.module('blocks.svg')
         .factory('Retangule', Retangule);
 
-    Retangule.$inject = ['Drawer']
+    Retangule.$inject = ['Drawer'];
     function Retangule (Drawer) {
         var vm = this;
         var svg = Drawer.svg;
         var x = Drawer.size;
 
-        var Retangule = {
+        return {
             createRetangule: createRetangule
-        }
-        return Retangule;
+        };
         //////////////////////
 
         /**
@@ -52,7 +51,7 @@
             return retangular;
         }
 
-         /**
+        /**
          * Change the background image of the element
          * @param  {Element} element    Element
          * @param  {String} img         Image s path
@@ -77,9 +76,9 @@
          * @return                       none
          */
         function cleanBorder(retangule) {
-            if (element.img) {
-                element.img.remove();
-                element.polygon.attr({
+            if (retangule.img) {
+                retangule.img.remove();
+                retangule.polygon.attr({
                     fill:'#FFF'
                 });
             }

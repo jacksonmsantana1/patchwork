@@ -15,23 +15,13 @@ var bodyParser = require('body-parser'),
     passport = require('passport'),
     express = require('express');
 
-
 module.exports = function (app) {
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(bodyParser.json());
     app.use(passport.initialize());
     app.use(compress());
-	app.use(logger('dev'));
-
-//    app.use(function (req, res, next) {
-//        res.header('Access-Control-Allow-Origin', '*');
-//        res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-//        res.header('Acess-Control-Allow-Headers', 'Content-Type, Authorization');
-//
-//        next();
-//    });
-
-	app.use(cors());
+    app.use(logger('dev'));
+    app.use(cors());
 
     switch (environment) {
         case 'build':
