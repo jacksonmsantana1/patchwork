@@ -15,7 +15,7 @@
             svg: svg,
             size: x,
             pInit: pInit,
-            border: border
+            border: border,
         };
         ////////////////GETTERS/SETTERS////
 
