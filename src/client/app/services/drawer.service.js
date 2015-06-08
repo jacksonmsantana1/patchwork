@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('blocks.svg')
+    angular.module('app.services')
         .factory('Drawer', Drawer);
 
     Drawer.$inject = [];

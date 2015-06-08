@@ -1,10 +1,5 @@
 (function () {
     'use strict';
 
-    angular
-        .module('app.directives', [
-            'app.core',
-            'blocks.svg',
-        ]);
-
+    angular.module('app.directives',['app.services']);
 })();

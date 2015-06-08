@@ -5,9 +5,11 @@
     angular.module('app', [
         /* Shared modules */
         'app.core',
-        'app.layout',
-        'app.directives'
+        'app.directives',
+        'app.services',
+
         /* Feature areas */
+        'app.layout'
     ]);
 
 })();

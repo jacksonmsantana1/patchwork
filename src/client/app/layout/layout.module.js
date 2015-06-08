@@ -2,9 +2,10 @@
 'use strict';
 
 angular
-	.module('app.layout', [
-		'app.core',
-        'app.directives'
-        ]);
+    .module('app.layout', [
+        'app.core',
+        'app.services',
+        'app.models'
+]);
 
 })();

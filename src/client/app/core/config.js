@@ -22,13 +22,10 @@
 
     core.config(configure);
 
-    configure.$inject = ['$compileProvider', '$logProvider',
-         'diagnostics', 'exceptionHandlerProvider', 'routerHelperProvider'];
+    configure.$inject = ['$compileProvider' , '$logProvider', 'exceptionHandlerProvider',       'routerHelperProvider'];
     /* @ngInject */
     function configure ($compileProvider, $logProvider,
-         diagnostics, exceptionHandlerProvider, routerHelperProvider) {
-
-        diagnostics.enable = false;
+                         exceptionHandlerProvider, routerHelperProvider) {
 
         $compileProvider.debugInfoEnabled(false);
 
@@ -42,9 +39,15 @@
         ////////////////
 
         function configureStateHelper() {
-            var resolveAlways = { /* @ngInject */
-                ready: function(dataservice) {
-                    return dataservice.ready();
+
+            /*
+            *   After implements the dataService to initialize the app with some initial config
+            *   See dataService John Papa
+            */
+            var resolveAlways = {
+                /* @ngInject */
+                ready: function() {
+                    return {};
                 }
             };
 
