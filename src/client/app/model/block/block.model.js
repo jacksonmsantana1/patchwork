@@ -29,20 +29,23 @@
             this.setPattern = setPattern;
 
             //methods
-            function setComplexBlock(px, py, name) {
+            function setComplexBlock(px, py, name, size) {
+                var blockSize = size || Config.size;
                 var elements = _.map(BlockDao.getBlock(name), function (element, index) {
                     var id = 'b' + 'newId' + 'e' + index;
                     switch (element.elementType) {
                         case 'Polygon':
                             return new Polygon(
-                                id, element.img, Evaluator.evalateCoordenates([px, py], element.coordenates));
+                                id, element.img, Evaluator.evalateCoordenates(
+                                    [px, py], element.coordenates, blockSize));
                         case 'Retangule':
                             return new Retangule(
-                                id, px, py, element.img, Evaluator.evalateCoordenates(0, 0, element.width),
-                                    Evaluator.evalateCoordenates(0, 0, element.height));
+                                id, px, py, element.img, Evaluator.evalateCoordenates([0, 0], element.width, blockSize),
+                                Evaluator.evalateCoordenates(0, 0, element.height, blockSize));
                         case 'Circle':
                             return new Circle(
-                                id, px, py, element.img , Evaluator.evalateCoordenates(0, 0, element.radio));
+                                id, px, py, element.img , Evaluator.evalateCoordenates(
+                                    [0, 0], element.radio, blockSize));
                         case 'Path':
                             //TODO: See how to make the path resizeble [Px, Py, x]
                             return new Path(id, px, py, element.img, element.path);
@@ -51,9 +54,10 @@
                 that.elements = elements;
             }
 
-            function setNormalBlock(px, py) {
+            function setNormalBlock(px, py, size) {
                 var elements = [];
-                var retangule = Drawer.svg.rect(px, py, Config.size, Config.size).attr('fill', pattern);
+                var blockSize = size || Config.size;
+                var retangule = Drawer.svg.rect(px, py, blockSize, blockSize).attr('fill', pattern);
                 elements.push({pattern: pattern, retangule: retangule});
                 that.elements =  elements;
             }

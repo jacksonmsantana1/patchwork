@@ -20,8 +20,8 @@
         /////////////////////////////
 
         function init($scope, board, elem){
-            $scope.element = new Polygon($scope.element.id, $scope.element.pInit[0],
-                                         $scope.element.pInit[1], null, $scope.element.coordenates);
+            $scope.element = new Polygon($scope.element.id,  null, $scope.element.coordenates);
+            $scope.element.html = elem[0];
 
             onClick($scope.element);
         }
@@ -41,6 +41,7 @@
             element.svg.pattern.remove();
         }
 
+        //?
         function unbindWatcher($scope) {
             return $scope.$watch(
                 'element',

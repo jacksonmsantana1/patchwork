@@ -8,8 +8,8 @@
 
     function Evaluator(Config) {
         return {
-            evalateCoordenates: function (pInit, coordString) {
-                return evaluateCoordenates(pInit, coordString);
+            evalateCoordenates: function (pInit, coordString, size) {
+                return evaluateCoordenates(pInit, coordString, size);
             }
         };
         /////////////////////////////////
@@ -20,11 +20,11 @@
          * @param  {String} coordenateString String with the coordenates of the element
          * @return {Array}                   Coordenates
          */
-        function evaluateCoordenates(pInit, coordenateString) {
+        function evaluateCoordenates(pInit, coordenateString, size) {
             var coordExp = evaluateExpressions(coordenateString);
             var coordenates = [];
             _.each (coordExp, function (coord, index) {
-                coordenates.push(coord.apply(this, [pInit[0], pInit[1], Config.size]));
+                coordenates.push(coord.apply(this, [pInit[0], pInit[1], size]));
             });
             return coordenates;
         }

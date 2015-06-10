@@ -12,18 +12,18 @@
 
             //init()
             Element.call(this, newId, newCoord[0], newCoord[1], newImg);
-            var that = this;
 
             //private properties
-            var pattern = setPattern(newImg);
-            var polygon = setPolygon(newCoord);
+            var that = this;
+            setPattern(newImg);
+            setPolygon(newCoord);
 
             //public properties
             this.coordenates = newCoord;
             this.html = '';
             this.svg = {
-                pattern: pattern,
-                polygon: polygon
+                pattern: that.pattern,
+                polygon: that.polygon
             };
 
             //getters and setters
@@ -32,7 +32,7 @@
 
             //methods
             function setPolygon(coord) {
-                var polygon = Drawer.svg.polygon(coord).attr('fill', pattern);
+                var polygon = Drawer.svg.polygon(coord).attr('fill', that.pattern);
                 that.polygon = polygon;
             }
 

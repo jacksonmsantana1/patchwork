@@ -12,19 +12,19 @@
 
             //init()
             Element.call(this, newId, newPx, newPy, newImg);
-            var that = this;
 
             //private properties
+            var that = this;
             var path = 'M' + newPx + ',' + newPy + newPath;
-            var pattern = setPattern(newImg);
-            var element = setPath(path);
+            setPattern(newImg);
+            setPath(path);
 
             //public properties
             this.path = path;
             this.html = '';
             this.svg = {
-                pattern: pattern,
-                polygon: element
+                pattern: that.pattern,
+                polygon: that.element
             };
 
             //getters and setters
@@ -33,7 +33,7 @@
 
             //methods
             function setPath(path) {
-                var element =  Drawer.svg.path('M' + newPx + ',' + newPy + newPath + path).attr('fill', pattern);
+                var element =  Drawer.svg.path('M' + newPx + ',' + newPy + newPath + path).attr('fill', that.pattern);
                 that.element = element;
             }
 

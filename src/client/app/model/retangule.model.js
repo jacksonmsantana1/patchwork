@@ -12,19 +12,19 @@
 
             //init()
             Element.call(this, newId, newPx, newPy, newImg);
-            var that = this;
 
             //private properties
-            var pattern = setPattern(newImg);
-            var retangule = setPolygon(newPx, newPy, width, height);
+            var that = this;
+            setPattern(newImg);
+            setPolygon(newPx, newPy, width, height);
 
             //public properties
             this.width = width;
             this.height = height;
             this.html = '';
             this.svg = {
-                pattern: pattern,
-                polygon: retangule
+                pattern: that.pattern,
+                polygon: that.retangule
             };
 
             //getters and setters
@@ -33,7 +33,7 @@
 
             //methods
             function setPolygon(newPx, newPy, width, height) {
-                var retangule = Drawer.svg.rect(newPx, newPy, width, height).attr('fill', pattern);
+                var retangule = Drawer.svg.rect(newPx, newPy, width, height).attr('fill', that.pattern);
                 that.retangule = retangule;
             }
 
