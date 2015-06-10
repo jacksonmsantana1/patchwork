@@ -2,38 +2,39 @@
     'use strict';
 
     angular.module('app.models')
-        .factory('Polygon', Polygon);
+        .factory('Path', Path);
 
-    Polygon.$inject = ['Element', 'Config', 'Drawer'];
-    function Polygon(Element, Config, Drawer) {
-        return function Polygon(newId, newImg, newCoord) {
+    Path.$inject = ['Element', 'Config', 'Drawer'];
+    function Path(Element, Config, Drawer) {
+        return function Path(newId, newPx, newPy, newImg, newPath) {
             //super()
-            Config.extend(Polygon, Element);
+            Config.extend(Path, Element);
 
             //init()
-            Element.call(this, newId, newCoord[0], newCoord[1], newImg);
+            Element.call(this, newId, newPx, newPy, newImg);
             var that = this;
 
             //private properties
+            var path = 'M' + newPx + ',' + newPy + newPath;
             var pattern = setPattern(newImg);
-            var polygon = setPolygon(newCoord);
+            var element = setPath(path);
 
             //public properties
-            this.coordenates = newCoord;
+            this.path = path;
             this.html = '';
             this.svg = {
                 pattern: pattern,
-                polygon: polygon
+                polygon: element
             };
 
             //getters and setters
-            this.setPolygon = setPolygon;
+            this.setPath = setPath;
             this.setPattern = setPattern;
 
             //methods
-            function setPolygon(coord) {
-                polygon = Drawer.svg.polygon(coord).attr('fill', pattern);
-                return polygon;
+            function setPath(path) {
+                element =  Drawer.svg.path('M' + newPx + ',' + newPy + newPath + path).attr('fill', pattern);
+                return element;
             }
 
             function setPattern(img) {

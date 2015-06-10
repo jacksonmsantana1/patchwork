@@ -4,13 +4,17 @@
     angular.module('app.models')
         .factory('Element', Element);
 
-    Element.$inject = [];
-    function Element() {
-        return function Element(idNew, pxNew, pyNew) {
-            var px = pxNew, py = pyNew;
-            var img = '';
-            this.id = idNew;
-            this.pInit = [px, py];
+    Element.$inject = ['Config'];
+    function Element(Config) {
+        return function Element(newId, newPx, newPy, newImg) {
+            //private properties
+
+            //public properties
+            this.id = newId;
+            this.pInit = [newPx, newPy];
+            this.img = newImg ? newImg : Config.img[0];
+
+            //getters and setters
             this.setImg = function(newImg) {
                 this.img = newImg;
             };

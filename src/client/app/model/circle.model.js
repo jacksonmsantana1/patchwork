@@ -2,38 +2,39 @@
     'use strict';
 
     angular.module('app.models')
-        .factory('Polygon', Polygon);
+        .factory('Circle', Circle);
 
-    Polygon.$inject = ['Element', 'Config', 'Drawer'];
-    function Polygon(Element, Config, Drawer) {
-        return function Polygon(newId, newImg, newCoord) {
+    Circle.$inject = ['Element', 'Config', 'Drawer'];
+    function Circle(Element, Config, Drawer) {
+        return function Circle(newId, cx, cy, newImg, radio) {
+            //cx = pX and cy = pY
             //super()
-            Config.extend(Polygon, Element);
+            Config.extend(Circle, Element);
 
             //init()
-            Element.call(this, newId, newCoord[0], newCoord[1], newImg);
+            Element.call(this, newId, cx, cy, newImg);
             var that = this;
 
             //private properties
             var pattern = setPattern(newImg);
-            var polygon = setPolygon(newCoord);
+            var circle = setCircle(cx, cy, radio);
 
             //public properties
-            this.coordenates = newCoord;
+            this.radio = radio;
             this.html = '';
             this.svg = {
-                pattern: pattern,
-                polygon: polygon
+                pattern: circle,
+                polygon: pattern
             };
 
             //getters and setters
-            this.setPolygon = setPolygon;
+            this.setCircle = setCircle;
             this.setPattern = setPattern;
 
             //methods
-            function setPolygon(coord) {
-                polygon = Drawer.svg.polygon(coord).attr('fill', pattern);
-                return polygon;
+            function setCircle(cx, cy, radio) {
+                circle = Drawer.svg.circle(cx, cy, radio).attr('fill', pattern);
+                return circle;
             }
 
             function setPattern(img) {

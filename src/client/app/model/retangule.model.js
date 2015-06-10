@@ -2,28 +2,29 @@
     'use strict';
 
     angular.module('app.models')
-        .factory('Polygon', Polygon);
+        .factory('Retangule', Retangule);
 
-    Polygon.$inject = ['Element', 'Config', 'Drawer'];
-    function Polygon(Element, Config, Drawer) {
-        return function Polygon(newId, newImg, newCoord) {
+    Retangule.$inject = ['Element', 'Config', 'Drawer'];
+    function Retangule(Element, Config, Drawer) {
+        return function Retangule(newId, newPx, newPy, newImg, width, height) {
             //super()
-            Config.extend(Polygon, Element);
+            Config.extend(Retangule, Element);
 
             //init()
-            Element.call(this, newId, newCoord[0], newCoord[1], newImg);
+            Element.call(this, newId, newPx, newPy, newImg);
             var that = this;
 
             //private properties
             var pattern = setPattern(newImg);
-            var polygon = setPolygon(newCoord);
+            var retangule = setPolygon(newPx, newPy, width, height);
 
             //public properties
-            this.coordenates = newCoord;
+            this.width = width;
+            this.height = height;
             this.html = '';
             this.svg = {
                 pattern: pattern,
-                polygon: polygon
+                polygon: retangule
             };
 
             //getters and setters
@@ -31,9 +32,9 @@
             this.setPattern = setPattern;
 
             //methods
-            function setPolygon(coord) {
-                polygon = Drawer.svg.polygon(coord).attr('fill', pattern);
-                return polygon;
+            function setPolygon(newPx, newPy, width, height) {
+                retangule = Drawer.svg.rect(newPx, newPy, width, height).attr('fill', pattern);
+                return retangule;
             }
 
             function setPattern(img) {

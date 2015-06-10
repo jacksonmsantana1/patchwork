@@ -12,6 +12,9 @@
             height: 800,    //Svg total height
             size: 20,       //Pattern
             imgSize: 200,    //images pattern size
+            imgX: 0,
+            imgY: 0,
+            img: ['/src/client/images/gulp-tiny.png'],
             extend: function (child, parent) {
                 var F = function () {};
                 F.prototype = parent.prototype;

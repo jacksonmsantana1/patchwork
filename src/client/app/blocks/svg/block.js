@@ -131,40 +131,6 @@
                 block.polygon = null;
             }
         }
-
-        /**
-         * Get from the database the block's information
-         * @param  {String} type            The block's name
-         * @param  {Boolean} orientation    Flag to sinalize if the block will be in vertical|horizontal
-         * @return {Array}                  Array of array of informations to draw the block
-         */
-        function getBlockFromType(type, orientation) {
-            //Retorna um array duplo, dividindo os elementos com as mesmas imagens
-            //TODO
-            return [
-                {
-                    coordenates: [
-                        '(Px) (Py) (Px+x) (Py) (Px) (Py+(x*0.333333333))',
-                        '(Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333))' +
-                            ' (Px) (Py+(x*0.666666667))',
-                        '(Px) (Py+(x*0.666666667)) (Px+x) (Py+(x*0.666666667)) (Px) (Py+x)'
-                    ],
-                    img: 'http://mlb-s1-p.mlstatic.com/' +
-                            'corte-tecido-importado-patchwork-pink-rosas-quilting' +
-                                '-fantasy-14178-MLB3238135558_102012-F.jpg'
-                }, {
-                    coordenates: [
-                        '(Px+x) (Py) (Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333))',
-                        '(Px+x) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.666666667)) (Px)' +
-                            ' (Py+(x*0.666666667))',
-                        '(Px+x) (Py+(x*0.666666667)) (Px+x) (Py+x) (Px) (Py+x)'
-                    ],
-                    img: 'http://mlb-s2-p.mlstatic.com/' +
-                            'corte-tecido-importado-patchwork-vinho-trelica-flor-quilting-' +
-                            '14259-MLB195704781_1434-F.jpg'
-                }
-            ];
-        }
     }
 
 })();

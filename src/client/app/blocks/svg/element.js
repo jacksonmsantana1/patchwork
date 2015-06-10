@@ -67,56 +67,7 @@
             }
         }
 
-        /**
-         * Draws the element on the DOM
-         * @param  {Number} id               ID
-         * @param  {Array} pInit             Coordenates of the initial points to draw
-         * @param  {String} coordenateString String with the coordenates of the element
-         * @return {HTMLElement}             Return the snap element(polygon)
-         */
-        function drawShape(id, pInit, coordenateString) {
-            var coordArray = evaluateCoordenates(pInit, coordenateString);
-            var coordenates = '';
-            _.each (coordArray, function (coord, index) {
-                coordenates += ' ' + coord;
-            });
-            var polygon =  svg.polygon(coordenates).attr({
-                id: id,
-                stroke: 'black',
-                fill: 'white',
-                strokeWidth: 1
-            });
-            return polygon;
-        }
 
-        /**
-         * Tranform the array of funtions into an array of coordenates
-         * @param  {Array} pInit             Coordenates of the initial points to draw
-         * @param  {String} coordenateString String with the coordenates of the element
-         * @return {Array}                   Coordenates
-         */
-        function evaluateCoordenates(pInit, coordenateString) {
-            var coordExp = evaluateExpressions(coordenateString);
-            var coordenates = [];
-            _.each (coordExp, function (coord, index) {
-                coordenates.push(coord.apply(this, [pInit[0], pInit[1], x]));
-            });
-            return coordenates;
-        }
-
-        /**
-         * Transform the coordenates string into an Array of functions
-         * @param  {String} coordenateString String with the coordenates of the element
-         * @return {Array}
-         */
-        function evaluateExpressions(coordenateString) {
-            var arrayCoordExp = coordenateString.split(' ');
-            var coordenatesExp = _.map(arrayCoordExp, function (coord) {
-                /*jslint evil: true */
-                return new Function ('Px', 'Py', 'x', 'return ' + coord);
-            });
-            return coordenatesExp;
-        }
 
         /**
          * Change the background image of the element

@@ -12,11 +12,9 @@
             'http://www.lojapatchwork.com.br/produtos/AF6140-2_detp.jpg',
             'http://www.lojapatchwork.com.br/produtos/AF6138-1_detp.jpg'
         ];
-        $scope.element = new Element('163u9', 0, 0);
-        $scope.element.setImg($scope.img[0]);
 
-        $scope.element2 = new Polygon('23432u4', 0, 0, '200 100 200 200 100 200');
-        $scope.element2.setImg($scope.img[1]);
+        $scope.element1 = new Polygon('234sdu4', 0, 0, '', '100 0 100 100 0 100');
+        $scope.element2 = new Polygon('23432u4', 0, 0, '', '200 100 200 200 100 200');
     }
 
 })();

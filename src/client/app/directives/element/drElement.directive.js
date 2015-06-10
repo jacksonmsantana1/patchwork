@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .directive('element', ElementDrct);
 
-    ElementDrct.$inject = ['Config', 'Drawer'];
-    function ElementDrct(Config, Drawer) {
+    ElementDrct.$inject = ['Config', 'Drawer', 'Element', 'Polygon'];
+    function ElementDrct(Config, Drawer, Element, Polygon) {
         return {
             restrict: 'E',
             replace: false,
@@ -20,24 +20,8 @@
         /////////////////////////////
 
         function init($scope, board, elem){
-            $scope.element.imgX = $scope.element.imgY = 0;
-            var coordenates = $scope.element.coordenates ?
-                                $scope.element.coordenates.split(' ') : $scope.coordenates.split(' ');
-
-            var pattern = board
-                .image($scope.element.img, $scope.element.imgX, $scope.element.imgY, Config.imgSize, Config.imgSize)
-                    .pattern($scope.element.imgX, $scope.element.imgY, Config.imgSize, Config.imgSize);
-            var polygon = board.polygon(coordenates).attr('fill', pattern);
-
-            $scope.element =  {
-                model: $scope.element,
-                html: elem[0],
-                svg: {
-                    polygon: polygon,
-                    pattern: pattern
-
-                }
-            };
+            $scope.element = new Polygon($scope.element.id, $scope.element.pInit[0],
+                                         $scope.element.pInit[1], null, $scope.element.coordenates);
 
             onClick($scope.element);
         }
@@ -55,7 +39,6 @@
             parent.removeChild(son);
             element.svg.polygon.remove();
             element.svg.pattern.remove();
-
         }
 
         function unbindWatcher($scope) {
