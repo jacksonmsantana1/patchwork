@@ -33,15 +33,15 @@
 
             //methods
             function setPath(path) {
-                element =  Drawer.svg.path('M' + newPx + ',' + newPy + newPath + path).attr('fill', pattern);
-                return element;
+                var element =  Drawer.svg.path('M' + newPx + ',' + newPy + newPath + path).attr('fill', pattern);
+                that.element = element;
             }
 
             function setPattern(img) {
-                pattern = Drawer.svg
-                    .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
-                    .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
-                return pattern;
+                var pattern = Drawer.svg
+                                .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
+                                    .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
+                that.pattern = pattern;
             }
         };
 

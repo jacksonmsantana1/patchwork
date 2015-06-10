@@ -33,15 +33,15 @@
 
             //methods
             function setPolygon(newPx, newPy, width, height) {
-                retangule = Drawer.svg.rect(newPx, newPy, width, height).attr('fill', pattern);
-                return retangule;
+                var retangule = Drawer.svg.rect(newPx, newPy, width, height).attr('fill', pattern);
+                that.retangule = retangule;
             }
 
             function setPattern(img) {
-                pattern = Drawer.svg
+                var pattern = Drawer.svg
                     .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
                     .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
-                return pattern;
+                that.pattern = pattern;
             }
         };
 

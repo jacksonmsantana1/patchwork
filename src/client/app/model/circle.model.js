@@ -33,15 +33,15 @@
 
             //methods
             function setCircle(cx, cy, radio) {
-                circle = Drawer.svg.circle(cx, cy, radio).attr('fill', pattern);
-                return circle;
+                var circle = Drawer.svg.circle(cx, cy, radio).attr('fill', pattern);
+                that.circle = circle;
             }
 
             function setPattern(img) {
-                pattern = Drawer.svg
-                    .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
-                    .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
-                return pattern;
+                var pattern = Drawer.svg
+                .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
+                .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
+                that.pattern = pattern;
             }
         };
 

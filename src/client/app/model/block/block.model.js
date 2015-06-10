@@ -30,8 +30,7 @@
 
             //methods
             function setComplexBlock(px, py, name) {
-                var elements = BlockDao.getBlock(name);
-                return _.map(elements, function (element, index) {
+                var elements = _.map(BlockDao.getBlock(name), function (element, index) {
                     var id = 'b' + 'newId' + 'e' + index;
                     switch (element.elementType) {
                         case 'Polygon':
@@ -49,20 +48,21 @@
                             return new Path(id, px, py, element.img, element.path);
                     }
                 });
+                that.elements = elements;
             }
 
             function setNormalBlock(px, py) {
                 var elements = [];
                 var retangule = Drawer.svg.rect(px, py, Config.size, Config.size).attr('fill', pattern);
                 elements.push({pattern: pattern, retangule: retangule});
-                return elements;
+                that.elements =  elements;
             }
 
             function setPattern(img) {
-                pattern =  Drawer.svg
-                    .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
-                    .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
-                return pattern;
+                var pattern = Drawer.svg
+                .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
+                .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
+                that.pattern = pattern;
             }
         };
 

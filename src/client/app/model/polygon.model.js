@@ -32,15 +32,15 @@
 
             //methods
             function setPolygon(coord) {
-                polygon = Drawer.svg.polygon(coord).attr('fill', pattern);
-                return polygon;
+                var polygon = Drawer.svg.polygon(coord).attr('fill', pattern);
+                that.polygon = polygon;
             }
 
             function setPattern(img) {
-                pattern = Drawer.svg
+                var pattern = Drawer.svg
                     .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
                     .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
-                return pattern;
+                that.pattern = pattern;
             }
         };
 
