@@ -23,6 +23,26 @@
             img: '',
             coordenates: [200, 100, 200, 200, 100, 200]
         };
+
+        $scope.circle = {
+            id: 'circle2',
+            img: '',
+            pInit: [100, 100],
+            radio: 20
+        };
+        $scope.rctl = {
+            id: 'rect1',
+            img: '',
+            pInit: [100, 100],
+            width: 100,
+            height: 50
+        };
+        $scope.path = {
+            id: 'pathsld',
+            pInit: [150, 150],
+            img: '',
+            path: 'c127,295,-1,1,282,12l-283,-11'
+        };
     }
 
 })();

@@ -23,8 +23,8 @@
             this.radio = radio;
             this.html = '';
             this.svg = {
-                pattern: circle,
-                polygon: pattern
+                pattern: that.pattern,
+                polygon: that.circle
             };
 
             //getters and setters
@@ -33,7 +33,7 @@
 
             //methods
             function setCircle(cx, cy, radio) {
-                var circle = Drawer.svg.circle(cx, cy, radio).attr('fill', pattern);
+                var circle = Drawer.svg.circle(cx, cy, radio).attr('fill', that.pattern);
                 that.circle = circle;
             }
 

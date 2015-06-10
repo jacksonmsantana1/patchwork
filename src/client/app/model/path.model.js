@@ -17,7 +17,7 @@
             var that = this;
             var path = 'M' + newPx + ',' + newPy + newPath;
             setPattern(newImg);
-            setPath(path);
+            setPath(newPx, newPy, path);
 
             //public properties
             this.path = path;
@@ -32,8 +32,8 @@
             this.setPattern = setPattern;
 
             //methods
-            function setPath(path) {
-                var element =  Drawer.svg.path('M' + newPx + ',' + newPy + newPath + path).attr('fill', that.pattern);
+            function setPath(px, py, path) {
+                var element =  Drawer.svg.path('M' + px + ',' + py + path).attr('fill', that.pattern);
                 that.element = element;
             }
 
