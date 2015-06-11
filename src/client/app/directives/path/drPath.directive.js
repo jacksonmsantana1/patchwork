@@ -12,6 +12,7 @@
             scope: {
                 element: '='
             },
+            controller: 'PathCtrl',
             link: function postLink ($scope, elem, attrs, ctrl) {
                 init($scope, elem);
             }
@@ -19,26 +20,17 @@
         /////////////////////////////
 
         function init($scope, elem){
-            $scope.element = new Path($scope.element.id, $scope.element.pInit[0],
-                                      $scope.element.pInit[1], $scope.element.img, $scope.element.path);
-            $scope.element.html = elem[0];
+            $scope.element = new Path($scope.element.id, $scope.element.pInit[0],'',
+                                      $scope.element.pInit[1], $scope.element.path);
+            $scope.html = elem[0];
 
-            onClick($scope.element);
+            onClick($scope.svg, $scope.html, $scope);
         }
 
-        function onClick(element) {
-            element.svg.polygon.click(function () {
-                removeElement(element);
+        function onClick(element, html, $scope) {
+            element.path.click(function () {
+                $scope.removeElement(element, html);
             });
-        }
-
-        function removeElement(element){
-            var son = element.html;
-            var parent = son.parentNode;
-
-            parent.removeChild(son);
-            element.svg.polygon.remove();
-            element.svg.pattern.remove();
         }
 
         //?

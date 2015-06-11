@@ -12,6 +12,7 @@
             scope: {
                 element: '='
             },
+            controller: 'CircleCtrl',
             link: function postLink ($scope, elem, attrs, ctrl) {
                 init($scope, elem);
             }
@@ -21,24 +22,15 @@
         function init($scope, elem){
             $scope.element = new Circle($scope.element.id, $scope.element.pInit[0],
                                         $scope.element.pInit[1], $scope.element.img, $scope.element.radio);
-            $scope.element.html = elem[0];
+            $scope.html = elem[0];
 
-            onClick($scope.element);
+            onClick($scope.svg, $scope.html, $scope);
         }
 
-        function onClick(element) {
-            element.svg.polygon.click(function () {
-                removeElement(element);
+        function onClick(element, html, $scope) {
+            element.circle.click(function () {
+                $scope.changeImage('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSLNHwLw75X0tiZUDNgGFXFtSildd0aD4z_qQwC6kSODBpRdMhZ');
             });
-        }
-
-        function removeElement(element){
-            var son = element.html;
-            var parent = son.parentNode;
-
-            parent.removeChild(son);
-            element.svg.polygon.remove();
-            element.svg.pattern.remove();
         }
 
         //?

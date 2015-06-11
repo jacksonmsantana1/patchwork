@@ -44,7 +44,7 @@
                     },
                     {
                         coordenates: '(Px+x) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.666666667))' +
-                                        '(Px) (Py+(x*0.666666667))',
+                                        ' (Px) (Py+(x*0.666666667))',
                         img: 'http://mlb-s2-p.mlstatic.com/' +
                         'corte-tecido-importado-patchwork-vinho-trelica-flor-quilting-' +
                         '14259-MLB195704781_1434-F.jpg',

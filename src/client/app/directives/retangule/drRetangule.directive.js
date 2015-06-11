@@ -9,6 +9,7 @@
         return {
             restrict: 'E',
             replace: false,
+            controller: 'RetanguleCtrl',
             scope: {
                 element: '=',
             },
@@ -19,27 +20,17 @@
         /////////////////////////////
 
         function init($scope, elem){
-            $scope.element = new Retangule($scope.element.id, $scope.element.pInit[0],
+            $scope.model = new Retangule($scope.element.id, $scope.element.pInit[0],
                                            $scope.element.pInit[1], $scope.element.img,
                                            $scope.element.width, $scope.element.height);
-            $scope.element.html = elem[0];
-
-            onClick($scope.element);
+            $scope.html = elem[0];
+            onClick($scope.svg, $scope.html, $scope);
         }
 
-        function onClick(element) {
-            element.svg.polygon.click(function () {
-                removeElement(element);
+        function onClick(element, html, $scope) {
+            element.retangule.click(function () {
+                $scope.removeElement(element, html);
             });
-        }
-
-        function removeElement(element){
-            var son = element.html;
-            var parent = son.parentNode;
-
-            parent.removeChild(son);
-            element.svg.polygon.remove();
-            element.svg.pattern.remove();
         }
 
         //?

@@ -15,34 +15,8 @@
             Element.call(this, newId, cx, cy, newImg);
             var that = this;
 
-            //private properties
-            var pattern = setPattern(newImg);
-            var circle = setCircle(cx, cy, radio);
-
             //public properties
             this.radio = radio;
-            this.html = '';
-            this.svg = {
-                pattern: that.pattern,
-                polygon: that.circle
-            };
-
-            //getters and setters
-            this.setCircle = setCircle;
-            this.setPattern = setPattern;
-
-            //methods
-            function setCircle(cx, cy, radio) {
-                var circle = Drawer.svg.circle(cx, cy, radio).attr('fill', that.pattern);
-                that.circle = circle;
-            }
-
-            function setPattern(img) {
-                var pattern = Drawer.svg
-                .image(img || that.img, Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
-                .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
-                that.pattern = pattern;
-            }
         };
 
     }

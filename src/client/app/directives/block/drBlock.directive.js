@@ -2,33 +2,36 @@
     'use strict';
 
     angular.module('app.directives')
-        .directive('element', ElementDrct);
+        .directive('block', BlockDrct);
 
-    BlockDrct.$inject = ['Config', 'Block', 'Element', 'Polygon'];
-    function BlockDrct(Config, Block, Element, Polygon) {
+    BlockDrct.$inject = ['Config', 'Block', '$compile'];
+    function BlockDrct(Config, Block, $compile) {
         return {
             restrict: 'E',
             replace: false,
             scope: {
-                pInit: '@',
+                block: '='
             },
+            controller: 'BlockCtrl',
             link: function postLink ($scope, elem, attrs) {
                 init($scope, elem);
+                $scope.$on("message", function (e, msg) {
+                    console.log(msg);
+                });
             }
         };
         /////////////////////////////
 
         function init($scope, elem){
-            $scope.element = new Block($scope.element.id, );
-            $scope.element.html = elem[0];
+            $scope.model = new Block($scope.block.id, $scope.block.pInit[0],
+                                       $scope.block.pInit[1], '', $scope.block.size);
+            $scope.html = elem[0];
 
-            onClick($scope.element);
-        }
-
-        function onClick(element) {
-            element.svg.polygon.click(function () {
-                //TODO
+            _.each($scope.model.elements, function (element, index) {
+                var el = $compile('<polygon element="model.elements['+index+']"></polygon>')($scope);
+                elem.append(el);
             });
+
         }
 
         //?

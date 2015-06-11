@@ -8,6 +8,8 @@
     function Board(Config) {
         return {
             restrict: 'E',
+            replace: false,
+            controller: 'BoardCtrl',
             link: function postLink ($scope, elem, attrs) {
                 init(elem);
             }
@@ -15,7 +17,7 @@
         /////////////////////////////
 
         function init(elem){
-            elem[0].appendChild(window.document.getElementsByTagName('svg')[0]);
+            //elem[0].appendChild(window.document.getElementsByTagName('svg')[0]);
         }
     }
 })();
