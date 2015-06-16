@@ -20,9 +20,22 @@
 
         init();
 
+        //Getters and setters
+        $scope.init = init;
+        $scope.rotateBlock = rotateBlock;
+        $scope.removeBlock = removeBlock;
+
         //methods
         function init() {
+            //Initial config
+        }
 
+        function rotateBlock (degree) {
+            //TODO
+        }
+
+        function removeBlock () {
+            //TODO
         }
 
     }

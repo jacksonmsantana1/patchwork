@@ -19,6 +19,9 @@
 
         init();
 
+        //Getters and setters
+        $scope.init = init;
+
         //methods
         function init() {
             //initial config

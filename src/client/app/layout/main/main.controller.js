@@ -59,7 +59,7 @@
             i: 4,
             j: 3,
             size: 'x',
-            nanme: ''
+            name: ''
         };
     }
 

@@ -19,10 +19,12 @@
         init();
 
         //getters and setters
+        $scope.init = init;
         $scope.setCircle = setCircle;
         $scope.setPattern = setPattern;
         $scope.changeImage = changeImage;
         $scope.removeElement = removeElement;
+        $scope.moveImg = moveImg;
 
         //methods
         function init() {
@@ -54,6 +56,10 @@
             parent.removeChild(son);
             element.circle.remove();
             element.pattern.remove();
+        }
+
+        function moveImg() {
+            //TODO
         }
     }
 })();
