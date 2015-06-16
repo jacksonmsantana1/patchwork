@@ -8,8 +8,8 @@
 
     function Evaluator(Config) {
         return {
-            evalateCoordenates: function (pInit, coordString, size) {
-                return evaluateCoordenates(pInit, coordString, size);
+            evalateCoordenates: function (pInit, coordString, size, width, height) {
+                return evaluateCoordenates(pInit, coordString, size, width, height);
             }
         };
         /////////////////////////////////
@@ -20,11 +20,11 @@
          * @param  {String} coordenateString String with the coordenates of the element
          * @return {Array}                   Coordenates
          */
-        function evaluateCoordenates(pInit, coordenateString, size) {
+        function evaluateCoordenates(pInit, coordenateString, size, width, height) {
             var coordExp = evaluateExpressions(coordenateString);
             var coordenates = [];
             _.each (coordExp, function (coord, index) {
-                coordenates.push(coord.apply(this, [pInit[0], pInit[1], size]));
+                coordenates.push(coord.apply(this, [pInit[0], pInit[1], size, width, height]));
             });
             return coordenates;
         }
@@ -38,7 +38,7 @@
             var arrayCoordExp = coordenateString.split(' ');
             var coordenatesExp = _.map(arrayCoordExp, function (coord) {
                 /*jslint evil: true */
-                return new Function ('Px', 'Py', 'x', 'return ' + coord);
+                return new Function ('Px', 'Py', 'x', 'w', 'h', 'return ' + coord);
             });
             return coordenatesExp;
         }

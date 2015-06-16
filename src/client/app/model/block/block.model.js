@@ -16,8 +16,9 @@
 
             //public properties
             this.name = newName;
-            this.elements = newName ? fullBlock(newName) : emptyBlock();
             this.size = size ? size : Config.size;
+            this.isEmpty = false;
+            this.elements = this.isEmpty ? fullBlock(newName) : emptyBlock();
 
             //public methods
             this.fullBlock = fullBlock;
@@ -26,9 +27,10 @@
 
             //methods
             function fullBlock(name) {
+                that.isEmpty = true;
                 var blockSize = that.size || Config.size;
                 return _.map(BlockDao.getBlock(name), function (element, index) {
-                    var id = 'b' + 'newId' + 'e' + index;
+                    var id = 'newId' + 'BL' + index;
                     return new Polygon(
                         id, element.img, Evaluator.evalateCoordenates(
                             [that.pInit[0], that.pInit[1]], element.coordenates, blockSize));
@@ -36,6 +38,7 @@
             }
 
             function emptyBlock() {
+                that.isEmpty = false;
                 var blockSize = that.size || Config.size;
                 var coordenates = [that.pInit[0], that.pInit[1],
                                    that.pInit[0] + blockSize, that.pInit[1],

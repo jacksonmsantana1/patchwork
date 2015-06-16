@@ -2,19 +2,18 @@
     'use strict';
 
     angular.module('app.directives')
-        .controller('BlockCtrl', BlockCtrl);
+        .controller('GroupCtrl', GroupCtrl);
 
-    BlockCtrl.$inject = ['$scope', 'Drawer', 'Config'];
-    function BlockCtrl ($scope, Drawer, Config) {
+    GroupCtrl.$inject = ['$scope', 'Drawer', 'Config'];
+    function GroupCtrl ($scope, Drawer, Config) {
         var vm = this;
 
         $scope.model = {
             id: '',
             pInit: [],
             name: '',
-            size: Config.size,
-            isEmpty: false,
-            elements: []
+            width: 0,
+            height: 0
         };
         $scope.html = '';
 
@@ -22,7 +21,7 @@
 
         //methods
         function init() {
-
+            //initial config
         }
 
     }

@@ -23,7 +23,6 @@
             img: '',
             coordenates: [200, 100, 200, 200, 100, 200]
         };
-
         $scope.circle = {
             id: 'circle2',
             img: '',
@@ -47,6 +46,20 @@
             id: 'block1',
             pInit: [200, 200],
             name: 'bla',
+        };
+        $scope.group = {
+            id: '3123g2',
+            pInit: [300, 300],
+            width: 200,
+            height: 200,
+            name: ''
+        };
+        $scope.board = {
+            pInit: [0, 0],
+            i: 4,
+            j: 3,
+            size: 'x',
+            nanme: ''
         };
     }
 

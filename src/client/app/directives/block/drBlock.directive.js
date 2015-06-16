@@ -24,7 +24,7 @@
 
         function init($scope, elem){
             $scope.model = new Block($scope.block.id, $scope.block.pInit[0],
-                                       $scope.block.pInit[1], '', $scope.block.size);
+                                       $scope.block.pInit[1], $scope.block.img, $scope.block.size);
             $scope.html = elem[0];
 
             _.each($scope.model.elements, function (element, index) {
