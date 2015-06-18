@@ -32,7 +32,14 @@
                     });
                 });
             }
-            window.document.getElementById('content').appendChild(window.document.getElementsByTagName('svg')[0]);
+
+            var svg = window.document.getElementsByTagName('svg')[0];
+            svg.removeAttribute('height');
+            svg.removeAttribute('width');
+            svg.setAttribute('viewBox', '0 0 1200 800');
+            svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+            window.document.getElementById('content').appendChild(svg);
+
         }
     }
 })();

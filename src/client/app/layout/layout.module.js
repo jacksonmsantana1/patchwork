@@ -5,7 +5,7 @@ angular
     .module('app.layout', [
         'app.core',
         'app.services',
-        'app.models'
+        'app.models',
 ]);
 
 })();

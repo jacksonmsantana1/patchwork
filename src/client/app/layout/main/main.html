@@ -1,10 +1,24 @@
-<board board="board">
 <!--
+<board board="board">
     <block block="block"></block>
     <rect element="rctl"></rect>
     <circle element="circle"></circle>
     <path element="path"></path>
     <group group="group"></group>
+</board>
+-->
+<dr-sequence-bar number="number"></dr-sequence-bar>
+<dr-choose-type ng-if="number === 1"></dr-choose-type>
+    <div id="content" class="svg-wrap" ng-if="number >= 3">
+        <board board="board"></board>
+    </div>
+<!--
+<dr-choose>
+
+    <dr-choose-board ng-if="number === 2"></dr-choose-board>
+    <dr-choose-block ng-if="number === 3"></dr-choose-block>
+    <dr-choose-img ng-if="number === 4"></dr-choose-img>
+</dr-choose>
 -->
 
-</board>
+
