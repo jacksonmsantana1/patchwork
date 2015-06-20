@@ -1,0 +1,18 @@
+<div class="carrousel">
+    <a class="carrousel-button prev" ng-click="pop()"><i class="fa fa-arrow-left icon fa-3"></i></a>
+    <div class="carrousel-conteiner">
+        <div class="carrousel-img" ng-click="next(types[0].value)">
+			<img src="{{types[0].img}}" alt="{{types[0].value}}"/>
+			<div class="carrousel-name"><h2>{{types[0].name}}</h2></div>
+		</div>
+        <div class="carrousel-img" ng-click="next(types[1].value)">
+			<img src="{{types[1].img}}" alt="{{types[1].value}}"/>
+			<div class="carrousel-name"><h2>{{types[1].name}}</h2></div>
+		</div>
+        <div class="carrousel-img" ng-click="next(types[2].value)">
+			<img src="{{types[2].img}}" alt="{{types[2].value}}"/>
+			<div class="carrousel-name"><h2>{{types[2].name}}</h2></div>
+		</div>
+    </div>
+    <a class="carrousel-button next" ng-click="push()"><i class="fa fa-arrow-right icon fa-3"></i></a>
+</div>

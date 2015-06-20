@@ -6,6 +6,6 @@
 
 module.exports = {
     db: {
-        projectName: 'project-gulp'
+        projectName: 'project-gulp-dev'
     }
 };

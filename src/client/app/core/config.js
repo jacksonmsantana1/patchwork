@@ -23,25 +23,10 @@
     core.config(configure);
 
     configure.$inject = ['$compileProvider' , '$logProvider', 'exceptionHandlerProvider',
-                         'routerHelperProvider', 'ScrollBarsProvider'];
+                         'routerHelperProvider'];
     /* @ngInject */
     function configure ($compileProvider, $logProvider,
-                         exceptionHandlerProvider, routerHelperProvider, ScrollBarsProvider) {
-
-        //Scrollbar configuration
-        ScrollBarsProvider .defaults = {
-            scrollButtons: {
-                scrollAmount: 'auto',
-                enable: false
-            },
-            scrollInertia: 0,
-            axis: 'yx',
-            theme: 'minimal',
-            autoHideScrollbar: true,
-            advanced:{
-                updateOnContentResize: true
-            }
-        };
+                         exceptionHandlerProvider, routerHelperProvider) {
 
         $compileProvider.debugInfoEnabled(false);
 

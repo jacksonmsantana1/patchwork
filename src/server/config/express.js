@@ -27,20 +27,12 @@ module.exports = function (app) {
         case 'build':
             console.log('** BUILD **');
             app.use(express.static('./build/'));
-            app.use('/app/*', function(req, res, next) {
-                return res.status(404).json({ok: 'false', info: 'Page not found'});
-            });
-            app.use('/*', express.static('./build/index.html'));
             break;
         default:
             console.log('** DEV **');
             app.use(express.static('./src/client/'));
             app.use(express.static('./'));
             app.use(express.static('./.tmp'));
-            app.use('/app/*', function(req, res, next) {
-                return res.status(404).json({ok: 'false', info: 'Page not found'});
-            });
-            app.use('/*', express.static('./src/client/index.html'));
             break;
 
     }

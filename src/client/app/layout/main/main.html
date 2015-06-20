@@ -7,18 +7,17 @@
     <group group="group"></group>
 </board>
 -->
+
+
+
+
 <dr-sequence-bar number="number"></dr-sequence-bar>
-<dr-choose-type ng-if="number === 1"></dr-choose-type>
-    <div id="content" class="svg-wrap" ng-if="number >= 3">
-        <board board="board"></board>
-    </div>
+    <dr-choose-type ng-show="number === 1"></dr-choose-type>
 <!--
-<dr-choose>
-
-    <dr-choose-board ng-if="number === 2"></dr-choose-board>
-    <dr-choose-block ng-if="number === 3"></dr-choose-block>
-    <dr-choose-img ng-if="number === 4"></dr-choose-img>
-</dr-choose>
+<div ng-controller="ChooseLayoutCtrl">
+    <dr-choose-type type="type" ng-show="number === 2"></dr-choose-type>
+</div>
 -->
-
-
+<div id="content" class="svg-wrap" ng-show="number >= 3">
+    <board board="board"></board>
+</div>

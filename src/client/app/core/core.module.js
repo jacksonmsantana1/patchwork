@@ -12,9 +12,7 @@
             'blocks.router',
             /* 3rd-party modules */
             'ui.router',
-            'ngplus',
-            'ngScrollbars',
-            'slick'
+            'ngplus'
         ]);
 
 })();

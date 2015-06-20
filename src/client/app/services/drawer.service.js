@@ -16,9 +16,12 @@
             size: x,
             pInit: pInit,
             border: border,
+            setSvg: setSvg,
+            setX: setX,
+            setPInit: setPInit,
+            setBorder: setBorder
         };
         ////////////////GETTERS/SETTERS////
-
         function setSvg(newX, newY) {
             svg = Snap(newX, newY);
         }
