@@ -7,7 +7,7 @@ module.exports = {
         console.log('Finding type _name: ' + req.params.name);
 
             if (req.params.name) {
-                Type.findById( req.params.name, function(err, data) {
+                Type.find({name: req.params.name}, function(err, data) {
                     if(err){
                         console.log(err);
 						res.status(500).json({ok: false, message: err });
