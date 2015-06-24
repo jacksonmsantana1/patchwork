@@ -13,11 +13,7 @@
 
 <dr-sequence-bar number="number"></dr-sequence-bar>
     <dr-choose-type ng-show="number === 1"></dr-choose-type>
-<!--
-<div ng-controller="ChooseLayoutCtrl">
-    <dr-choose-type type="type" ng-show="number === 2"></dr-choose-type>
-</div>
--->
-<div id="content" class="svg-wrap" ng-show="number >= 3">
-    <board board="board"></board>
-</div>
+	<dr-choose-layout ng-show="number === 2"></dr-choose-layout>
+	<div id="content" class="svg-wrap" ng-show="number >= 3">
+    	<board board="board"></board>
+	</div>

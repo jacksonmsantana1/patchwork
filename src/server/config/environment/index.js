@@ -23,5 +23,6 @@ var all = {
     timeTokenExpired: 60
 };
 
-module.exports = _.merge(all, require('./' + process.env.NODE_ENV + '.js') || {});
+//module.exports = _.merge(all, require('./' + process.env.NODE_ENV + '.js') || {});
+module.exports = _.merge(all, require('./dev.js') || {});
 

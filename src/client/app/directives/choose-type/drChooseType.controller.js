@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .controller('ChooseTypeCtrl', ChooseTypeCtrl);
 
-	ChooseTypeCtrl.$inject = ['$scope', 'Types', 'logger'];
-    function ChooseTypeCtrl($scope, Types, logger) {
+	ChooseTypeCtrl.$inject = ['$scope', 'Types', 'logger', 'Scopes', '$rootScope'];
+    function ChooseTypeCtrl($scope, Types, logger, Scopes, $rootScope) {
         var vm = this;
 
         $scope.types = [];
@@ -46,7 +46,10 @@
         }
 
         function next(type) {
-			//TODO
+			var Main = Scopes.get('Main');
+			Main.patchwork.type = type;
+			Main.number += 1;
+			$rootScope.$broadcast('number', Main.number);
         }
     }
 })();

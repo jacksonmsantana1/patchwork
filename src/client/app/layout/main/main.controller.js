@@ -5,16 +5,16 @@
     angular.module('app.layout')
         .controller('Main', Main);
 
-    Main.$inject = ['$scope', 'Element', 'Polygon'];
+    Main.$inject = ['$scope', 'Scopes'];
 
-    function Main($scope, Element, Polygon) {
+    function Main($scope, Scopes) {
 
         //fase 1
 
         //fase 2
         $scope.patchwork = {
             type: '',
-            boardName: ''
+            board: {}
         };
 
         //Fase 3 e 4
@@ -31,6 +31,7 @@
         //methods
         function init() {
             $scope.number = 1;
+            Scopes.store('Main', $scope);
             var svg = window.document.getElementsByTagName('svg')[0];
             svg.removeAttribute('height');
             svg.removeAttribute('width');
