@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .controller('BlockCtrl', BlockCtrl);
 
-    BlockCtrl.$inject = ['$scope', 'Drawer', 'Config'];
-    function BlockCtrl ($scope, Drawer, Config) {
+    BlockCtrl.$inject = ['$scope', 'Drawer', 'Config', 'Block', '$compile', 'Scopes'];
+    function BlockCtrl ($scope, Drawer, Config, Block, $compile, Scopes) {
         var vm = this;
 
         $scope.model = {
@@ -16,7 +16,7 @@
             isEmpty: false,
             elements: []
         };
-        $scope.html = '';
+        $scope.elements = [];
 
         init();
 
@@ -24,19 +24,35 @@
         $scope.init = init;
         $scope.rotateBlock = rotateBlock;
         $scope.removeBlock = removeBlock;
+        $scope.rotateBlock = rotateBlock;
+        $scope.removeBlock = removeBlock;
+        $scope.changeBlock = changeBlock;
 
         //methods
         function init() {
-            //Initial config
+            if (!Scopes.get($scope.block.id)) {
+                Scopes.store($scope.block.id, $scope);
+            }
+
+            $scope.model = new Block($scope.block.id, $scope.block.pInit[0],
+                                     $scope.block.pInit[1], $scope.block.img, $scope.block.size);
+
+            _.each($scope.model.elements, function(element, index) {
+                var el = $compile('<polygon element="model.elements[' + index + ']"></polygon>')($scope);
+                $scope.elements.push(el);
+            });
         }
 
-        function rotateBlock (degree) {
+        function rotateBlock(degree) {
             //TODO
         }
 
-        function removeBlock () {
+        function removeBlock() {
             //TODO
         }
 
+        function changeBlock(name){
+            //TODO
+        }
     }
 })();
