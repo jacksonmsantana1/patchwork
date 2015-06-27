@@ -31,8 +31,9 @@
             }
         }
 
-        function saveBoard(name, type) {
-            return $http.post(API_URL + '/api/board/'+ type + '/' + name)
+        function saveBoard(type, board) {
+            return $http.post(API_URL + '/api/board/'+ type,
+                              {board: board})
                 .then(saveBoardComplete)
                 .catch(function(message) {
                 exception.catcher('XHR Failed for getTypes')(message);

@@ -7,25 +7,23 @@
     BoardComplex.$inject = ['Config', 'Evaluator', 'Board', 'BoardDao',
                             'Element', 'Block', 'Polygon', 'Group', 'Retangule'];
     function BoardComplex(Config, Evaluator, Board, BoardDao, Element, Block, Polygon, Group, Retangule) {
-        return function BoardComplex(newId, newPx, newPy, img, size, name) {
+        return function BoardComplex(newId, newPx, newPy, img, size, coordenates) {
             //super()
-            Config.extend(Board, Element);
+            Config.extend(BoardComplex, Board);
 
             //init()
             Board.call(this, newId, newPx, newPy, img, [], size);
             var that = this;
 
             //public properties
-
-            this.name = name;
-            this.lines = getComplexBoard(name);
+            this.lines = getComplexBoard(coordenates);
 
             //getters and setters
             this.getComplexBoard = getComplexBoard;
 
             //methods
-            function getComplexBoard(name) {
-                var board = BoardDao.getBoardByName(name);
+            function getComplexBoard(coordenates) {
+                var board = coordenates;
                 var lines = [];
                 var boardSize = that.size || Config.size;
                 _.each(board, function (line, bindex) {
@@ -40,14 +38,14 @@
                                     boardSize, that.width, that.height));
                                 break;
                             case 'Retangule':
-                                lines[bindex][lindex] = Retangule(id,
+                                lines[bindex][lindex] = new Retangule(id,
                                                      Evaluator.evalateCoordenates(
-                                    [that.pInit[0], that.pInit[1]], element.pInit[0], boardSize,
+                                    [that.pInit[0], that.pInit[1]], element.px, boardSize,
                                     0, 0)[0],
                                                      Evaluator.evalateCoordenates(
-                                    [that.pInit[0], that.pInit[1]], element.pInit[1], boardSize,
+                                    [that.pInit[0], that.pInit[1]], element.py, boardSize,
                                     0, 0)[0],
-                                                     element.img,
+                                                     '',
                                                      Evaluator.evalateCoordenates(
                                     [that.pInit[0], that.pInit[1]], element.width, boardSize,
                                     0, 0)[0],
@@ -56,20 +54,20 @@
                                     0, 0)[0]);
                                 break;
                             case 'Block':
-                                lines[bindex][lindex] = Block(id,
+                                lines[bindex][lindex] = new Block(id,
                                                  Evaluator.evalateCoordenates(
-                                    [that.pInit[0], that.pInit[1]], element.pInit[0], boardSize,
+                                    [that.pInit[0], that.pInit[1]], element.px, boardSize,
                                     0, 0)[0],
                                                  Evaluator.evalateCoordenates(
-                                    [that.pInit[0], that.pInit[1]], element.pInit[1], boardSize,
+                                    [that.pInit[0], that.pInit[1]], element.py, boardSize,
                                     0, 0)[0],
                                                  element.name,
                                                  Evaluator.evalateCoordenates(
-                                    [that.pInit[0], that.pInit[1]], element.size, boardSize,
+                                    [that.pInit[0], that.pInit[1]], 'x', boardSize,
                                     0, 0)[0]);
                                 break;
                             case 'Group':
-                                lines[bindex][lindex] = Group(id,
+                                lines[bindex][lindex] = new Group(id,
                                                  Evaluator.evalateCoordenates(
                                     [that.pInit[0], that.pInit[1]], element.pInit[0], boardSize,
                                     0, 0)[0],
@@ -86,6 +84,7 @@
                         }
                     });
                 });
+                return lines;
             }
         };
     }

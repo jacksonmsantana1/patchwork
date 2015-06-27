@@ -2,14 +2,14 @@
     'use strict';
 
     angular.module('app.directives')
-        .directive('drChooseType', drChooseType);
+        .directive('drChooseBoard', drChooseBoard);
 
-    drChooseType.$inject = [];
-    function drChooseType() {
+    drChooseBoard.$inject = ['Scopes', 'Patchwork'];
+    function drChooseBoard(Scopes, Patchwork) {
         return {
-            templateUrl: 'src/client/app/directives/choose-type/dr-choose-type.html',
+            templateUrl: 'src/client/app/directives/choose-board/dr-choose-board.html',
             restrict: 'E',
-            controller: 'ChooseTypeCtrl',
+            controller: 'ChooseBoardCtrl',
             scope: {
                 active: '@'
             },
@@ -18,9 +18,10 @@
                     elem.hide();
                 }
                 $scope.$watch('active', function() {
-                    if ($scope.active === 'true') {
+                    if (($scope.active === 'true')) {
+                        var type = Patchwork.get().type;
+                        $scope.init(type);
                         elem.show();
-                        $scope.init();
                     } else {
                         elem.hide();
                     }

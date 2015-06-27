@@ -5,7 +5,7 @@
         .directive('group', GroupDrct);
 
     GroupDrct.$inject = ['Config', 'Group', '$compile', 'Polygon'];
-    function GroupDrct(Config, Group, $compile, Polygon) {
+    function GroupDrct(Config, Group, $compile, Polygon, Circle, Path) {
         return {
             restrict: 'E',
             replace: false,
@@ -39,9 +39,11 @@
                     el = $compile('<rect element="model.elements['+index+']"></rect>')($scope);
                     elem.append(el);
                 } else if (element instanceof Circle) {
-                    //TODO
+                    el = $compile('<circle element="model.elements['+index+']"></circle>')($scope);
+                    elem.append(el);
                 } else if (element instanceof Path) {
-                    //TODO
+                    el = $compile('<path element="model.elements['+index+']"></path>')($scope);
+                    elem.append(el);
                 }
             });
 

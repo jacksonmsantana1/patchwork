@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .controller('ChooseTypeCtrl', ChooseTypeCtrl);
 
-	ChooseTypeCtrl.$inject = ['$scope', 'Types', 'logger', 'Scopes', '$rootScope'];
-    function ChooseTypeCtrl($scope, Types, logger, Scopes, $rootScope) {
+    ChooseTypeCtrl.$inject = ['$scope', 'Types', 'logger', 'Scopes', 'Patchwork'];
+    function ChooseTypeCtrl($scope, Types, logger, Scopes, Patchwork) {
         var vm = this;
 
         $scope.types = [];
@@ -14,42 +14,45 @@
         $scope.pop = pop;
         $scope.push = push;
         $scope.next = next;
-		$scope.getTypes = getTypes;
+        $scope.getTypes = getTypes;
 
-		//methods
-		function init() {
-			return getTypes().then(function() {
-				logger.info('Activated Types View');
-			});
-		}
+        //methods
+        function init() {
+            if (!Scopes.get('ChooseType')) {
+                Scopes.store('ChooseBoard', $scope);
+            }
+            return getTypes().then(function() {
+                logger.info('Activated Types View');
+            });
+        }
 
-		function getTypes() {
-			return Types.getTypes().then(function(data) {
-				if (data.ok) {
-					$scope.types = data.types;
-					return $scope.types;
-				} else {
-					logger.error(data.message);
-				}
+        function getTypes() {
+            return Types.getTypes().then(function(data) {
+                if (data.ok) {
+                    $scope.types = data.types;
+                    return $scope.types;
+                } else {
+                    logger.error(data.message);
+                }
 
-			});
-		}
+            });
+        }
 
         function pop() {
             var last = $scope.types.pop();
-			$scope.types.unshift(last);
+            $scope.types.unshift(last);
         }
 
         function push() {
             var first = $scope.types.shift();
-			$scope.types.push(first);
+            $scope.types.push(first);
         }
 
         function next(type) {
-			var Main = Scopes.get('Main');
-			Main.patchwork.type = type;
-			Main.number += 1;
-			$rootScope.$broadcast('number', Main.number);
+            Patchwork.setType(type);
+            Scopes.get('Main').chType = false;
+            Scopes.get('Main').chBoard = true;
+            Scopes.get('Main').number += 1;
         }
     }
 })();

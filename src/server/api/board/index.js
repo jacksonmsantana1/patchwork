@@ -10,3 +10,5 @@ router.use(function timeLog(req, res, next) {
 });
 router.get('/:type', controller.getBoardsByType);
 router.post('/:type', controller.saveBoardOnType);
+
+module.exports = router;

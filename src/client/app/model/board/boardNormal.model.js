@@ -8,7 +8,7 @@
     function BoardNormal(Config, Evaluator, Board, Block) {
         return function BoardNormal(newId, newPx, newPy, img, i, j, size) {
             //super()
-            Config.extend(Board, Element);
+            Config.extend(BoardNormal, Board);
 
             //init()
             Board.call(this, newId, newPx, newPy, img, [], size);

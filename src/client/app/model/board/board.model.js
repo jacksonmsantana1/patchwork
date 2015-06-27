@@ -4,8 +4,8 @@
     angular.module('app.models')
         .factory('Board', Board);
 
-    Board.$inject = ['Config', 'Evaluator'];
-    function Board(Config, Evaluator) {
+    Board.$inject = ['Config', 'Evaluator', 'Element'];
+    function Board(Config, Evaluator, Element) {
         return function Board(newId, newPx, newPy, img, lines, size) {
             //super()
             Config.extend(Board, Element);

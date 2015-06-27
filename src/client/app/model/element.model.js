@@ -5,6 +5,7 @@
         .factory('Element', Element);
 
     Element.$inject = ['Config'];
+    /* jshint ignore:start */
     function Element(Config) {
         return function Element(newId, newPx, newPy, newImg) {
             //private properties
@@ -21,5 +22,5 @@
         };
 
     }
-
+    /* jshint ignore:end */
 })();

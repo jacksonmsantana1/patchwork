@@ -1,11 +1,10 @@
 'use strict';
 
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema();
 
-var BoardNormalSchema = new Schema({
+var BoardNormalSchema = new mongoose.Schema({
     complex: {type: Boolean, required: true},
-    type: {type: String, required: true}, //Simple || Complex
+    type: {type: String, required: true},
     i: {type: Number, required: true},
     j: {type: Number, required: true},
     descriptionImg: {type: String, required: true}

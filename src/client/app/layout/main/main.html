@@ -12,8 +12,12 @@
 
 
 <dr-sequence-bar number="number"></dr-sequence-bar>
-    <dr-choose-type ng-show="number === 1"></dr-choose-type>
-	<dr-choose-layout ng-show="number === 2"></dr-choose-layout>
-	<div id="content" class="svg-wrap" ng-show="number >= 3">
-    	<board board="board"></board>
-	</div>
+<dr-choose-type  active="{{chType}}"></dr-choose-type>
+<dr-choose-board active="{{chBoard}}"></dr-choose-board>
+<dr-choose-block active="{{chBlock}}"></dr-choose-block>
+
+<!--Temp-->
+<!--
+<button name="button" ng-click="saveBoard('Colchas')">Click me</button>
+<textarea name="textarea" rows="10" cols="50" ng-model="board"></textarea>
+-->

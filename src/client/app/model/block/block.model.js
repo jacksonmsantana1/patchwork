@@ -44,7 +44,7 @@
                                    that.pInit[0] + blockSize, that.pInit[1],
                                    that.pInit[0] + blockSize, that.pInit[1] + blockSize,
                                    that.pInit[0] , that.pInit[1] + blockSize];
-                var id = 'b' + that.id + 'e' + 1;
+                var id = that.id + 'e' + 1;
                 return [new Polygon(id, that.image, coordenates)];
             }
 

@@ -1,21 +1,21 @@
 <div class="nav-sequence">
     <div class="step" ng-if="number >= 1">
-        <a href="#" class="circle" number="1">Type</a>
+        <a href="#" class="circle" ng-click="next('Type')">Type</a>
     </div>
     <div class="line" ng-if="number >= 1"></div>
     <div class="step" ng-if="number >= 2">
-        <a href="#" class="circle" number="2">Layout</a>
+        <a href="#" class="circle" ng-click="next('Board')">Layout</a>
     </div>
     <div class="line" ng-if="number >= 2"></div>
     <div class="step" ng-if="number >= 3">
-        <a href="#" class="circle" number="3">Block</a>
+        <a href="#" class="circle" ng-click="next('Block')">Block</a>
     </div>
     <div class="line" ng-if="number >= 3"></div>
     <div class="step" ng-if="number >= 4">
-        <a href="#" class="circle" number="4">Tisseu</a>
+        <a href="#" class="circle" ng-click="next('Image')">Tisseu</a>
     </div>
     <div class="line" ng-if="number >= 4"></div>
     <div class="step" ng-if="number >= 5">
-        <a href="#" class="circle" number="5">Result</a>
+        <a href="#" class="circle" ng-click="next('Result')">Result</a>
     </div>
 </div>

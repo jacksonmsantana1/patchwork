@@ -1,6 +1,96 @@
 
-'layouts': [
+layouts: [
     {
-
+        "complex": false,
+        "type": "Colchas",
+        "i": 5,
+        "j": 4,
+        "descriptionImg": "http://localhost:3000/src/client/images/boardsImg/5x4.png"
+    },
+    {
+        "complex": false,
+        "type": "Colchas",
+        "i": 4,
+        "j": 3,
+        "descriptionImg": "http://localhost:3000/src/client/images/boardsImg/4x3.png"
+    },
+    {
+        "complex": false,
+        "type": "Colchas",
+        "i": 5,
+        "j": 6,
+        "descriptionImg": "http://localhost:3000/src/client/images/boardsImg/6x5.png"
+    },
+    {
+        "complex": true,
+        "type": "Colchas",
+        "name": "00000001",
+        "descriptionImg": "http://localhost:3000/src/client/images/boardsImg/00000001.png",
+        "lines": [
+            [
+                {"type":"Retangule", "px":"Px", "py":"Py", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x/10))", "py":"Py", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/10)))", "py":"Py", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(12/10)))", "py":"Py", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(22/10)))", "py":"Py", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(23/10)))", "py":"Py", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(33/10)))", "py":"Py", "width":"(x*(1/10))", "height": "(x*(1/10))"}
+            ],
+            [
+                {"type":"Retangule", "px":"Px", "py":"(Py+(x/10))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(1/10)))", "py":"(Py+(x/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/10)))", "py":"(Py+(x/10))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(12/10)))", "py":"(Py+(x/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/5)))", "py":"(Py+(x/10))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(23/10)))", "py":"(Py+(x/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(33/10)))", "py":"(Py+(x/10))", "width":"(x*(1/10))", "height": "x"}
+            ],
+            [
+                {"type":"Retangule", "px":"Px", "py":"(Py+(x*(11/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(1/10)))", "py":"(Py+(x*(11/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/10)))", "py":"(Py+(x*(11/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(12/10)))", "py":"(Py+(x*(11/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/5)))", "py":"(Py+(x*(11/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(23/10)))", "py":"(Py+(x*(11/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(33/10)))", "py":"(Py+(x*(11/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"}
+            ],
+            [
+                {"type":"Retangule", "px":"Px", "py":"(Py+(x*(12/10)))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(1/10)))", "py":"(Py+(x*(12/10)))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/10)))", "py":"(Py+(x*(12/10)))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(12/10)))", "py":"(Py+(x*(12/10)))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/5)))", "py":"(Py+(x*(12/10)))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(23/10)))", "py":"(Py+(x*(12/10)))"},
+                {"type":"Retangule", "px":"(Px+(x*(33/10)))", "py":"(Py+(x*(12/10)))", "width":"(x*(1/10))", "height": "x"}
+            ],
+            [
+                {"type":"Retangule", "px":"Px", "py":"(Py+(x*(22/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(1/10)))", "py":"(Py+(x*(22/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/10)))", "py":"(Py+(x*(22/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(12/10)))", "py":"(Py+(x*(22/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/5)))", "py":"(Py+(x*(22/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(23/10)))", "py":"(Py+(x*(22/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(33/10)))", "py":"(Py+(x*(22/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"}
+            ],
+            [
+                {"type":"Retangule", "px":"Px", "py":"(Py+(x*(23/10)))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(1/10)))", "py":"(Py+(x*(23/10)))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/10)))", "py":"(Py+(x*(23/10)))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(12/10)))", "py":"(Py+(x*(23/10)))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/5)))", "py":"(Py+(x*(23/10)))", "width":"(x*(1/10))", "height": "x"},
+                {"type":"Block", "px":"(Px+(x*(23/10)))", "py":"(Py+(x*(23/10)))"},
+                {"type":"Retangule", "px":"(Px+(x*(33/10)))", "py":"(Py+(x*(23/10)))", "width":"(x*(1/10))", "height": "x"}
+            ],
+            [
+                {"type":"Retangule", "px":"Px", "py":"(Py+(x*(33/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(1/10)))", "py":"(Py+(x*(33/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/10)))", "py":"(Py+(x*(33/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(12/10)))", "py":"(Py+(x*(33/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(11/5)))", "py":"(Py+(x*(33/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(23/10)))", "py":"(Py+(x*(33/10)))", "width":"x", "height": "(x*(1/10))"},
+                {"type":"Retangule", "px":"(Px+(x*(33/10)))", "py":"(Py+(x*(33/10)))", "width":"(x*(1/10))", "height": "(x*(1/10))"}
+            ]
+        ]
     }
+
 ]

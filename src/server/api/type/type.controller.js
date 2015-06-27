@@ -10,26 +10,26 @@ module.exports = {
                 Type.find({name: req.params.name}, function(err, data) {
                     if(err){
                         console.log(err);
-						res.status(500).json({ok: false, message: err });
+                        res.status(500).send({ok: false, message: err });
                     }else{
                         console.log(data);
-						res.status(200).json({ok: true, types: data})
+                        res.status(200).send({ok: true, types: data});
                     }
                 });
             }else{
-				res.status(400).json({ok: false, message: 'Missing :name from the url.' });
+                res.status(400).json({ok: false, message: 'Missing :name from the url.' });
             }
         },
     getTypes: function (req, res) {
-		console.log('Finding all the types' + req.url);
+        console.log('Finding all the types' + req.url);
 
-		Type.find({}, function (err, data) {
-			if (err) {
-				res.send(500, {ok: false, message: err});
-			} else {
-				res.status(200).json({ok: true, types: data});
-			}
-		});
+        Type.find({}, function (err, data) {
+            if (err) {
+                res.status(500).send({ok: false, message: err});
+            } else {
+                res.status(200).send({ok: true, types: data});
+            }
+        });
 
-	}
+    }
 };

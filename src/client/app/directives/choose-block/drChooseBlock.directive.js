@@ -1,19 +1,20 @@
-(function () {
+(function() {
     'use strict';
 
     angular.module('app.directives')
-        .directive('drChooseType', drChooseType);
+        .directive('drChooseBlock', drChooseBlock);
 
-    drChooseType.$inject = [];
-    function drChooseType() {
+    drChooseBlock.$inject = ['Scopes'];
+
+    function drChooseBlock(Scopes) {
         return {
-            templateUrl: 'src/client/app/directives/choose-type/dr-choose-type.html',
+            templateUrl: 'src/client/app/directives/choose-block/dr-choose-block.html',
             restrict: 'E',
-            controller: 'ChooseTypeCtrl',
+            controller: 'ChooseBlockCtrl',
             scope: {
                 active: '@'
             },
-            link: function ($scope, elem, attrs) {
+            link: function($scope, elem, attrs) {
                 if ($scope.active === 'false') {
                     elem.hide();
                 }

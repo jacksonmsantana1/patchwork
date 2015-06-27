@@ -29,7 +29,7 @@
 
         function onClick(element, html, $scope) {
             element.circle.click(function () {
-                $scope.changeImage('https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSLNHwLw75X0tiZUDNgGFXFtSildd0aD4z_qQwC6kSODBpRdMhZ');
+                //$scope.changeImage('');
             });
         }
 

@@ -29,8 +29,8 @@
         function onClick(element, $scope) {
             element.polygon.click(function () {
                 //$scope.removeElement(element);
-                $scope.changeImage('https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTh9xIQXnx4sXCuIcNK-sgBiZ4F77UejcX44NhHbsHE9qWs2XCt');
-                $scope.$emit("message", "Hello, this is the client!");
+                //$scope.changeImage('');
+                $scope.$emit('message', 'Hello, this is the client!');
             });
         }
 

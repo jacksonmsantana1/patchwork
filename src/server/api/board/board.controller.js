@@ -2,56 +2,52 @@
 
 var BoardComplex = require('./schemas/boardComplex.model');
 var BoardNormal = require('./schemas/boardNormal.model');
-var LineSchema = require('./schemas/lines.model');
-var ElementSchema = require('./schemas/element.model');
 var _ = require('lodash');
 var async = require('async');
 
 module.exports = {
     saveBoardOnType: function (req, res) {
-        if (req.params.type && req.body.layout) {
-            var layout;
-            var lines = [];
-            if (req.body.layout.complex) {
-                _.each(req.body.layout.lines, function (line) {
-                    var l = new LineSchema({elements: []});
-                    lines.push(l);
-                    _.each(line, function (elem) {
-                        var element = new ElementSchema(elem);
-                        l.elements.push(element);
-                    });
-                });
+        if (req.params.type && req.body.board) {
+            var layout, lines = [];
+            if (req.body.board.complex) {
+				_.each(req.body.board.lines, function (line) {
+					async.map(line, function(elem, done){
+						done(null, elem);
+					}, function (err, results) {
+						lines.push(results);
+					});
+				});
 
                 layout = new BoardComplex({
                     complex: true,
                     type: req.params.type,
-                    name: req.body.layout.name,
-                    descriptionImg: req.body.layout.descriptionImg,
+                    name: req.body.board.name,
+                    descriptionImg: req.body.board.descriptionImg,
                     lines: lines
                 });
             } else {
                 layout = new BoardNormal({
                     complex: false,
                     type: req.params.type,
-                    i: req.body.layout.i,
-                    j: req.body.layout.j,
-                    descriptionImg: req.body.layout.descriptionImg,
+                    i: req.body.board.i,
+                    j: req.body.board.j,
+                    descriptionImg: req.body.board.descriptionImg
                 });
             }
             layout.save(function (err, data) {
                 if (err) {
-                    res.send(500, {ok:false, message: err});
+                    res.status(500).send({ok:false, message: err});
                 } else {
-                    res.send(200, {ok: true, layout: data});
+                    res.status(200).send({ok: true, layout: data});
                 }
             });
         } else {
             if (req.params.type) {
-                res.send(400, {ok: false, message:'There was no type required in the request.'});
+                res.status(400).send({ok: false, message:'There was no type required in the request.'});
             } else if (req.body.layout) {
-                res.send(400, {ok: false, message:'There was no board in request body.'});
+                res.status(400).send({ok: false, message:'There was no board in request body.'});
             } else {
-                res.send(500, {ok: false, message:'There was some internal error.'});
+                res.status(500).send({ok: false, message:'There was some internal error.'});
             }
         }
     },
@@ -78,13 +74,13 @@ module.exports = {
                 }
             ], function (err, results) {
                 if (err) {
-                    res.send(400, {ok: false, message:'It was not possible to talk with the db.'});
+                    res.status(400).send({ok: false, message:'It was not possible to talk with the db.'});
                 } else {
-                    res.send(200, {ok: true, boards: _.union(results[0], results[1])});
+                    res.status(200).send({ok: true, boards: _.union(results[0], results[1])});
                 }
             });
         } else {
-            res.send(400, {ok: false, message:'There was no type required in the request.'});
+            res.status(400).send({ok: false, message:'There was no type required in the request.'});
         }
     }
 };
