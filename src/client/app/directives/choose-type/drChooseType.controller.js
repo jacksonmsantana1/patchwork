@@ -1,11 +1,12 @@
-(function () {
+(function() {
     'use strict';
 
     angular.module('app.directives')
         .controller('ChooseTypeCtrl', ChooseTypeCtrl);
 
-    ChooseTypeCtrl.$inject = ['$scope', 'Types', 'logger', 'Scopes', 'Patchwork'];
-    function ChooseTypeCtrl($scope, Types, logger, Scopes, Patchwork) {
+    ChooseTypeCtrl.$inject = ['$scope', 'Types', 'logger', 'Scopes', 'Patchwork', 'Cache'];
+
+    function ChooseTypeCtrl($scope, Types, logger, Scopes, Patchwork, Cache) {
         var vm = this;
 
         $scope.types = [];
@@ -18,23 +19,24 @@
 
         //methods
         function init() {
-            if (!Scopes.get('ChooseType')) {
-                Scopes.store('ChooseBoard', $scope);
+            if (!Cache.getTypes()) {
+                return getTypes().then(function() {
+                    logger.info('Activated Types View');
+                });
+            } else {
+                $scope.types = Cache.getTypes();
             }
-            return getTypes().then(function() {
-                logger.info('Activated Types View');
-            });
         }
 
         function getTypes() {
             return Types.getTypes().then(function(data) {
                 if (data.ok) {
                     $scope.types = data.types;
+                    Cache.cacheTypes(data.types);
                     return $scope.types;
                 } else {
                     logger.error(data.message);
                 }
-
             });
         }
 

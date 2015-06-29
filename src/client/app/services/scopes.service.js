@@ -15,6 +15,9 @@
             },
             get: function (key) {
                 return mem[key];
+            },
+            remove: function (key) {
+                mem[key] = null;
             }
         };
     }
