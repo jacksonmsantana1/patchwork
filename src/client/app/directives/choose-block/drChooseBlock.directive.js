@@ -11,20 +11,12 @@
             templateUrl: 'src/client/app/directives/choose-block/dr-choose-block.html',
             restrict: 'E',
             controller: 'ChooseBlockCtrl',
-            scope: {
-                active: '@'
-            },
+            scope: true,
             link: function($scope, elem, attrs) {
-                if ($scope.active === 'false') {
-                    elem.hide();
-                }
-                $scope.$watch('active', function() {
-                    if ($scope.active === 'true') {
-                        elem.show();
-                        $scope.init();
-                    } else {
-                        elem.hide();
-                    }
+                Scopes.store('ChooseBlock', $scope);
+                $scope.init();
+                $scope.$on('$destroy', function () {
+                    Scopes.remove('ChooseBlock');
                 });
             }
         };

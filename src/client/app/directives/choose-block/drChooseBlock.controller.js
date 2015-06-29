@@ -16,10 +16,8 @@
 
         //methods
         function init() {
-            if (!Scopes.get('ChooseBlock')) {
-                Scopes.store('ChooseBlock', $scope);
-            }
             $scope.patchwork = Patchwork.get();
+            $scope.active = true;
         }
 
         function next(type) {

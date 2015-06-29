@@ -2,41 +2,34 @@
     'use strict';
 
     angular.module('app.services')
-        .factory('Drawer', Drawer);
+        .service('Drawer', Drawer);
 
     Drawer.$inject = [];
     function Drawer() {
-        var svg = Snap(1200, 800);
-        var x = 200;
-        var pInit = [20, 20];
-        var border = 20;
+        var that = this;
 
-        return {
-            svg: svg,
-            size: x,
-            pInit: pInit,
-            border: border,
-            setSvg: setSvg,
-            setX: setX,
-            setPInit: setPInit,
-            setBorder: setBorder
-        };
+        this.svg = null;
+        this.x = 200;
+        this.pInit = [20, 20];
+        this.border = 20;
+
+
         ////////////////GETTERS/SETTERS////
-        function setSvg(newX, newY) {
-            svg = Snap(newX, newY);
-        }
+        this.draw = function() {
+            that.svg = Snap('#svgBoard');
+        };
 
-        function setX(newX) {
-            x = newX;
-        }
+        this.setX = function(newX) {
+            that.x = newX;
+        };
 
-        function setPInit(newPInit) {
-            pInit = newPInit;
-        }
+        this.setPInit = function (newPInit) {
+            that.pInit = newPInit;
+        };
 
-        function setBorder(newBorder) {
-            border = newBorder;
-        }
+        this.setBorder = function (newBorder) {
+            that.border = newBorder;
+        };
 
     }
 

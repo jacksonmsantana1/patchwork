@@ -15,7 +15,7 @@
             link: function($scope, elem, attrs) {
                 Scopes.store('ChooseType', $scope);
                 $scope.init();
-                $scope.$on('destroy', function () {
+                $scope.$on('$destroy', function () {
                     Scopes.remove('ChooseType');
                 });
             }
