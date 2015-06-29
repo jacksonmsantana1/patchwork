@@ -14,32 +14,31 @@
             },
             controller: 'PolygonCtrl',
             link: function postLink ($scope, elem, attrs, ctrl) {
-                init($scope, elem);
+                init();
+                onClick();
+                onDestroy();
+
+                //Methods
+                function init(){
+                    $scope.model = new Polygon($scope.element.id,  $scope.element.img, $scope.element.coordenates);
+                    $scope.html = elem[0];
+
+                    onClick($scope.svg, $scope);
+                }
+
+                function onClick() {
+                    $scope.svg.polygon.click(function () {
+                        //
+                    });
+                }
+
+                function onDestroy() {
+                    $scope.$on('$destroy', function() {
+                        console.log('Polygon id:'+ $scope.model.id + 'destroyed');
+                        $scope.removeElement($scope.svg, $scope.html);
+                    });
+                }
             }
         };
-        /////////////////////////////
-
-        function init($scope, elem){
-            $scope.model = new Polygon($scope.element.id,  $scope.element.img, $scope.element.coordenates);
-            $scope.html = elem[0];
-
-            onClick($scope.svg, $scope);
-        }
-
-        function onClick(element, $scope) {
-            element.polygon.click(function () {
-                //$scope.removeElement(element);
-                //$scope.changeImage('');
-                $scope.$emit('message', 'Hello, this is the client!');
-            });
-        }
-
-        //?
-        function unbindWatcher($scope) {
-            return $scope.$watch(
-                'element',
-                function( newClickCount ) {});
-        }
-
     }
 })();

@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .controller('BlockCtrl', BlockCtrl);
 
-    BlockCtrl.$inject = ['$scope', 'Drawer', 'Config', 'Block', '$compile', 'Scopes'];
-    function BlockCtrl ($scope, Drawer, Config, Block, $compile, Scopes) {
+    BlockCtrl.$inject = ['$scope', 'Config', 'Block', '$compile', 'Scopes'];
+    function BlockCtrl ($scope, Config, Block, $compile, Scopes) {
         var vm = this;
 
         $scope.model = {
@@ -18,8 +18,6 @@
         };
         $scope.elements = [];
 
-        init();
-
         //Getters and setters
         $scope.init = init;
         $scope.rotateBlock = rotateBlock;
@@ -29,26 +27,24 @@
         $scope.changeBlock = changeBlock;
 
         //methods
-        function init() {
-            if (!Scopes.get($scope.block.id)) {
-                Scopes.store($scope.block.id, $scope);
-            }
-
+        function init(done) {
             $scope.model = new Block($scope.block.id, $scope.block.pInit[0],
                                      $scope.block.pInit[1], $scope.block.img, $scope.block.size);
 
-            _.each($scope.model.elements, function(element, index) {
+            $scope.elements = _.map($scope.model.elements, function(element, index) {
                 var el = $compile('<polygon element="model.elements[' + index + ']"></polygon>')($scope);
-                $scope.elements.push(el);
+                return el;
             });
+            done($scope.elements);
         }
 
         function rotateBlock(degree) {
             //TODO
         }
 
-        function removeBlock() {
-            //TODO
+        function removeBlock(element) {
+            element.remove();
+            Scopes.remove($scope.model.id);
         }
 
         function changeBlock(name){
