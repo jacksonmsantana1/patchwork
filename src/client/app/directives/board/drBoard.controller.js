@@ -14,6 +14,7 @@
 
         //Getters and setters
         $scope.init = init;
+        $scope.removeBoard = removeBoard;
 
         //methods
         function init(done) {
@@ -58,7 +59,7 @@
         }
 
         function removeBoard() {
-            //TODO
+            $scope.$broadcast('destroy');
         }
     }
 })();

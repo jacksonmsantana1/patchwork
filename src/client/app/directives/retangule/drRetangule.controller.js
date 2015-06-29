@@ -60,6 +60,10 @@
         function moveImg() {
             //TODO
         }
+
+        function resizeElement(x) {
+            //TODO
+        }
     }
 })();
 

@@ -14,31 +14,31 @@
                 element: '=',
             },
             link: function postLink ($scope, elem, attrs, ctrl) {
-                init($scope, elem);
+                init();
+                onClick();
+                onDestroy();
+
+                //Methods
+                function init(){
+                    $scope.model = new Retangule($scope.element.id, $scope.element.pInit[0],
+                                                 $scope.element.pInit[1], $scope.element.img,
+                                                 $scope.element.width, $scope.element.height);
+                    $scope.html = elem[0];
+                }
+
+                function onClick() {
+                    $scope.svg.retangule.click(function () {
+                        //TODO
+                    });
+                }
+
+                function onDestroy() {
+                    $scope.$on('destroy', function () {
+                        console.log('Retangule id:' + $scope.model.id + ' destroyed');
+                        $scope.removeElement($scope.svg, $scope.html);
+                    });
+                }
             }
         };
-        /////////////////////////////
-
-        function init($scope, elem){
-            $scope.model = new Retangule($scope.element.id, $scope.element.pInit[0],
-                                           $scope.element.pInit[1], $scope.element.img,
-                                           $scope.element.width, $scope.element.height);
-            $scope.html = elem[0];
-            onClick($scope.svg, $scope.html, $scope);
-        }
-
-        function onClick(element, html, $scope) {
-            element.retangule.click(function () {
-                $scope.removeElement(element, html);
-            });
-        }
-
-        //?
-        function unbindWatcher($scope) {
-            return $scope.$watch(
-                'element',
-                function( newClickCount ) {});
-        }
-
     }
 })();

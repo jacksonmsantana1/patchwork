@@ -15,13 +15,25 @@
                 board: '='
             },
             link: function postLink($scope, elem, attrs) {
-                $scope.init(function(lines) {
-                    angular.forEach(lines, function(line, lindex) {
-                        angular.forEach(line, function(element) {
-                            elem.append(element);
+                init();
+                onDestroy();
+
+                //Methods
+                function init() {
+                    $scope.init(function(lines) {
+                        angular.forEach(lines, function(line, lindex) {
+                            angular.forEach(line, function(element) {
+                                elem.append(element);
+                            });
                         });
                     });
-                });
+                }
+
+                function onDestroy() {
+                    $scope.$on('$destroy', function () {
+                        $scope.removeBoard();
+                    });
+                }
             }
 
         };
