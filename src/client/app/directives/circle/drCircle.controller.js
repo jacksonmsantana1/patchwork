@@ -25,6 +25,7 @@
         $scope.changeImage = changeImage;
         $scope.removeElement = removeElement;
         $scope.moveImg = moveImg;
+        $scope.resizeElement = resizeElement;
 
         //methods
         function init() {
@@ -59,6 +60,10 @@
         }
 
         function moveImg() {
+            //TODO
+        }
+
+        function resizeElement(x) {
             //TODO
         }
     }

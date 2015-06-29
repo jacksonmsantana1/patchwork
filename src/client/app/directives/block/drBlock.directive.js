@@ -27,6 +27,7 @@
                         });
                     });
                 }
+
                 function onDestroy() {
                     $scope.$on('destroy', function () {
                         console.log('Block id:'+ $scope.model.id + 'destroyed');

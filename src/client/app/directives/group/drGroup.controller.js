@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .controller('GroupCtrl', GroupCtrl);
 
-    GroupCtrl.$inject = ['$scope', 'Drawer', 'Config', '$compile', 'Group', 'Scopes'];
-    function GroupCtrl ($scope, Drawer, Config, $compile, Group, Scopes) {
+    GroupCtrl.$inject = ['$scope','$compile', 'Group', 'Scopes'];
+    function GroupCtrl ($scope, $compile, Group, Scopes) {
         var vm = this;
 
         $scope.model = {
@@ -23,12 +23,7 @@
         $scope.init = init;
 
         //methods
-        function init() {
-            //See if we will use it
-            //TODO
-            //if (!Scopes.get($scope.block.id)) {
-            //  Scopes.store($scope.block.id, $scope);
-            //}
+        function init(done) {
             $scope.model = new Group($scope.group.id,
                                      $scope.group.pInit[0],
                                      $scope.group.pInit[1],
@@ -53,7 +48,15 @@
                     el = $compile('<path element="model.elements['+index+']"></path>')($scope);
                     $scope.elements.push(el);
                 }
+                if ($scope.model.elements.length === index +1) {
+                    done($scope.elements);
+                }
             });
+        }
+
+        function removeGroup(element) {
+            element.remove();
+            Scopes.remove($scope.model.id);
         }
 
     }
