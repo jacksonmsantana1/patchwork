@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('app.layout')
+    angular.module('app.directives')
         .directive('drSequenceBar', drSequenceBar);
 
     drSequenceBar.$inject = [];
     function drSequenceBar() {
         return {
-            templateUrl: 'src/client/app/layout/main/sequenceBar/dr-sequence-bar.html',
+            templateUrl: 'src/client/app/directives/sequenceBar/dr-sequence-bar.html',
             restrict: 'E',
             controller: 'SequenceBarCtrl',
             link: function postLink ($scope, elem, attrs) {
