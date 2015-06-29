@@ -41,13 +41,13 @@
         }
 
         function pop() {
-            var last = $scope.types.pop();
-            $scope.types.unshift(last);
+            var first = $scope.types.shift();
+            $scope.types.push(first);
         }
 
         function push() {
-            var first = $scope.types.shift();
-            $scope.types.push(first);
+            var last = $scope.types.pop();
+            $scope.types.unshift(last);
         }
 
         function next(type) {
