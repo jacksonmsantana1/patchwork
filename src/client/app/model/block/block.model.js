@@ -29,8 +29,8 @@
             function fullBlock(name) {
                 that.isEmpty = true;
                 var blockSize = that.size || Config.size;
-                return _.map(BlockDao.getBlock(name), function (element, index) {
-                    var id = 'newId' + 'BL' + index;
+                return _.map(BlockDao.getBlockByName(name), function (element, index) {
+                    var id = 'newId' + 'e' + index;
                     return new Polygon(
                         id, element.img, Evaluator.evalateCoordenates(
                             [that.pInit[0], that.pInit[1]], element.coordenates, blockSize));

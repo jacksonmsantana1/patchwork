@@ -9,10 +9,12 @@
         return {
             restrict: 'AE',
             templateUrl: 'src/client/app/directives/list-block/dr-list-block.html',
+			controller: 'ListBlockCtrl',
             scope: {
                 active: '='
             },
             link: function postLink($scope, elem, attrs) {
+				$scope.init();
                 // Collect the elements attrs in a nice usable object
                 var attributes = {};
                 angular.forEach(elem[0].attributes, function(a) {

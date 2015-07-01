@@ -91,6 +91,10 @@
 			}
 		}
 	});
+
+	//Make the Item Component creation
+	//TODO
+
 	window.ReactComponents.ListBlock = ListBlock;
 })(window);
 

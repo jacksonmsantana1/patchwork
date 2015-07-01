@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .controller('ChooseBoardCtrl', ChooseBoardCtrl);
 
-    ChooseBoardCtrl.$inject = ['$scope', 'Boards', 'logger', 'Scopes', 'Patchwork', 'Cache'];
-    function ChooseBoardCtrl($scope, Boards, logger, Scopes, Patchwork, Cache) {
+    ChooseBoardCtrl.$inject = ['$scope', 'BoardDao', 'logger', 'Scopes', 'Patchwork', 'Cache'];
+    function ChooseBoardCtrl($scope, BoardDao, logger, Scopes, Patchwork, Cache) {
         var vm = this;
 
         $scope.boards = [];
@@ -28,7 +28,7 @@
         }
 
         function getBoards(type) {
-            return Boards.getBoards(type).then(function(data) {
+            return BoardDao.getBoards(type).then(function(data) {
                 if (data.data  && data.data.ok) {
                     $scope.boards = data.data.boards;
                     Cache.cacheBoards(data.data.boards);

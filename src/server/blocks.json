@@ -1,0 +1,33 @@
+{
+	"blocks": [
+		{
+			"name": "00000001",
+			"elements": [
+				{
+					"coordenates": "(Px) (Py) (Px+x) (Py) (Px) (Py+(x*0.333333333))",
+					"img": "http://localhost:3000/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333)) (Px) (Py+(x*0.666666667))",
+					"img": "http://localhost:3000/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px) (Py+(x*0.666666667)) (Px+x) (Py+(x*0.666666667)) (Px) (Py+x)",
+					"img": "http://localhost:3000/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px+x) (Py) (Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333))",
+					"img": "http://localhost:3000/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "(Px+x) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.666666667)) (Px) (Py+(x*0.666666667))",
+					"img": "http://localhost:3000/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "(Px+x) (Py+(x*0.666666667)) (Px+x) (Py+x) (Px) (Py+x)",
+					"img": "http://localhost:3000/src/client/images/background/background2.png"
+				}
+			]
+		}
+	]
+}

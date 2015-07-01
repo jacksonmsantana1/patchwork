@@ -7,11 +7,10 @@
     Config.$inject = [];
 
     function Config() {
-        var image = 'https://encrypted-tbn1.gstatic.com/images?' +
-            'q=tbn:ANd9GcSf2f5A2_9JgU6RJOzQHgrBBQuvRe4szGMVWdsk7dWi2at1Rp851w';
+        var image = 'http://localhost:3000/src/client/images/background/background1.png';
         return {
             width: 1200,    //Svg total width
-            height: 800,    //Svg total height
+            height: 700,    //Svg total height
             size: 200,       //Pattern
             imgSize: 200,    //images pattern size
             imgX: 0,
