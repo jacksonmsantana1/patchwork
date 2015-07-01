@@ -7,7 +7,7 @@
     drSequenceBar.$inject = [];
     function drSequenceBar() {
         return {
-            templateUrl: 'src/client/app/directives/sequenceBar/dr-sequence-bar.html',
+            templateUrl: 'src/client/app/directives/sequence-bar/dr-sequence-bar.html',
             restrict: 'E',
             controller: 'SequenceBarCtrl',
             link: function postLink ($scope, elem, attrs) {

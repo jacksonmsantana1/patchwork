@@ -53,24 +53,21 @@
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/snap.svg/dist/snap.svg-min.js"></script>
     <script src="/bower_components/underscore/underscore.js"></script>
+    <script src="/bower_components/react/react.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js js/app.js-->
     <!-- inject:js -->
     <script src="/src/client/app/app.module.js"></script>
-    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
-    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
-    <script src="/src/client/app/blocks/router/router.module.js"></script>
     <script src="/src/client/app/core/core.module.js"></script>
     <script src="/src/client/app/directives/directives.module.js"></script>
     <script src="/src/client/app/layout/layout.module.js"></script>
     <script src="/src/client/app/model/model.module.js"></script>
+    <script src="/src/client/app/providers/exception/exception.module.js"></script>
+    <script src="/src/client/app/providers/logger/logger.module.js"></script>
+    <script src="/src/client/app/providers/router/router.module.js"></script>
     <script src="/src/client/app/services/services.module.js"></script>
-    <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
-    <script src="/src/client/app/blocks/exception/exception.js"></script>
-    <script src="/src/client/app/blocks/logger/logger.js"></script>
-    <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
     <script src="/src/client/app/core/config.js"></script>
     <script src="/src/client/app/core/constants.js"></script>
     <script src="/src/client/app/core/core.route.js"></script>
@@ -88,14 +85,17 @@
     <script src="/src/client/app/directives/circle/drCircle.directive.js"></script>
     <script src="/src/client/app/directives/group/drGroup.controller.js"></script>
     <script src="/src/client/app/directives/group/drGroup.directive.js"></script>
+    <script src="/src/client/app/directives/list-block/drListBlock.directive.js"></script>
     <script src="/src/client/app/directives/path/drPath.controller.js"></script>
     <script src="/src/client/app/directives/path/drPath.directive.js"></script>
     <script src="/src/client/app/directives/polygon/drPolygon.controller.js"></script>
     <script src="/src/client/app/directives/polygon/drPolygon.directive.js"></script>
+    <script src="/src/client/app/directives/react/namespace.react.js"></script>
+    <script src="/src/client/app/directives/react/rt-list-block.js"></script>
     <script src="/src/client/app/directives/retangule/drRetangule.controller.js"></script>
     <script src="/src/client/app/directives/retangule/drRetangule.directive.js"></script>
-    <script src="/src/client/app/directives/sequenceBar/drSequenceBar.controller.js"></script>
-    <script src="/src/client/app/directives/sequenceBar/drSequenceBar.directive.js"></script>
+    <script src="/src/client/app/directives/sequence-bar/drSequenceBar.controller.js"></script>
+    <script src="/src/client/app/directives/sequence-bar/drSequenceBar.directive.js"></script>
     <script src="/src/client/app/layout/layout.route.js"></script>
     <script src="/src/client/app/layout/main/main.controller.js"></script>
     <script src="/src/client/app/model/block/block.dao.js"></script>
@@ -113,12 +113,18 @@
     <script src="/src/client/app/model/path.model.js"></script>
     <script src="/src/client/app/model/polygon.model.js"></script>
     <script src="/src/client/app/model/retangule.model.js"></script>
+    <script src="/src/client/app/providers/exception/exception-handler.provider.js"></script>
+    <script src="/src/client/app/providers/exception/exception.js"></script>
+    <script src="/src/client/app/providers/logger/logger.js"></script>
+    <script src="/src/client/app/providers/router/router-helper.provider.js"></script>
     <script src="/src/client/app/services/boards.service.js"></script>
     <script src="/src/client/app/services/cache.service.js"></script>
     <script src="/src/client/app/services/config.service.js"></script>
     <script src="/src/client/app/services/drawer.service.js"></script>
     <script src="/src/client/app/services/evaluator.service.js"></script>
-    <script src="/src/client/app/services/Patchwork.service.js"></script>
+    <script src="/src/client/app/services/patchwork.service.js"></script>
+    <script src="/src/client/app/services/react.service.js"></script>
+    <script src="/src/client/app/services/reactFactory.service.js"></script>
     <script src="/src/client/app/services/scopes.service.js"></script>
     <script src="/src/client/app/services/types.service.js"></script>
     <!-- endinject -->

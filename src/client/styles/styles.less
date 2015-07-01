@@ -301,8 +301,98 @@ a .icon {
 }
 
 /*****************************************
-#region wrapper for angular ng-include and ng-view animations
+#List Block
 *****************************************/
+.list-block-container {
+	width: 15%;
+	height: 600px;
+	background-color: #044;
+	border-radius: 5%;
+	border: solid #001 5px;
+}
+
+.list-block-header {
+	background-color: #030;
+	border-top-left-radius: 5%;
+	border-top-right-radius: 5%;
+	height: 15%;
+	padding: 20%;
+}
+
+.list-block-header h1 {
+	height: 80%;
+	text-align: center;
+	font-size: 2.0em;
+	font-family: 'Indie Flower',Arial, serif;
+	font-weight: 400;
+}
+
+.list-block-nav {
+	height: 5%;
+	background-color: #00B3EE;
+}
+
+.list-block-nav ul {
+	width: 100%;
+	background-color: #00B3EE;
+}
+
+.list-block-nav ul li{
+	width: 15%;
+	min-height: 30px;
+	background-color: #0380E8;
+	display: inline-block;
+	float:left;
+	border-radius: 100%;
+}
+
+.list-block-nav ul li a {
+	display: block;
+	text-decoration: none;
+	margin: 0 auto;
+	text-align: center;
+	padding-top: 20%;
+}
+
+.list-block-nav ul li:hover {
+	border: solid 2px #000;
+	background-color: #0083E8;
+}
+
+.list-block-nav ul li:last-child {
+	margin-right: 2.5%;
+}
+
+.list-block-nav ul li:first-child {
+	margin-left: 2.5%;
+}
+
+.list-block-ul {
+	background-color: #060;
+	height: 80%;
+	border-bottom-left-radius: 5%;
+	border-bottom-right-radius: 5%;
+	padding: 5%;
+	overflow: scroll;
+}
+
+.list-block-ul ul {
+	width: 100%;
+	background-color: #0D0;
+}
+
+.list-block-ul ul li {
+	background-color: #066;
+	width: 100%;
+	min-height: 150px;
+	border-radius: 5%;
+	margin: 0 auto;
+	margin-top: 5%;
+}
+
+	/*****************************************
+    #region wrapper for angular ng-include and ng-view animations
+    *****************************************/
 
 .view-container {
     position: relative;

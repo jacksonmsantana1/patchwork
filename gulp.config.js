@@ -55,6 +55,12 @@ module.exports = function() {
         temp: temp,
 
         /**
+        * React settings
+        */
+        jsxFiles: client + 'react-jsx/**/*.jsx',
+        reactFiles: client + 'app/directives/react',
+
+        /**
          * optimized files
          */
         optimized: {
