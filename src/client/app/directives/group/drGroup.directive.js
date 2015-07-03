@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .directive('group', GroupDrct);
 
-    GroupDrct.$inject = ['Config', 'Scopes'];
-    function GroupDrct(Config, Scopes) {
+    GroupDrct.$inject = ['Scopes'];
+    function GroupDrct(Scopes) {
         return {
             restrict: 'E',
             replace: false,
@@ -15,6 +15,7 @@
             controller: 'GroupCtrl',
             link: function postLink ($scope, elem, attrs) {
                 init();
+				onDestroy();
 
                 //Methods
                 function init() {
@@ -28,7 +29,7 @@
 
                 function onDestroy() {
                     $scope.$on('destroy', function () {
-                        console.log('Group id:'+ $scope.model.id + 'destroyed');
+                        console.log('Group id:'+ $scope.group.id + 'destroyed');
                         $scope.removeGroup(elem);
                     });
                 }

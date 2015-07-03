@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .directive('polygon', ElementDrct);
 
-    ElementDrct.$inject = ['Config', 'Drawer', 'Element', 'Polygon'];
-    function ElementDrct(Config, Drawer, Element, Polygon) {
+    ElementDrct.$inject = ['Polygon', 'Scopes'];
+    function ElementDrct(Polygon, Scopes) {
         return {
             restrict: 'E',
             replace: false,
@@ -19,12 +19,12 @@
                 onDestroy();
 
                 //Methods
-                function init(){
-                    $scope.model = new Polygon($scope.element.id,  $scope.element.img, $scope.element.coordenates);
-                    $scope.html = elem[0];
-
-                    onClick($scope.svg, $scope);
-                }
+				function init() {
+					Scopes.store($scope.element.id, $scope);
+					$scope.html = elem;
+					$scope.setPattern($scope.element.img);
+					$scope.setPolygon($scope.element.coordenates);
+				}
 
                 function onClick() {
                     $scope.svg.polygon.click(function () {
@@ -34,7 +34,7 @@
 
                 function onDestroy() {
                     $scope.$on('$destroy', function() {
-                        console.log('Polygon id:'+ $scope.model.id + 'destroyed');
+                        console.log('Polygon id:'+ $scope.element.id + 'destroyed');
                         $scope.removeElement($scope.svg, $scope.html);
                     });
                 }

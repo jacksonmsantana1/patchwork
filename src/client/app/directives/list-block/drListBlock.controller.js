@@ -4,12 +4,14 @@
 	angular.module('app.directives')
 		.controller('ListBlockCtrl', ListBlockCtrl);
 
-	ListBlockCtrl.$inject = ['$scope', 'BlockDao'];
+	ListBlockCtrl.$inject = ['$scope', 'BlockDao', 'logger'];
 
-	function ListBlockCtrl($scope, BlockDao) {
+	function ListBlockCtrl($scope, BlockDao, logger) {
 		var vm = this;
 
 		$scope.blocks = [];
+		$scope.showListBlock = false;
+
 
 		$scope.getBlocks = getBlocks;
 		$scope.next = next;
@@ -24,6 +26,7 @@
 
 		function getBlocks() {
 			return BlockDao.getBlocks().then(function(data) {
+				var data = data.data;
 				if (data.ok) {
 					$scope.blocks = data.blocks;
 					return $scope.blocks;
@@ -33,7 +36,7 @@
 			});
 		}
 
-		function next(type) {
+		function next() {
 			//TODO
 		}
 	}

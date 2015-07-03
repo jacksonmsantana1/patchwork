@@ -13,13 +13,9 @@
             pattern: pattern,
             polygon: circle
         };
-        $scope.model = {};
         $scope.html = '';
 
-        init();
-
         //getters and setters
-        $scope.init = init;
         $scope.setCircle = setCircle;
         $scope.setPattern = setPattern;
         $scope.changeImage = changeImage;
@@ -27,11 +23,6 @@
         $scope.moveImg = moveImg;
         $scope.resizeElement = resizeElement;
 
-        //methods
-        function init() {
-            setPattern();
-            setCircle($scope.element.pInit[0], $scope.element.pInit[1], $scope.element.radio);
-        }
 
         //methods
         function setCircle(cx, cy, radio) {
@@ -51,10 +42,7 @@
         }
 
         function removeElement(element, html){
-            var son = html;
-            var parent = son.parentNode;
-
-            parent.removeChild(son);
+           	html.remove();
             element.circle.remove();
             element.pattern.remove();
         }

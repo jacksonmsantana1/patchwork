@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .directive('path', PathDrct);
 
-    PathDrct.$inject = ['Config', 'Path'];
-    function PathDrct(Config, Path) {
+    PathDrct.$inject = ['Scopes'];
+    function PathDrct(Scopes) {
         return {
             restrict: 'E',
             replace: false,
@@ -20,9 +20,10 @@
 
                 //Methods
                 function init(){
-                    $scope.element = new Path($scope.element.id, $scope.element.pInit[0],'',
-                                              $scope.element.pInit[1], $scope.element.path);
-                    $scope.html = elem[0];
+					Scopes.store($scope.element.id, $scope);
+					$scope.setPattern();
+					$scope.setPath($scope.element.pInit[0], $scope.element.pInit[1], $scope.element.path);
+                    $scope.html = elem;
                 }
 
                 function onClick() {

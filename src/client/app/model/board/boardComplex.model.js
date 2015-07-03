@@ -4,9 +4,8 @@
     angular.module('app.models')
         .factory('BoardComplex', BoardComplex);
 
-    BoardComplex.$inject = ['Config', 'Evaluator', 'Board', 'BoardDao',
-                            'Element', 'Block', 'Polygon', 'Group', 'Retangule'];
-    function BoardComplex(Config, Evaluator, Board, BoardDao, Element, Block, Polygon, Group, Retangule) {
+    BoardComplex.$inject = ['Config', 'Evaluator', 'Board', 'Block', 'Polygon', 'Group', 'Retangule'];
+    function BoardComplex(Config, Evaluator, Board, Block, Polygon, Group, Retangule) {
         return function BoardComplex(newId, newPx, newPy, img, size, coordenates) {
             //super()
             Config.extend(BoardComplex, Board);

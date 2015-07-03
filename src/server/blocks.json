@@ -1,31 +1,192 @@
 {
 	"blocks": [
 		{
-			"name": "00000001",
+			"name": "Jackson Five's",
+			"imgDescription": "/src/client/images/blocksImg/jacksonFive.png",
 			"elements": [
 				{
 					"coordenates": "(Px) (Py) (Px+x) (Py) (Px) (Py+(x*0.333333333))",
-					"img": "http://localhost:3000/src/client/images/background/background1.png"
+					"img": "/src/client/images/background/background1.png"
 				},
 				{
 					"coordenates": "(Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333)) (Px) (Py+(x*0.666666667))",
-					"img": "http://localhost:3000/src/client/images/background/background1.png"
+					"img": "/src/client/images/background/background1.png"
 				},
 				{
 					"coordenates": "(Px) (Py+(x*0.666666667)) (Px+x) (Py+(x*0.666666667)) (Px) (Py+x)",
-					"img": "http://localhost:3000/src/client/images/background/background1.png"
+					"img": "/src/client/images/background/background1.png"
 				},
 				{
 					"coordenates": "(Px+x) (Py) (Px) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.333333333))",
-					"img": "http://localhost:3000/src/client/images/background/background2.png"
+					"img": "/src/client/images/background/background2.png"
 				},
 				{
 					"coordenates": "(Px+x) (Py+(x*0.333333333)) (Px+x) (Py+(x*0.666666667)) (Px) (Py+(x*0.666666667))",
-					"img": "http://localhost:3000/src/client/images/background/background2.png"
+					"img": "/src/client/images/background/background2.png"
 				},
 				{
 					"coordenates": "(Px+x) (Py+(x*0.666666667)) (Px+x) (Py+x) (Px) (Py+x)",
-					"img": "http://localhost:3000/src/client/images/background/background2.png"
+					"img": "/src/client/images/background/background2.png"
+				}
+			]
+		},
+		{
+			"name": "Ivana's",
+			"imgDescription": "/src/client/images/blocksImg/ivanas.png",
+			"elements": [
+				{
+					"coordenates": "(Px) (Py) (Px+(x/3)) (Py) (Px+(x/3)) (Py+(x/3)) (Px) (Py+(x/3))",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px+(x/3)) (Py) (Px+x) (Py) (Px+x) (Py+(x/3)) (Px+(x/3)) (Py+(x/3))",
+					"img": "/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "(Px) (Py+(x/3)) (Px+(x/3)) (Py+(x/3)) (Px+(x/3)) (Py+x) (Px) (Py+x)",
+					"img": "/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "(Px+(x/3)) (Py+(x/3)) (Px+x) (Py+(x/3)) (Px+x) (Py+x) (Px+(x/3)) (Py+x)",
+					"img": "/src/client/images/background/background3.png"
+				}
+			]
+		},
+		{
+			"name": "Magic Retangule",
+			"imgDescription": "/src/client/images/blocksImg/magicRetangule.png",
+			"elements": [
+				{
+					"coordenates": "(Px) (Py) (Px+(x/2)) (Py+(x/2)) (Px) (Py+(x/2))",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px) (Py) (Px+(x/2)) (Py) (Px+(x/2)) (Py+(x/2))",
+					"img": "/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py) (Px+x) (Py) (Px+(x/2)) (Py+(x/2))",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py+(x/2)) (Px+x) (Py) (Px+x) (Py+(x/2))",
+					"img": "/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py+(x/2)) (Px+x) (Py+(x/2)) (Px+x) (Py+x)",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py+(x/2)) (Px+x) (Py+x) (Px+(x/2)) (Py+x)",
+					"img": "/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py+(x/2)) (Px+(x/2)) (Py+x) (Px) (Py+x)",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py+(x/2)) (Px) (Py+x) (Px) (Py+(x/2))",
+					"img": "/src/client/images/background/background2.png"
+				}
+			]
+		},
+		{
+			"name": "Squares Dancers",
+			"imgDescription": "/src/client/images/blocksImg/squaresDancers.png",
+			"elements": [
+				{
+					"coordenates": "(Px) (Py+((3*x)/20)) (Px) (Py) (Px+((17*x)/20)) (Py) (Px+(x/2)) (Py+(x/2))",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py+(x/2)) (Px+((17*x)/20)) (Py) (Px+x) (Py) (Px+x) (Py+((17*x)/20))",
+					"img": "/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py+(x/2)) (Px+x) (Py+((17*x)/20)) (Px+x) (Py+x) (Px+((3*x)/20)) (Py+x)",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "(Px+(x/2)) (Py+(x/2)) (Px+((3*x)/20)) (Py+x) (Px) (Py+x) (Px) (Py+((3*x)/20))",
+					"img": "/src/client/images/background/background2.png"
+				}
+			]
+		},
+		{
+			"name": "Churn Dash",
+			"imgDescription": "/src/client/images/blocksImg/ChurnDash.png",
+			"elements": [
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background2.png"
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background3.png"
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background3.png"
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background3.png"
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": ""
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": ""
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": ""
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": ""
+				},
+				{
+					"coordenates": "",
+					"img": "/src/client/images/background/background1.png"
+				},
+				{
+					"coordenates": "",
+					"img": ""
 				}
 			]
 		}

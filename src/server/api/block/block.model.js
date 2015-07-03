@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 var BlockSchema = new mongoose.Schema({
 	name: {type: String, required: true},
+	imgDescription: {type:String, required: true},
 	elements: [mongoose.Schema.Types.Mixed]
 });
 

@@ -18,12 +18,7 @@
 					)
 				), 
 				React.createElement("div", {className: "list-block-ul"}, 
-					React.createElement("ul", null, 
-						React.createElement("li", null), 
-						React.createElement("li", null), 
-						React.createElement("li", null), 
-						React.createElement("li", null)
-					)
+					React.createElement("ul", null, this.getItems(this))
 				)
 			);
 		},
@@ -41,8 +36,34 @@
 				rel: null // position relative to the cursor
 			}
 		},
+		getItems: function (that) {
+			return that.props.scope.blocks.map(function (block) {
+				return React.createElement("div", {className: "block-list-item", onClick: that.handleClick.bind(null, block)}, 
+					React.createElement("div", {className: "block-list-item-img"}, React.createElement("img", {src: block.imgDescription})), 
+					React.createElement("div", {className: "block-list-item-name"}, React.createElement("h2", null, block.name))
+				);
+			});
+		},
+		handleClick: function (a) {
+			this.props.scopes.get(this.props.blockID).$broadcast(this.props.blockID, {block: a});
+			$(React.findDOMNode(this)).offset({
+				top: 700,
+				left: 50
+			}).hide();
+		},
 		componentDidMount: function () {
+			var that = this;
 			React.findDOMNode(this).addEventListener('mousedown', this.onMouseDown);
+			this.props.scope.$on('BlockClicked', function (data, args) {
+				that.setProps({blockID: args.id});
+				$(React.findDOMNode(that)).offset({
+					top: -700,
+					left: 50
+				}).show();
+			});
+			if (!this.props.scope.showListBlock) {
+				$(React.findDOMNode(this)).hide();
+			}
 		},
 		componentDidUpdate: function (props, state) {
 			if (this.state.dragging && !state.dragging) {
@@ -91,9 +112,6 @@
 			}
 		}
 	});
-
-	//Make the Item Component creation
-	//TODO
 
 	window.ReactComponents.ListBlock = ListBlock;
 })(window);

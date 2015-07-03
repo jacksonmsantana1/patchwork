@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .directive('circle', CircleDrct);
 
-    CircleDrct.$inject = ['Config', 'Circle'];
-    function CircleDrct(Config, Circle) {
+    CircleDrct.$inject = ['Scopes'];
+    function CircleDrct(Scopes) {
         return {
             restrict: 'E',
             replace: false,
@@ -20,9 +20,10 @@
 
                 //Methods
                 function init(){
-                    $scope.element = new Circle($scope.element.id, $scope.element.pInit[0],
-                                                $scope.element.pInit[1], $scope.element.img, $scope.element.radio);
-                    $scope.html = elem[0];
+					Scopes.store($scope.element.id, $scope);
+					$scope.setPattern();
+					$scope.setCircle($scope.element.pInit[0], $scope.element.pInit[1], $scope.element.radio);
+                    $scope.html = elem;
                 }
 
                 function onClick() {

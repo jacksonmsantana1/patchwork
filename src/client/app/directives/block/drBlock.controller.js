@@ -4,19 +4,9 @@
     angular.module('app.directives')
         .controller('BlockCtrl', BlockCtrl);
 
-    BlockCtrl.$inject = ['$scope', 'Config', 'Block', '$compile', 'Scopes'];
-    function BlockCtrl ($scope, Config, Block, $compile, Scopes) {
+    BlockCtrl.$inject = ['$scope','$compile', 'Scopes', '$rootScope'];
+    function BlockCtrl ($scope, $compile, Scopes, $rootScope) {
         var vm = this;
-
-        $scope.model = {
-            id: '',
-            pInit: [],
-            name: '',
-            size: Config.size,
-            isEmpty: false,
-            elements: []
-        };
-        $scope.elements = [];
 
         //Getters and setters
         $scope.init = init;
@@ -27,16 +17,26 @@
         $scope.changeBlock = changeBlock;
 
         //methods
-        function init(done) {
-            $scope.model = new Block($scope.block.id, $scope.block.pInit[0],
-                                     $scope.block.pInit[1], $scope.block.img, $scope.block.size);
-
-            $scope.elements = _.map($scope.model.elements, function(element, index) {
-                var el = $compile('<polygon element="model.elements[' + index + ']"></polygon>')($scope);
+        function init(block, done) {
+            var htmlElements = _.map(block.elements, function(element, index) {
+                var el = $compile('<polygon element="block.elements[' + index + ']"></polygon>')($scope);
                 return el;
             });
-            done($scope.elements);
+			addEventListeners();
+            done(htmlElements);
         }
+
+		function addEventListeners() {
+			if ($scope.block.elements.length === 1) {
+				Scopes.get($scope.block.elements[0].id).bindClickEvent(function () {
+					Scopes.get('ListBlock').$broadcast('BlockClicked', {id: $scope.block.id});
+				});
+			} else {
+				_.each($scope.block.elements, function (element) {
+					//TODO
+				});
+			}
+		}
 
         function rotateBlock(degree) {
             //TODO
@@ -44,7 +44,7 @@
 
         function removeBlock(element) {
             element.remove();
-            Scopes.remove($scope.model.id);
+            Scopes.remove($scope.block.id);
         }
 
         function changeBlock(name){

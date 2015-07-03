@@ -6,19 +6,17 @@
 
     Block.$inject = ['Config', 'Evaluator', 'BlockDao', 'Element', 'Polygon'];
     function Block(Config, Evaluator, BlockDao, Element, Polygon) {
-        return function Block(newId, newPx, newPy, newName, size) {
+        return function Block(newId, newPx, newPy, newImg, size, elements) {
             //super()
             Config.extend(Block, Element);
 
             //init()
-            Element.call(this, newId, newPx, newPy);
+            Element.call(this, newId, newPx, newPy, newImg);
             var that = this;
 
             //public properties
-            this.name = newName;
             this.size = size ? size : Config.size;
-            this.isEmpty = false;
-            this.elements = this.isEmpty ? fullBlock(newName) : emptyBlock();
+            this.elements = elements? fullBlock(elements) : emptyBlock();
 
             //public methods
             this.fullBlock = fullBlock;
@@ -26,11 +24,10 @@
             this.cleanBlock = cleanBlock;
 
             //methods
-            function fullBlock(name) {
-                that.isEmpty = true;
+            function fullBlock(elements) {
                 var blockSize = that.size || Config.size;
-                return _.map(BlockDao.getBlockByName(name), function (element, index) {
-                    var id = 'newId' + 'e' + index;
+                return _.map(elements, function (element, index) {
+                    var id = that.id + 'e' + index;
                     return new Polygon(
                         id, element.img, Evaluator.evalateCoordenates(
                             [that.pInit[0], that.pInit[1]], element.coordenates, blockSize));
@@ -38,7 +35,6 @@
             }
 
             function emptyBlock() {
-                that.isEmpty = false;
                 var blockSize = that.size || Config.size;
                 var coordenates = [that.pInit[0], that.pInit[1],
                                    that.pInit[0] + blockSize, that.pInit[1],

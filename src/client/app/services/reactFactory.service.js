@@ -8,11 +8,12 @@
 
     function ReactFactory(React, $window) {
         return {
-            render: function(namespace, component, element, scope, attrs) {
+            render: function(namespace, component, element, scope, attrs, scopes) {
                 if (namespace) {
                     React.render(React.createElement($window[namespace][component], {
                         scope: scope,
-                        attrs: attrs
+                        attrs: attrs,
+						scopes: scopes
                     }), element[0]);
                 }
             },

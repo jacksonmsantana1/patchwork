@@ -13,51 +13,49 @@
             pattern: pattern,
             polygon: polygon
         };
-        $scope.model = {};
         $scope.html = '';
 
-        init();
 
         //getters and setters
-        $scope.init = init;
         $scope.setPolygon = setPolygon;
         $scope.setPattern = setPattern;
         $scope.changeImage = changeImage;
+		$scope.bindClickEvent = bindClickEvent;
+		$scope.unbindClickEvent = unbindClickEvent;
         $scope.removeElement = removeElement;
         $scope.moveImg = moveImg;
 
         //methods
-        function init() {
-            setPattern($scope.element.img);
-            setPolygon($scope.element.coordenates);
-        }
-
         function setPolygon(coord) {
             $scope.svg.polygon = Drawer.svg.polygon(coord).attr('fill', $scope.svg.pattern);
         }
 
         function setPattern(img) {
             $scope.svg.pattern = Drawer.svg
-            .image(img || Config.img[0], Config.imgX, Config.imgY, Config.imgSize, Config.imgSize)
-            .pattern(Config.imgX, Config.imgY, Config.imgSize, Config.imgSize);
+            .image(img || Config.img[0], $scope.element.coordenates[0], $scope.element.coordenates[1], Config.imgSize, Config.imgSize)
+            .pattern($scope.element.coordenates[0], $scope.element.coordenates[1], Config.imgSize, Config.imgSize);
         }
+
+		function bindClickEvent(fn) {
+			$scope.svg.polygon.click(fn);
+		}
+
+		function unbindClickEvent() {
+			$scope.svg.polygon.unclick();
+		}
 
         function changeImage(img) {
             $scope.svg.pattern.remove();
             setPattern(img);
             $scope.svg.polygon.attr('fill', $scope.svg.pattern);
-            $scope.model.img = img;
+            $scope.element.img = img;
         }
 
         function removeElement(element, html){
-            var son = html;
-            var parent = son.parentNode;
-
-            parent.removeChild(son);
+            html.remove();
+			unbindClickEvent();
             element.polygon.remove();
             element.pattern.remove();
-
-            $scope.model = null;
         }
 
         function moveImg() {

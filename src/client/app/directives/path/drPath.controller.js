@@ -13,13 +13,11 @@
             pattern: pattern,
             polygon: path
         };
-        $scope.model = {};
         $scope.html = '';
 
         init();
 
         //getters and setters
-        $scope.init = init;
         $scope.setPath = setPath;
         $scope.setPattern = setPattern;
         $scope.changeImage = changeImage;
@@ -28,11 +26,6 @@
         $scope.resizeElement = resizeElement;
 
         //methods
-        function init() {
-            setPattern();
-            setPath($scope.element.pInit[0], $scope.element.pInit[1], $scope.element.path);
-        }
-
         function setPath(px, py, path) {
             $scope.svg.path =  Drawer.svg.path('M' + px + ',' + py + path).attr('fill', $scope.svg.pattern);
         }
@@ -50,10 +43,8 @@
         }
 
         function removeElement(element, html){
-            var son = html;
-            var parent = son.parentNode;
-
-            parent.removeChild(son);
+            html.remove();
+			element.path.unclick();
             element.path.remove();
             element.pattern.remove();
         }

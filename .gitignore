@@ -74,3 +74,6 @@ Thumbs.db
 #  Editor config file #
 #######################
 .editorconfig
+
+# OS generated files #
+######################

@@ -4,8 +4,8 @@
     angular.module('app.directives')
         .directive('drListBlock', ListBlock);
 
-    ListBlock.$inject = ['React', 'ReactFactory'];
-    function ListBlock(React, ReactFactory) {
+    ListBlock.$inject = ['ReactFactory', 'Scopes'];
+    function ListBlock(ReactFactory, Scopes) {
         return {
             restrict: 'AE',
             templateUrl: 'src/client/app/directives/list-block/dr-list-block.html',
@@ -14,6 +14,7 @@
                 active: '='
             },
             link: function postLink($scope, elem, attrs) {
+				Scopes.store('ListBlock', $scope);
 				$scope.init();
                 // Collect the elements attrs in a nice usable object
                 var attributes = {};
@@ -22,7 +23,7 @@
                 });
 
                 // Render the component when the directive loads
-                ReactFactory.render('ReactComponents', attrs.component, elem, $scope, attributes);
+                ReactFactory.render('ReactComponents', attrs.component, elem, $scope, attributes, Scopes);
 
                 // Watch the model and re-render the component
                 $scope.$watch('active', function() {

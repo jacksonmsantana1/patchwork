@@ -5,9 +5,9 @@
     angular.module('app.layout')
         .controller('Main', Main);
 
-    Main.$inject = ['$scope', 'Scopes', 'BoardDao'];
+    Main.$inject = ['$scope', 'Scopes', 'BoardDao', 'BlockDao'];
 
-    function Main($scope, Scopes, BoardDao) {
+    function Main($scope, Scopes, BoardDao, BlockDao) {
 
         //fase 1
         $scope.chType = true;
@@ -30,6 +30,9 @@
         function init() {
             $scope.number = 1;
             Scopes.store('Main', $scope);
+			$scope.$watch(function (newValue, oldValue) {
+
+			});
         }
 
         //Temp
@@ -44,6 +47,17 @@
 
             });
         };
+
+		$scope.saveBlock = function () {
+			var block = JSON.parse($scope.block);
+			return BlockDao.saveBlock(block).then(function(data) {
+				if (data.ok) {
+					console.log(data);
+				} else {
+					console.log(data.message);
+				}
+			});
+		};
     }
 
 })();

@@ -6,7 +6,7 @@
 
     BoardDrct.$inject = ['Config'];
 
-    function BoardDrct(Config) {
+    function BoardDrct() {
         return {
             restrict: 'E',
             replace: false,

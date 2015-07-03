@@ -8,9 +8,9 @@
 
     function BoardCtrl($scope, Config, Drawer, BoardComplex, BoardNormal, $compile) {
         var vm = this;
+		var lines = [];
 
-        $scope.html = '';
-        $scope.lines = [];
+		$scope.html = '';
 
         //Getters and setters
         $scope.init = init;
@@ -30,29 +30,29 @@
             Drawer.draw();
 
             _.each($scope.model.lines, function(line, lindex) {
-                $scope.lines[lindex] = [];
+                 lines[lindex] = [];
                 _.each(line, function(element, bindex) {
                     var el;
                     if (element.constructor.name === 'Block') {
                         el = $compile('<block block="model.lines[' + lindex + '][' + bindex + ']"></block>')($scope);
-                        $scope.lines[lindex].push(el);
+                        lines[lindex].push(el);
                     } else if (element.constructor.name === 'Retangule') {
                         el = $compile('<rect element="model.lines[' + lindex + '][' + bindex + ']"></rect>')($scope);
-                        $scope.lines[lindex].push(el);
+                        lines[lindex].push(el);
                     } else if (element.constructor.name === 'Circle') {
                         el = $compile('<circle element="model.lines[' + lindex + '][' + bindex + ']"></circle>')($scope);
-                        $scope.lines[lindex].push(el);
+                        lines[lindex].push(el);
                     } else if (element.constructor.name === 'Path') {
                         el = $compile('<path element="model.lines[' + lindex + '][' + bindex + ']"></path>')($scope);
-                        $scope.lines[lindex].push(el);
+                        lines[lindex].push(el);
                     } else if (element.constructor.name === 'Group') {
                         //TODO Still see how it will work
                         el = $compile('<group group="model.lines[' + lindex + '][' + bindex + ']"></group>')($scope);
-                        $scope.lines[lindex].push(el);
+                        lines[lindex].push(el);
                     }
                 });
                 if (lindex === $scope.model.lines.length - 1) {
-                    done($scope.lines);
+                    done(lines);
                 }
             });
 

@@ -86,9 +86,10 @@ gulp.task('react', function() {
 
     gulp.src(config.jsxFiles)
         .pipe(react()).on('error', function(e) {
+			console.log(e);
             this.end();
         })
-        .pipe(gulp.dest(config.reactFiles))
+        .pipe(gulp.dest(config.reactFiles));
 
 	notify('JSX compiled');
 });

@@ -18,12 +18,7 @@
 					</ul>
 				</div>
 				<div className="list-block-ul">
-					<ul>
-						<li></li>
-						<li></li>
-						<li></li>
-						<li></li>
-					</ul>
+					<ul>{this.getItems(this)}</ul>
 				</div>
 			</div>;
 		},
@@ -41,8 +36,34 @@
 				rel: null // position relative to the cursor
 			}
 		},
+		getItems: function (that) {
+			return that.props.scope.blocks.map(function (block) {
+				return <div className="block-list-item" onClick={that.handleClick.bind(null, block)}>
+					<div className="block-list-item-img"><img src={block.imgDescription}/></div>
+					<div className="block-list-item-name"><h2>{block.name}</h2></div>
+				</div>;
+			});
+		},
+		handleClick: function (a) {
+			this.props.scopes.get(this.props.blockID).$broadcast(this.props.blockID, {block: a});
+			$(React.findDOMNode(this)).offset({
+				top: 700,
+				left: 50
+			}).hide();
+		},
 		componentDidMount: function () {
+			var that = this;
 			React.findDOMNode(this).addEventListener('mousedown', this.onMouseDown);
+			this.props.scope.$on('BlockClicked', function (data, args) {
+				that.setProps({blockID: args.id});
+				$(React.findDOMNode(that)).offset({
+					top: -700,
+					left: 50
+				}).show();
+			});
+			if (!this.props.scope.showListBlock) {
+				$(React.findDOMNode(this)).hide();
+			}
 		},
 		componentDidUpdate: function (props, state) {
 			if (this.state.dragging && !state.dragging) {
@@ -91,9 +112,6 @@
 			}
 		}
 	});
-
-	//Make the Item Component creation
-	//TODO
 
 	window.ReactComponents.ListBlock = ListBlock;
 })(window);

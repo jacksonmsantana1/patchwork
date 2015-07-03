@@ -9,7 +9,6 @@
         var vm = this;
 
         $scope.active = false;
-        //Patchwork
 
         $scope.init = init;
         $scope.next = next;
