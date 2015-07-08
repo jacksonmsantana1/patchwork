@@ -6,6 +6,7 @@
 		render: function() {
 			return React.createElement("div", {className: "list-block-container"}, 
 				React.createElement("div", {className: "list-block-header"}, 
+					React.createElement("div", {onClick: this.closeList, className: "x"}), 
 					React.createElement("h1", null, this.props.header)
 				), 
 				React.createElement("div", {className: "list-block-nav"}, 
@@ -24,16 +25,7 @@
 		},
 		getDefaultProps: function () {
 			return {
-				// allow the initial position to be passed in as a prop
-				initialPos: {x: 0, y: 0},
 				header: 'Blocks'
-			}
-		},
-		getInitialState: function () {
-			return {
-				pos: this.props.initialPos,
-				dragging: false,
-				rel: null // position relative to the cursor
 			}
 		},
 		getItems: function (that) {
@@ -44,71 +36,28 @@
 				);
 			});
 		},
+		closeList: function (e) {
+			$(React.findDOMNode(this)).hide();
+			e.stopPropagation();
+		},
 		handleClick: function (a) {
-			this.props.scopes.get(this.props.blockID).$broadcast(this.props.blockID, {block: a});
-			$(React.findDOMNode(this)).offset({
-				top: 700,
-				left: 50
-			}).hide();
+			this.props.scopes.get(this.props.blockID).$broadcast(this.props.blockID + '-ChangeBlock', {block: a});
+			$(React.findDOMNode(this)).hide();
 		},
 		componentDidMount: function () {
 			var that = this;
 			React.findDOMNode(this).addEventListener('mousedown', this.onMouseDown);
 			this.props.scope.$on('BlockClicked', function (data, args) {
 				that.setProps({blockID: args.id});
-				$(React.findDOMNode(that)).offset({
-					top: -700,
-					left: 50
-				}).show();
+				$(React.findDOMNode(that)).show();
+				var newPosition = {
+					top: args.y - 200,
+					left: 200 + args.x
+				};
+				$(React.findDOMNode(that)).offset(newPosition);
 			});
 			if (!this.props.scope.showListBlock) {
 				$(React.findDOMNode(this)).hide();
-			}
-		},
-		componentDidUpdate: function (props, state) {
-			if (this.state.dragging && !state.dragging) {
-				document.addEventListener('mousemove', this.onMouseMove);
-				document.addEventListener('mouseup', this.onMouseUp);
-			} else if (!this.state.dragging && state.dragging) {
-				document.removeEventListener('mousemove', this.onMouseMove);
-				document.removeEventListener('mouseup', this.onMouseUp);
-			}
-		},
-		// calculate relative position to the mouse and set dragging=true
-		onMouseDown: function (e) {
-			// only left mouse button
-			if (e.button === 0) {
-				var pos = $(React.findDOMNode(this)).offset();
-				this.setState({
-					dragging: true,
-					rel: {
-						x: e.pageX - pos.left,
-						y: e.pageY - pos.top
-					}
-				});
-				e.stopPropagation();
-				e.preventDefault();
-			}
-		},
-		onMouseUp: function (e) {
-			this.setState({dragging: false});
-			e.stopPropagation();
-			e.preventDefault();
-		},
-		onMouseMove: function (e) {
-			if (this.state.dragging) {
-				this.setState({
-					pos: {
-						x: e.pageX - this.state.rel.x,
-						y: e.pageY - this.state.rel.y
-					}
-				});
-				$(React.findDOMNode(this)).offset({
-					top: this.state.pos.y,
-					left: this.state.pos.x
-				});
-				e.stopPropagation();
-				e.preventDefault();
 			}
 		}
 	});

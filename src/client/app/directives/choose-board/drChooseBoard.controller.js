@@ -18,7 +18,7 @@
 
         //methods
         function init(type) {
-            if (Cache.getBoards()) {
+            if (type === 'Board' && Cache.getBoards()) {
                 $scope.boards = Cache.getBoards();
             } else {
                 return getBoards(type).then(function() {

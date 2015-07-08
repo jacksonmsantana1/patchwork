@@ -28,7 +28,7 @@
 
                 function onClick() {
                     $scope.svg.polygon.click(function () {
-                        //
+                        //TODO Change the image pattern ...
                     });
                 }
 

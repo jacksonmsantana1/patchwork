@@ -419,6 +419,45 @@ a .icon {
 	text-align: center;
 }
 
+.x::before, .x::after {
+	content: "";
+	border-style: solid;
+	border-color: #761C19;
+	border-width: 0px 3px 3px 0px;
+	height: 15px;  width: 15px;
+	position: absolute;
+	top: -60px;
+	left: 5px;
+	transform: rotate(45deg);
+}
+.x::before {
+	border-width: 0px 3px 3px 0px;
+	top: -5px;
+}
+.x::after {
+	border-width: 3px 0px 0px 3px;
+	top: 15px;
+}
+
+/*****************************************
+#Block Buttons Actions
+*****************************************/
+.block-container {
+	display: inline-block;
+	position: absolute;
+	z-index: 100;
+	margin: 1%;
+}
+.block-button-actions {
+	background-color: #345;
+	width: 100%;
+}
+.button-actions {
+	min-height: 33%;
+	margin: 0 auto;
+}
+
+
 /*****************************************
 #region wrapper for angular ng-include and ng-view animations
 *****************************************/

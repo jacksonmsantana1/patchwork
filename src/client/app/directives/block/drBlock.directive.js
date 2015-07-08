@@ -4,9 +4,9 @@
     angular.module('app.directives')
     .directive('block', BlockDrct);
 
-    BlockDrct.$inject = ['Scopes', 'Block'];
+    BlockDrct.$inject = ['Scopes'];
 
-    function BlockDrct(Scopes, Block) {
+    function BlockDrct(Scopes) {
         return {
             restrict: 'E',
             replace: false,
@@ -17,9 +17,11 @@
             link: function postLink($scope, elem, attrs) {
                 init();
 				onChange();
-                onDestroy();
+				onRotate();
+				onRestart();
+				onDestroy();
 
-                //Methods
+				//Methods
                 function init() {
                     Scopes.store($scope.block.id, $scope);
                     onLoad();
@@ -34,29 +36,31 @@
 				}
 
                 function onDestroy() {
-                    $scope.$on('destroy', function () {
+                    $scope.$on('$destroy', function () {
                         console.log('Block id:'+ $scope.block.id + 'destroyed');
                         $scope.removeBlock(elem);
                     });
                 }
 
-				function onClick(element) {
-					//TODO
-				}
-
                 function onChange() {
-					var size = null; //Deopis ver se utilizarei
-                    $scope.$on($scope.block.id, function (evt, data) {
-						$scope.$broadcast('$destroy');
-						$scope.block = new Block($scope.block.id, $scope.block.pInit[0], $scope.block.pInit[1],'',size,
-							data.block.elements);
+                    $scope.$on($scope.block.id + '-ChangeBlock', function (evt, data) {
+						$scope.changeBlock(data);
 						onLoad();
 					});
                 }
 
-                function onRotate() {
-                    //TODO
-                }
+				function onRestart() {
+					$scope.$on($scope.block.id + '-RestartBlock', function () {
+						$scope.restartBlock();
+						onLoad();
+					});
+				}
+
+				function onRotate() {
+					$scope.$on($scope.block.id + '-RotateBlock', function () {
+						$scope.rotateBlock();
+					});
+				}
             }
         };
     }

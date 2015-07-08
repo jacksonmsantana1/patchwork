@@ -20,10 +20,13 @@
         $scope.setPolygon = setPolygon;
         $scope.setPattern = setPattern;
         $scope.changeImage = changeImage;
+		$scope.moveImage = moveImage;
 		$scope.bindClickEvent = bindClickEvent;
 		$scope.unbindClickEvent = unbindClickEvent;
+		$scope.bindMouseOverEvent = bindMouseOverEvent;
+		$scope.unbindMouseOverEvent = unbindMouseOverEvent;
         $scope.removeElement = removeElement;
-        $scope.moveImg = moveImg;
+		$scope.rotateElement = rotateElement;
 
         //methods
         function setPolygon(coord) {
@@ -36,6 +39,7 @@
             .pattern($scope.element.coordenates[0], $scope.element.coordenates[1], Config.imgSize, Config.imgSize);
         }
 
+		//Bind Events Methods
 		function bindClickEvent(fn) {
 			$scope.svg.polygon.click(fn);
 		}
@@ -44,6 +48,15 @@
 			$scope.svg.polygon.unclick();
 		}
 
+		function bindMouseOverEvent(fn) {
+			$scope.svg.polygon.mouseover(fn);
+		}
+
+		function unbindMouseOverEvent() {
+			$scope.svg.polygon.unmouseover();
+		}
+
+		//Image Methods
         function changeImage(img) {
             $scope.svg.pattern.remove();
             setPattern(img);
@@ -51,15 +64,22 @@
             $scope.element.img = img;
         }
 
+		function moveImage() {
+			//TODO
+		}
+
+		//Element Methods
         function removeElement(element, html){
             html.remove();
 			unbindClickEvent();
+			unbindMouseOverEvent();
             element.polygon.remove();
             element.pattern.remove();
         }
 
-        function moveImg() {
-            //TODO
-        }
+        function rotateElement(mediumPoint) {
+			$scope.element.rotateAngle += 90;
+			$scope.svg.polygon.animate( { transform: "r" + $scope.element.rotateAngle + ", " + mediumPoint[0] + ", " + mediumPoint[1] + ""}, 100);
+		}
     }
 })();

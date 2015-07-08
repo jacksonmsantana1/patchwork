@@ -15,6 +15,8 @@
 
             //public properties
             this.coordenates = newCoord;
+
+			this.rotateAngle = 0;
         };
 
     }
