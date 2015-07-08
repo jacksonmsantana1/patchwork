@@ -40,14 +40,14 @@
 			$(React.findDOMNode(this)).hide();
 			e.stopPropagation();
 		},
-		handleClick: function (a) {
-			this.props.scopes.get(this.props.blockID).$broadcast(this.props.blockID + '-ChangeBlock', {block: a});
+		handleClick: function (block) {
+			this.props.scopes.get(this.props.blockID).changeBlock(block);
 			$(React.findDOMNode(this)).hide();
 		},
 		componentDidMount: function () {
 			var that = this;
 			React.findDOMNode(this).addEventListener('mousedown', this.onMouseDown);
-			this.props.scope.$on('BlockClicked', function (data, args) {
+			this.props.scope.changeBlock  = function (args) {
 				that.setProps({blockID: args.id});
 				$(React.findDOMNode(that)).show();
 				var newPosition = {
@@ -55,7 +55,7 @@
 					left: 200 + args.x
 				};
 				$(React.findDOMNode(that)).offset(newPosition);
-			});
+			};
 			if (!this.props.scope.showListBlock) {
 				$(React.findDOMNode(this)).hide();
 			}

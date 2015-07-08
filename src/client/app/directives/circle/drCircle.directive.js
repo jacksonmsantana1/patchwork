@@ -33,8 +33,11 @@
                 }
 
                 function onDestroy() {
-                    $scope.$on('destroy', function () {
+                    var unbinder = $scope.$on('destroy', function () {
                         $scope.removeElement($scope.svg, $scope.html);
+						Scopes.remove($scope.element.id);
+						unbinder();
+						unbinder = null;
                     });
                 }
             }

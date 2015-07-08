@@ -59,6 +59,7 @@
         }
 
         function removeBoard() {
+			console.log('Board Destroyed');
             $scope.$broadcast('destroy');
         }
     }

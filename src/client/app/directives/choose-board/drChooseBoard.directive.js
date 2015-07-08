@@ -16,8 +16,10 @@
                 Scopes.store('ChooseBoard', $scope);
                 var type = Patchwork.get().type;
                 $scope.init(type);
-                $scope.$on('$destroy', function () {
+                var unbinder = $scope.$on('$destroy', function () {
                     Scopes.remove('ChooseBoard');
+					unbinder();
+					unbinder = null;
                 });
             }
         };

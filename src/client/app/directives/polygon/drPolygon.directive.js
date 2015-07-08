@@ -15,7 +15,6 @@
             controller: 'PolygonCtrl',
             link: function postLink ($scope, elem, attrs, ctrl) {
                 init();
-                onClick();
                 onDestroy();
 
                 //Methods
@@ -26,16 +25,13 @@
 					$scope.setPolygon($scope.element.coordenates);
 				}
 
-                function onClick() {
-                    $scope.svg.polygon.click(function () {
-                        //TODO Change the image pattern ...
-                    });
-                }
-
                 function onDestroy() {
-                    $scope.$on('$destroy', function() {
+                    var unbinder = $scope.$on('$destroy', function() {
                         console.log('Polygon id:'+ $scope.element.id + 'destroyed');
                         $scope.removeElement($scope.svg, $scope.html);
+						Scopes.remove($scope.element.id);
+						unbinder();
+						unbinder = null;
                     });
                 }
             }

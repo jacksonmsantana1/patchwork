@@ -30,9 +30,6 @@
         function init() {
             $scope.number = 1;
             Scopes.store('Main', $scope);
-			$scope.$watch(function (newValue, oldValue) {
-
-			});
         }
 
         //Temp

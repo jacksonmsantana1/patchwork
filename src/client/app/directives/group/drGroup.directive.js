@@ -28,9 +28,11 @@
                 }
 
                 function onDestroy() {
-                    $scope.$on('destroy', function () {
+                    var unbinder = $scope.$on('destroy', function () {
                         console.log('Group id:'+ $scope.group.id + 'destroyed');
                         $scope.removeGroup(elem);
+						unbinder();
+						unbinder = null;
                     });
                 }
             }

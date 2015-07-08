@@ -34,9 +34,12 @@
                 }
 
                 function onDestroy() {
-                    $scope.$on('destroy', function () {
+                    var unbinder = $scope.$on('destroy', function () {
                         console.log('Retangule id:' + $scope.element.id + ' destroyed');
                         $scope.removeElement($scope.svg, $scope.html);
+						Scopes.remove($scope.element.id);
+						unbinder();
+						unbinder = null;
                     });
                 }
             }

@@ -31,8 +31,11 @@
                 }, true);
 
                 // Unmount the component when the scope is destroyed
-                $scope.$on('$destroy', function () {
+                var unbinder = $scope.$on('$destroy', function () {
+					Scopes.remove('ListBlock');
                     ReactFactory.unmount(elem);
+					unbinder();
+					unbinder = null;
                 });
             }
         };

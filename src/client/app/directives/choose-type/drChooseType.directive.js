@@ -15,8 +15,10 @@
             link: function($scope, elem, attrs) {
                 Scopes.store('ChooseType', $scope);
                 $scope.init();
-                $scope.$on('$destroy', function () {
+                var unbinder =  $scope.$on('$destroy', function () {
                     Scopes.remove('ChooseType');
+					unbinder();
+					unbinder = null;
                 });
             }
         };

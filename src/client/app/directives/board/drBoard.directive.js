@@ -30,8 +30,10 @@
                 }
 
                 function onDestroy() {
-                    $scope.$on('$destroy', function () {
+                    var unbinder = $scope.$on('$destroy', function () {
                         $scope.removeBoard();
+						unbinder();
+						unbinder = null;
                     });
                 }
             }

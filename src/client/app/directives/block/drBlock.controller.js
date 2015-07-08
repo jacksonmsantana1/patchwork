@@ -16,12 +16,12 @@
 		$scope.restartBlock = restartBlock;
 		$scope.changeBlock = changeBlock;
 		$scope.rotateBlock = rotateBlock;
+		$scope.appendElements = appendElements;
 
         //Methods
-        function init(block, done) {
-            var htmlElements = _.map(block.elements, function(element, index) {
+        function init(done) {
+            var htmlElements = _.map($scope.block.elements, function(element, index) {
                 var el = $compile('<polygon element="block.elements[' + index + ']"></polygon>')($scope);
-				$compile('<block-menu-action block="block"></block-menu-action>')($scope);
                 return el;
             });
 			addEventListeners();
@@ -39,15 +39,17 @@
 					Scopes.get(element.id).$broadcast('$destroy');
 				});
 				$scope.block = new Block($scope.block.id, $scope.block.pInit[0], $scope.block.pInit[1], '', $scope.size);
+				$scope.appendElements();
 			}
 		}
 
-		function changeBlock(data) {
+		function changeBlock(block) {
 			$scope.block.elements.forEach(function (element) {
 				Scopes.get(element.id).$broadcast('$destroy');
 			});
 			$scope.block = new Block($scope.block.id, $scope.block.pInit[0], $scope.block.pInit[1], '', $scope.size,
-				data.block.elements);
+				block.elements);
+			$scope.appendElements();
 		}
 
 		function rotateBlock() {
@@ -61,7 +63,15 @@
 		function addEventListeners() {
 			$scope.block.elements.forEach(function (element) {
 				Scopes.get(element.id).bindMouseOverEvent(function () {
-					Scopes.get('BlockMenuAction-' + $scope.block.id).$broadcast($scope.block.id);
+					Scopes.get('BlockMenuAction').init($scope.block);
+				});
+			});
+		}
+
+		function appendElements() {
+			$scope.init(function (elements) {
+				_.each(elements, function (element) {
+					$scope.htmlElem.append(element);
 				});
 			});
 		}

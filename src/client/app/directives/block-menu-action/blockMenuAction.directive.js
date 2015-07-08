@@ -9,22 +9,21 @@
 		return {
 			restrict: 'E',
 			replace: false,
-			scope: {
-				block: '='
-			},
+			scope: true,
 			controller: 'BlockMenuActionCtrl',
 			link: function postLink ($scope, elem, attrs, ctrl) {
-				Scopes.store('BlockMenuAction-' + $scope.block.id, $scope);
-				onChange();
+				init();
 
 				//Methods
-				function onChange() {
-					$scope.$on($scope.block.id, function () {
-						if (!$scope.active) {
-							$scope.init();
-						}
-					});
+				function init() {
+					Scopes.store('BlockMenuAction', $scope);
 				}
+
+				var unbinder =  $scope.$on('$destroy', function () {
+					Scopes.remove('BlockMenuAction');
+					unbinder();
+					unbinder = null;
+				});
 			}
 		};
 	}
